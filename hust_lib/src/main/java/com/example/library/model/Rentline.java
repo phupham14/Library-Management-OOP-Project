@@ -9,3 +9,5 @@ public class Rentline {
     private LocalDateTime returnDate;
     private String rentlineStatus; // "Returned" or "Not returned"
 }
+
+

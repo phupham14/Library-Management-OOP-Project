@@ -93,6 +93,86 @@ public class Person {
 
     // Getters and Setters thêm sau (sau này cần gì thì tạo)
 
+    public int getPersonId() {
+        return personId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public LocalDateTime getLastActiveDate() {
+        return lastActiveDate;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
 
     // Method
 }
