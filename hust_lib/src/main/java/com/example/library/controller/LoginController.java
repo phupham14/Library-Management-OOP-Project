@@ -1,4 +1,4 @@
-package com.example.loginpage;
+package com.example.library.controller;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-public class HelloController {
+public class LoginController {
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -110,34 +110,34 @@ public class HelloController {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        assert changePass_Pass != null : "fx:id=\"changePass_Pass\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert changePass_backBtn != null : "fx:id=\"changePass_backBtn\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert changePass_btn != null : "fx:id=\"changePass_btn\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert changePass_cPass != null : "fx:id=\"changePass_cPass\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert changePass_form != null : "fx:id=\"changePass_form\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert changePass_showPass != null : "fx:id=\"changePass_showPass\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert forgor_answer != null : "fx:id=\"forgor_answer\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert forgor_backBtn != null : "fx:id=\"forgor_backBtn\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert forgor_btn != null : "fx:id=\"forgor_btn\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert forgor_email != null : "fx:id=\"forgor_email\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert forgor_form != null : "fx:id=\"forgor_form\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert forgor_selectQues != null : "fx:id=\"forgor_selectQues\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert login_btn != null : "fx:id=\"login_btn\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert login_email != null : "fx:id=\"login_email\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert login_forgorPass != null : "fx:id=\"login_forgorPass\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert login_form != null : "fx:id=\"login_form\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert login_pass != null : "fx:id=\"login_pass\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert login_showPass != null : "fx:id=\"login_showPass\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert login_signUpBtn != null : "fx:id=\"login_signUpBtn\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert signup_answer != null : "fx:id=\"signup_answer\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert signup_btn != null : "fx:id=\"signup_btn\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert signup_cPass != null : "fx:id=\"signup_cPass\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert signup_email != null : "fx:id=\"signup_email\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert signup_form != null : "fx:id=\"signup_form\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert signup_logInBtn != null : "fx:id=\"signup_logInBtn\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert signup_pass != null : "fx:id=\"signup_pass\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert signup_selectQues != null : "fx:id=\"signup_selectQues\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert signup_username != null : "fx:id=\"signup_username\" was not injected: check your FXML file 'hello-view.fxml'.";
+        assert changePass_Pass != null : "fx:id=\"changePass_Pass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert changePass_backBtn != null : "fx:id=\"changePass_backBtn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert changePass_btn != null : "fx:id=\"changePass_btn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert changePass_cPass != null : "fx:id=\"changePass_cPass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert changePass_form != null : "fx:id=\"changePass_form\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert changePass_showPass != null : "fx:id=\"changePass_showPass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert forgor_answer != null : "fx:id=\"forgor_answer\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert forgor_backBtn != null : "fx:id=\"forgor_backBtn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert forgor_btn != null : "fx:id=\"forgor_btn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert forgor_email != null : "fx:id=\"forgor_email\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert forgor_form != null : "fx:id=\"forgor_form\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert forgor_selectQues != null : "fx:id=\"forgor_selectQues\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_btn != null : "fx:id=\"login_btn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_email != null : "fx:id=\"login_email\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_forgorPass != null : "fx:id=\"login_forgorPass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_form != null : "fx:id=\"login_form\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_pass != null : "fx:id=\"login_pass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_showPass != null : "fx:id=\"login_showPass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_signUpBtn != null : "fx:id=\"login_signUpBtn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_answer != null : "fx:id=\"signup_answer\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_btn != null : "fx:id=\"signup_btn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_cPass != null : "fx:id=\"signup_cPass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_email != null : "fx:id=\"signup_email\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_form != null : "fx:id=\"signup_form\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_logInBtn != null : "fx:id=\"signup_logInBtn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_pass != null : "fx:id=\"signup_pass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_selectQues != null : "fx:id=\"signup_selectQues\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_username != null : "fx:id=\"signup_username\" was not injected: check your FXML file 'login-view.fxml'.";
         login_signUpBtn.setOnAction(this::handleLoginButtonClick);
         signup_btn.setOnAction(this::handleSignupButtonClick);
         signup_logInBtn.setOnAction(this::handleSignupButtonClick);
