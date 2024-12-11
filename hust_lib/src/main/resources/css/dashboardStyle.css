@@ -1,0 +1,33 @@
+//sidebar
+.sidebar {
+    -fx-background-color: #fff;
+}
+
+.sidebar-btn {
+}
+
+.sidebar-btn:hover {
+    -fx-border-width: 0px 4px 0px 0px;
+    -fx-border-color: #1f77fa;
+}
+
+//menubar
+.menubar-text{
+}
+
+.menubar-btn{
+}
+
+.menubar-btn:hover {
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: #1f77fa;
+}
+
+.menubar-btn:hover .menubar-text {
+    -fx-text-fill: #1f77fa; /* Change text color */
+}
+
+//contentArea
+.contentArea-btn {
+    -fx-background-color: transparent;
+}

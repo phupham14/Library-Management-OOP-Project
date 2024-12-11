@@ -1,17 +1,19 @@
 package com.example.library.controller;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class LoginController {
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -107,6 +109,30 @@ public class LoginController {
     private Tooltip changePassTooltip;
     private Tooltip loginTooltip;
 
+
+    public void onSwitchToLoginAs() {
+        try {
+            // Load the FXML file
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/library/view/loginAs.fxml"));
+
+            // Create a new Scene with the loaded content
+            Scene scene = new Scene(root);
+
+            // Use the login_btn to get the current Stage
+            Stage window = (Stage) login_btn.getScene().getWindow();
+
+            // Set the scene to the window
+            window.setScene(scene);
+
+            // Optionally, you can set the window to be resizable
+            window.setResizable(true);
+
+            // Show the window with preferred size
+            window.sizeToScene();
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+        }
+    }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
