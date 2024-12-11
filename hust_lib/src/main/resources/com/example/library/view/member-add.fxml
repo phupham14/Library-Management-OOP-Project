@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.AddMemberController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0">
+         <children>
+            <Label text="Adding Member">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutY="57.0" prefHeight="278.0" prefWidth="600.0">
+         <children>
+            <HBox>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+               <children>
+                  <TextField fx:id="addMem_firstName" prefHeight="26.0" prefWidth="240.0" promptText="First Name" />
+                  <TextField fx:id="addMem_lastName" prefHeight="26.0" prefWidth="240.0" promptText="Last Name">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <TextField fx:id="addMem_contact" promptText="Mobile">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="addMem_email" promptText="Email">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="addMem_adress" promptText="Adress">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+         </children>
+      </VBox>
+      <HBox layoutY="335.0" prefHeight="70.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="addMem_saveBtn" mnemonicParsing="false" prefHeight="120.0" prefWidth="307.0" styleClass="btn" stylesheets="@../../../../css/add-member.css" text="Save">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="addMem_cancelBtn" mnemonicParsing="false" prefHeight="122.0" prefWidth="298.0" styleClass="btn" stylesheets="@../../../../css/add-member.css" text="Cancel">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

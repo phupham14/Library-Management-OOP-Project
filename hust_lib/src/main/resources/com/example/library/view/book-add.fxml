@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.AddBookController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0">
+         <children>
+            <Label text="Adding Book">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutY="57.0" prefHeight="278.0" prefWidth="600.0">
+         <children>
+            <TextField fx:id="addBook_bookTitle" promptText="Book Title">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="addBook_bookID" promptText="Book ID">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="addBook_author" promptText="Book Author">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="addBook_publisher" promptText="Publisher">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+         </children>
+      </VBox>
+      <HBox layoutY="335.0" prefHeight="70.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="addBook_saveBtn" mnemonicParsing="false" prefHeight="120.0" prefWidth="307.0" styleClass="btn" stylesheets="@../../../../css/add-member.css" text="Save">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="addBook_cancelBtn" mnemonicParsing="false" prefHeight="122.0" prefWidth="298.0" styleClass="btn" stylesheets="@../../../../css/add-member.css" text="Cancel">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
