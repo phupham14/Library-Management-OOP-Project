@@ -39,7 +39,6 @@ public class Person {
      * @param dob         The person's date of birth
      * @param gender      The person's gender ('M' or 'F')
      * @param role        The person's role in the system
-     **/
     public Person(String firstName, String lastName, String address,
                   String phoneNumber, String email, String password,
                   LocalDate dob, char gender, String role) {
