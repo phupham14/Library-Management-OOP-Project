@@ -1,4 +1,4 @@
-package com.example.library.database;
+package com.example.library.util;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -11,9 +11,9 @@ public class DatabaseManager {
 
     private DatabaseManager() {
         // Khởi tạo kết nối trong constructor
-        String dbName = "hustlib";
-        String user = "postgres";
-        String password = "skadi123";
+        String dbName = "hust_lib";
+        String user = "hustlib_admin";
+        String password = "hustlib_admin";
 
         connection = ConnectionUtil.getInstance().connect_to_db(dbName, user, password);
     }
@@ -26,7 +26,7 @@ public class DatabaseManager {
     }
 
     // Method test kết nối
-    public void testConnection() {
+    public Connection testConnection() {
         if (connection != null) {
             try {
                 Statement stmt = connection.createStatement();
@@ -57,6 +57,7 @@ public class DatabaseManager {
                 e.printStackTrace();
             }
         }
+        return null;
     }
 
     // Method để test

@@ -173,7 +173,6 @@ public class LoginController {
         changePass_backBtn.setOnAction(this::handleForgorPassLinkClick);
 
         login_forgorPass.setOnAction(this::handleForgorPassLinkClick);
-        questions();
 
         // Initialize tooltips
         changePassTooltip = new Tooltip();
@@ -248,20 +247,6 @@ public class LoginController {
         forgor_form.setVisible(false);
         changePass_form.setVisible(false);
         signup_form.setVisible(true);
-    }
-
-    private String[] questionList = {
-            "What's your favourite food?",
-            "What's your favourite color?",
-            "What's your favourite sport?",
-            "What's the name of your pet?"
-    };
-
-    public void questions() {
-        List<String> listQ = new ArrayList<>(Arrays.asList(questionList)); // Create a list from the array
-
-        ObservableList<String> listData = FXCollections.observableArrayList(listQ); // Create an ObservableList
-        signup_selectQues.setItems(listData); // Set items in the ComboBox
     }
 
     private void togglePasswordVisibility(CheckBox checkBox, PasswordField passwordField, Tooltip tooltip) {

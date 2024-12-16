@@ -1,4 +1,4 @@
-package com.example.library.database;
+package com.example.library.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

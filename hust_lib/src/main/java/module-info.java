@@ -1,6 +1,10 @@
 module com.example.library {
     requires javafx.controls;
+<<<<<<< HEAD
     //requires javafx.fxml;
+=======
+    requires javafx.fxml;
+>>>>>>> 9e595cb (Add service and constructors, get, set)
     //requires javafx.web;
     requires java.sql;
     requires org.postgresql.jdbc;
