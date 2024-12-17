@@ -127,6 +127,52 @@ public class AdminPageController {
         addMember.show();
     }
 
+    public void onOpenSearchMember() throws IOException {
+        // Load the FXML file for the admin page
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/searchMember.fxml")));
+
+        // Create a new Stage for the new window
+        Stage searchMember = new Stage();
+
+        // Create a new Scene with the loaded content
+        Scene scene = new Scene(root);
+
+        // Set the scene to the new window
+        searchMember.setScene(scene);
+
+        // Optionally, you can set the window to be resizable
+        searchMember.setResizable(true);
+
+        // Set a title for the new window (optional)
+        searchMember.setTitle("Search Member Page");
+
+        // Show the new window
+        searchMember.show();
+    }
+
+    public void onOpenSearchBook() throws IOException {
+        // Load the FXML file for the admin page
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/searchBook.fxml")));
+
+        // Create a new Stage for the new window
+        Stage searchBook = new Stage();
+
+        // Create a new Scene with the loaded content
+        Scene scene = new Scene(root);
+
+        // Set the scene to the new window
+        searchBook.setScene(scene);
+
+        // Optionally, you can set the window to be resizable
+        searchBook.setResizable(true);
+
+        // Set a title for the new window (optional)
+        searchBook.setTitle("Search Book Page");
+
+        // Show the new window
+        searchBook.show();
+    }
+
     public void onOpenAllBooks() throws IOException {
         // Load the FXML file for the admin page
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/displayBooks.fxml")));
@@ -148,5 +194,51 @@ public class AdminPageController {
 
         // Show the new window
         allBooks.show();
+    }
+
+    public void onOpenAllMembers() throws IOException {
+        // Load the FXML file for the admin page
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/displayMembers.fxml")));
+
+        // Create a new Stage for the new window
+        Stage allMembers = new Stage();
+
+        // Create a new Scene with the loaded content
+        Scene scene = new Scene(root);
+
+        // Set the scene to the new window
+        allMembers.setScene(scene);
+
+        // Optionally, you can set the window to be resizable
+        allMembers.setResizable(true);
+
+        // Set a title for the new window (optional)
+        allMembers.setTitle("All Members Page");
+
+        // Show the new window
+        allMembers.show();
+    }
+
+    public void onOpenIssuedBooks() throws IOException {
+        // Load the FXML file for the admin page
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/issued-books.fxml")));
+
+        // Create a new Stage for the new window
+        Stage issuedBooks = new Stage();
+
+        // Create a new Scene with the loaded content
+        Scene scene = new Scene(root);
+
+        // Set the scene to the new window
+        issuedBooks.setScene(scene);
+
+        // Optionally, you can set the window to be resizable
+        issuedBooks.setResizable(true);
+
+        // Set a title for the new window (optional)
+        issuedBooks.setTitle("Issued Books Page");
+
+        // Show the new window
+        issuedBooks.show();
     }
 }

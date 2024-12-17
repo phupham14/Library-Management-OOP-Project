@@ -53,11 +53,11 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
-                  <Button fx:id="admin_searchBook" mnemonicParsing="false" prefHeight="76.0" prefWidth="145.0" styleClass="right-btn" stylesheets="@../../../../css/adminPage.css" text="Search Book">
+                  <Button fx:id="admin_searchBook" mnemonicParsing="false" onAction="#onOpenSearchBook" prefHeight="76.0" prefWidth="145.0" styleClass="right-btn" stylesheets="@../../../../css/adminPage.css" text="Search Book">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
-                  <Button fx:id="admin_searchMember" mnemonicParsing="false" prefHeight="82.0" prefWidth="134.0" styleClass="right-btn" stylesheets="@../../../../css/adminPage.css" text="Search Member">
+                  <Button fx:id="admin_searchMember" mnemonicParsing="false" onAction="#onOpenSearchMember" prefHeight="82.0" prefWidth="134.0" styleClass="right-btn" stylesheets="@../../../../css/adminPage.css" text="Search Member">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
@@ -65,11 +65,11 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
-                  <Button fx:id="admin_memberCheck" mnemonicParsing="false" prefHeight="83.0" prefWidth="134.0" styleClass="right-btn" stylesheets="@../../../../css/adminPage.css" text="All Members">
+                  <Button fx:id="admin_memberCheck" mnemonicParsing="false" onAction="#onOpenAllMembers" prefHeight="83.0" prefWidth="134.0" styleClass="right-btn" stylesheets="@../../../../css/adminPage.css" text="All Members">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
-                  <Button fx:id="admin_issuedBooks" mnemonicParsing="false" prefHeight="83.0" prefWidth="134.0" styleClass="right-btn" stylesheets="@../../../../css/adminPage.css" text="Issued Books">
+                  <Button fx:id="admin_issuedBooks" mnemonicParsing="false" onAction="#onOpenIssuedBooks" prefHeight="83.0" prefWidth="134.0" styleClass="right-btn" stylesheets="@../../../../css/adminPage.css" text="Issued Books">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>

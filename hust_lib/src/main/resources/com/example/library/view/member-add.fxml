@@ -54,12 +54,12 @@
       </VBox>
       <HBox layoutY="335.0" prefHeight="70.0" prefWidth="600.0">
          <children>
-            <Button fx:id="addMem_saveBtn" mnemonicParsing="false" prefHeight="120.0" prefWidth="307.0" styleClass="btn" stylesheets="@../../../../css/add-member.css" text="Save">
+            <Button fx:id="addMem_saveBtn" mnemonicParsing="false" onAction="#handleSaveAction" prefHeight="120.0" prefWidth="307.0" styleClass="btn" stylesheets="@../../../../css/add-member.css" text="Save">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="addMem_cancelBtn" mnemonicParsing="false" prefHeight="122.0" prefWidth="298.0" styleClass="btn" stylesheets="@../../../../css/add-member.css" text="Cancel">
+            <Button fx:id="addMem_cancelBtn" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="122.0" prefWidth="298.0" styleClass="btn" stylesheets="@../../../../css/add-member.css" text="Cancel">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
