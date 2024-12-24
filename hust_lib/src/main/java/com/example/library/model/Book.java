@@ -14,30 +14,10 @@ public class Book {
     private int publishYear;      // PublishYear INT NOT NULL
     private BigDecimal worth;     // Worth NUMERIC NOT NULL
     private String image;         // Image VARCHAR(255)
+    private String author;
+    private String publisher;
 
-    //region Constructors
-    public Book() {
-    }
-
-    /**
-     * Constructor for creating new book
-     */
-    public Book(String title, int publisherId, int quantity,
-                int publishYear, BigDecimal worth, String image) {
-        this.title = title;
-        this.publisherId = publisherId;
-        this.quantity = quantity;
-        this.publishYear = publishYear;
-        this.worth = worth;
-        this.image = image;
-    }
-
-    /**
-     * Constructor with all fields
-     */
-    public Book(int bookId, String title, int publisherId,
-                int quantity, int publishYear, BigDecimal worth,
-                String image) {
+    public Book(int bookId, String title, int publisherId, int quantity, int publishYear, BigDecimal worth, String image, String author, String publisher) {
         this.bookId = bookId;
         this.title = title;
         this.publisherId = publisherId;
@@ -45,10 +25,19 @@ public class Book {
         this.publishYear = publishYear;
         this.worth = worth;
         this.image = image;
+        this.author = author;
+        this.publisher = publisher;
     }
-    //endregion
 
-    //region Methods
+    public Book(int bookID, String title, int publishYear, int publisherID, int quantity, double worth) {
+        this.bookId = bookID;
+        this.publisherId = publisherID;
+        this.title = title;
+        this.publishYear = publishYear;
+        this.quantity = quantity;
+        this.worth = BigDecimal.valueOf(worth);
+    }
+
     /**
      * Check if book is available for borrowing
      */
@@ -131,5 +120,22 @@ public class Book {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
     //endregion
 }

@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.example.library.service.loginService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,9 +39,6 @@ public class LoginController {
     @FXML // fx:id="changePass_showPass"
     private CheckBox changePass_showPass; // Value injected by FXMLLoader
 
-    @FXML // fx:id="forgor_answer"
-    private TextField forgor_answer; // Value injected by FXMLLoader
-
     @FXML // fx:id="forgor_backBtn"
     private Button forgor_backBtn; // Value injected by FXMLLoader
 
@@ -54,9 +50,6 @@ public class LoginController {
 
     @FXML // fx:id="forgor_form"
     private AnchorPane forgor_form; // Value injected by FXMLLoader
-
-    @FXML // fx:id="forgor_selectQues"
-    private ComboBox<?> forgor_selectQues; // Value injected by FXMLLoader
 
     @FXML // fx:id="login_btn"
     private Button login_btn; // Value injected by FXMLLoader
@@ -79,9 +72,6 @@ public class LoginController {
     @FXML // fx:id="login_signUpBtn"
     private Button login_signUpBtn; // Value injected by FXMLLoader
 
-    @FXML // fx:id="signup_answer"
-    private TextField signup_answer; // Value injected by FXMLLoader
-
     @FXML // fx:id="signup_btn"
     private Button signup_btn; // Value injected by FXMLLoader
 
@@ -100,39 +90,65 @@ public class LoginController {
     @FXML // fx:id="signup_pass"
     private PasswordField signup_pass; // Value injected by FXMLLoader
 
-    @FXML // fx:id="signup_selectQues"
-    private ComboBox<String> signup_selectQues; // Value injected by FXMLLoader
+    @FXML // fx:id="signup_firstname"
+    private TextField  signup_firstName; // Value injected by FXMLLoader
 
-    @FXML // fx:id="signup_username"
-    private TextField signup_username; // Value injected by FXMLLoader
+    @FXML
+    private TextField  signup_lastName; // Value injected by FXMLLoader
+
+    @FXML
+    private Label successLabel;
+
+    @FXML
+    private Label errorLabel;
 
     private Tooltip changePassTooltip;
     private Tooltip loginTooltip;
 
+    private com.example.library.service.loginService loginService = new loginService();
 
     public void onSwitchToLoginAs() {
+        String enteredEmail = signup_email.getText(); // Assuming you have a TextField for the email
+        String enteredPassword = signup_pass.getText(); // Assuming you have a PasswordField for the password
+
         try {
-            // Load the FXML file
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/library/view/loginAs.fxml"));
+                // Load the FXML file for the next view
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/loginAs.fxml")));
 
-            // Create a new Scene with the loaded content
-            Scene scene = new Scene(root);
+                // Create a new Scene with the loaded content
+                Scene scene = new Scene(root);
 
-            // Use the login_btn to get the current Stage
-            Stage window = (Stage) login_btn.getScene().getWindow();
+                // Get the current window (Stage) and set the new scene
+                Stage window = (Stage) login_btn.getScene().getWindow();
+                window.setScene(scene);
 
-            // Set the scene to the window
-            window.setScene(scene);
+                // Optionally, you can set the window to be resizable
+                window.setResizable(true);
 
-            // Optionally, you can set the window to be resizable
-            window.setResizable(true);
+                // Adjust the window size to fit the content
+                window.sizeToScene();
 
-            // Show the window with preferred size
-            window.sizeToScene();
+                // Show an error message if credentials are invalid
+//                Alert alert = new Alert(Alert.AlertType.ERROR);
+//                alert.setTitle("Login Failed");
+//                alert.setHeaderText("Invalid Credentials");
+//                alert.setContentText("The email or password you entered is incorrect.");
+//                alert.showAndWait();
         } catch (IOException e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            // Handle IOException (e.g., show error message in UI)
+            showError("An error occurred while loading the login page. Please try again.");
         }
     }
+
+    // Helper method to show an error message to the user
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -142,12 +158,10 @@ public class LoginController {
         assert changePass_cPass != null : "fx:id=\"changePass_cPass\" was not injected: check your FXML file 'login-view.fxml'.";
         assert changePass_form != null : "fx:id=\"changePass_form\" was not injected: check your FXML file 'login-view.fxml'.";
         assert changePass_showPass != null : "fx:id=\"changePass_showPass\" was not injected: check your FXML file 'login-view.fxml'.";
-        assert forgor_answer != null : "fx:id=\"forgor_answer\" was not injected: check your FXML file 'login-view.fxml'.";
         assert forgor_backBtn != null : "fx:id=\"forgor_backBtn\" was not injected: check your FXML file 'login-view.fxml'.";
         assert forgor_btn != null : "fx:id=\"forgor_btn\" was not injected: check your FXML file 'login-view.fxml'.";
         assert forgor_email != null : "fx:id=\"forgor_email\" was not injected: check your FXML file 'login-view.fxml'.";
         assert forgor_form != null : "fx:id=\"forgor_form\" was not injected: check your FXML file 'login-view.fxml'.";
-        assert forgor_selectQues != null : "fx:id=\"forgor_selectQues\" was not injected: check your FXML file 'login-view.fxml'.";
         assert login_btn != null : "fx:id=\"login_btn\" was not injected: check your FXML file 'login-view.fxml'.";
         assert login_email != null : "fx:id=\"login_email\" was not injected: check your FXML file 'login-view.fxml'.";
         assert login_forgorPass != null : "fx:id=\"login_forgorPass\" was not injected: check your FXML file 'login-view.fxml'.";
@@ -155,15 +169,14 @@ public class LoginController {
         assert login_pass != null : "fx:id=\"login_pass\" was not injected: check your FXML file 'login-view.fxml'.";
         assert login_showPass != null : "fx:id=\"login_showPass\" was not injected: check your FXML file 'login-view.fxml'.";
         assert login_signUpBtn != null : "fx:id=\"login_signUpBtn\" was not injected: check your FXML file 'login-view.fxml'.";
-        assert signup_answer != null : "fx:id=\"signup_answer\" was not injected: check your FXML file 'login-view.fxml'.";
         assert signup_btn != null : "fx:id=\"signup_btn\" was not injected: check your FXML file 'login-view.fxml'.";
         assert signup_cPass != null : "fx:id=\"signup_cPass\" was not injected: check your FXML file 'login-view.fxml'.";
         assert signup_email != null : "fx:id=\"signup_email\" was not injected: check your FXML file 'login-view.fxml'.";
         assert signup_form != null : "fx:id=\"signup_form\" was not injected: check your FXML file 'login-view.fxml'.";
         assert signup_logInBtn != null : "fx:id=\"signup_logInBtn\" was not injected: check your FXML file 'login-view.fxml'.";
         assert signup_pass != null : "fx:id=\"signup_pass\" was not injected: check your FXML file 'login-view.fxml'.";
-        assert signup_selectQues != null : "fx:id=\"signup_selectQues\" was not injected: check your FXML file 'login-view.fxml'.";
-        assert signup_username != null : "fx:id=\"signup_username\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_firstName != null : "fx:id=\"signup_username\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_lastName != null : "fx:id=\"signup_username\" was not injected: check your FXML file 'login-view.fxml'.";
         login_signUpBtn.setOnAction(this::handleLoginButtonClick);
         signup_btn.setOnAction(this::handleSignupButtonClick);
         signup_logInBtn.setOnAction(this::handleSignupButtonClick);
@@ -171,8 +184,6 @@ public class LoginController {
         forgor_backBtn.setOnAction(this::handleSignupButtonClick);
         changePass_btn.setOnAction(this::handleChangePassButtonClick);
         changePass_backBtn.setOnAction(this::handleForgorPassLinkClick);
-
-        login_forgorPass.setOnAction(this::handleForgorPassLinkClick);
 
         // Initialize tooltips
         changePassTooltip = new Tooltip();
@@ -209,6 +220,10 @@ public class LoginController {
         });
     }
 
+    private boolean isValidEmail(String email) {
+        return email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+    }
+
     private void handleForgorPassLinkClick(ActionEvent actionEvent) {
         // Set visibility for forgot password form
         login_form.setVisible(false);
@@ -217,12 +232,56 @@ public class LoginController {
         forgor_form.setVisible(true);
     }
 
-    private void handleSignupButtonClick(ActionEvent actionEvent) {
-        // Set visibility of forms
+    public LoginController() {
+        this.loginService = new loginService();
+    }
+
+    private void handleSignupButtonClick(ActionEvent event) {
         login_form.setVisible(true);
-        forgor_form.setVisible(false);
-        changePass_form.setVisible(false);
         signup_form.setVisible(false);
+        changePass_form.setVisible(false);
+        forgor_form.setVisible(false);
+
+        // Lấy giá trị từ các trường nhập liệu
+        String firstName = signup_firstName.getText();
+        String lastName = signup_lastName.getText();
+        String email = signup_email.getText();
+        String password = signup_pass.getText();
+        String confirmPassword = signup_cPass.getText();
+
+        // Kiểm tra các trường nhập liệu không được để trống
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            showError("All fields are required!");
+            return;
+        }
+
+        // Kiểm tra mật khẩu và xác nhận mật khẩu có trùng khớp không
+        if (!password.equals(confirmPassword)) {
+            showError("Passwords do not match!");
+            return;
+        }
+
+        // Kiểm tra tính hợp lệ của địa chỉ email
+        if (!isValidEmail(email)) {
+            showError("Invalid email address!");
+            return;
+        }
+
+        // Kiểm tra xem email đã được đăng ký chưa
+        if (loginService.isEmailAlreadyRegistered(email)) {
+            showError("Email is already registered!");
+            return;
+        }
+
+        // Gọi phương thức đăng ký từ LoginService để lưu thông tin người dùng vào cơ sở dữ liệu
+        boolean isRegistered = loginService.registerUser(firstName, lastName, email, password);
+
+        if (isRegistered) {
+            showSuccess("Signup successful!");
+            // Tiến hành các bước sau khi đăng ký thành công (ví dụ: chuyển sang trang đăng nhập hoặc trang chủ)
+        } else {
+            showError("An error occurred during signup. Please try again.");
+        }
     }
 
     private void handleForgorButtonClick(ActionEvent actionEvent) {
@@ -251,14 +310,24 @@ public class LoginController {
 
     private void togglePasswordVisibility(CheckBox checkBox, PasswordField passwordField, Tooltip tooltip) {
         if (checkBox.isSelected()) {
-            // Show password in tooltip
             tooltip.setText(passwordField.getText());
             tooltip.show(passwordField,
                     passwordField.getScene().getWindow().getX() + passwordField.getLayoutX(),
                     passwordField.getScene().getWindow().getY() + passwordField.getLayoutY() - 25);
         } else {
-            // Hide tooltip when not showing password
             tooltip.hide();
         }
     }
+
+
+    // Hàm hiển thị thông báo thành công
+    private void showSuccess(String message) {
+        if (successLabel != null) {
+            successLabel.setText(message);
+            successLabel.setStyle("-fx-text-fill: green;");
+        } else {
+            System.err.println("Error: successLabel is not initialized.");
+        }
+    }
+
 }

@@ -71,4 +71,44 @@ public class LoginAsController {
         // Show the window with preferred size
         window.sizeToScene();
     }
+
+    public void onSwitchToUser() throws IOException {
+        // Load the FXML file
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/user-page.fxml")));
+
+        // Create a new Scene with the loaded content
+        Scene scene = new Scene(root);
+
+        // Get the current window
+        Stage window = (Stage) switchToUser.getScene().getWindow();
+
+        // Set the scene to the window
+        window.setScene(scene);
+
+        // Optionally, you can set the window to be resizable
+        window.setResizable(true);
+
+        // Show the window with preferred size
+        window.sizeToScene();
+    }
+
+    public void onSwitchToEmployee() throws IOException {
+        // Load the FXML file
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/employee-page.fxml")));
+
+        // Create a new Scene with the loaded content
+        Scene scene = new Scene(root);
+
+        // Get the current window
+        Stage window = (Stage) switchToEmployee.getScene().getWindow();
+
+        // Set the scene to the window
+        window.setScene(scene);
+
+        // Optionally, you can set the window to be resizable
+        window.setResizable(true);
+
+        // Show the window with preferred size
+        window.sizeToScene();
+    }
 }

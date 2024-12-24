@@ -9,12 +9,12 @@
 
 <AnchorPane styleClass="btn" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.LoginAsController">
    <children>
-      <Button fx:id="switchToUser" layoutX="36.0" layoutY="131.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="218.0" styleClass="btn" stylesheets="@../../../../css/loginAs.css" text="Users">
+      <Button fx:id="switchToUser" layoutX="36.0" layoutY="131.0" mnemonicParsing="false" onAction="#onSwitchToUser" prefHeight="78.0" prefWidth="218.0" styleClass="btn" stylesheets="@../../../../css/loginAs.css" text="Users">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Button>
-      <Button fx:id="switchToEmployee" layoutX="191.0" layoutY="233.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="218.0" styleClass="btn" stylesheets="@../../../../css/loginAs.css" text="Employee">
+      <Button fx:id="switchToEmployee" layoutX="191.0" layoutY="233.0" mnemonicParsing="false" onAction="#onSwitchToEmployee" prefHeight="78.0" prefWidth="218.0" styleClass="btn" stylesheets="@../../../../css/loginAs.css" text="Employee">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
