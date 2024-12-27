@@ -23,11 +23,14 @@ import javafx.stage.Stage;
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 public class SearchBookController {
 
     @FXML
     private ListView<?> searchBook_listView;
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 import java.io.File;
@@ -59,6 +62,9 @@ public class SearchBookController {
     @FXML
     private Button searchBook_saveAddBtn;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -89,7 +95,10 @@ public class SearchBookController {
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     @FXML
@@ -298,6 +307,9 @@ public class SearchBookController {
         clearFields(); // Clear fields after update
     }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

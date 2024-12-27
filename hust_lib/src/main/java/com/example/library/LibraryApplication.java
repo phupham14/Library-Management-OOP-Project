@@ -13,7 +13,11 @@ public class LibraryApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 getClass().getResource("/com/example/library/view/employee-page.fxml")
+=======
+                getClass().getResource("/com/example/library/view/user-page.fxml")
+>>>>>>> Stashed changes
 =======
                 getClass().getResource("/com/example/library/view/user-page.fxml")
 >>>>>>> Stashed changes

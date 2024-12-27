@@ -20,11 +20,14 @@ import javafx.stage.Stage;
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 public class SearchMemberController {
 
     @FXML
     private ListView<?> searchMem_listView;
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 import java.io.File;
@@ -88,6 +91,9 @@ public class SearchMemberController {
     @FXML
     private Button searchMem_saveBtn;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -252,6 +258,9 @@ public class SearchMemberController {
         }
     }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
