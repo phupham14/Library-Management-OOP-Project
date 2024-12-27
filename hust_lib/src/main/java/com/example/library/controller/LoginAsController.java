@@ -54,7 +54,7 @@ public class LoginAsController {
 
     public void ontSwitchToAdmin() throws IOException {
         // Load the FXML file
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/admin-page.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/Dashboard.fxml")));
 
         // Create a new Scene with the loaded content
         Scene scene = new Scene(root);

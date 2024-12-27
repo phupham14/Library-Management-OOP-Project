@@ -29,7 +29,7 @@
                   <Image url="@../../../../icons/book.png" />
                </image>
             </ImageView>
-            <HBox fx:id="homepage_btn" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="sidebar-btn" stylesheets="@../../../../css/dashboardStyle.css">
+            <HBox fx:id="homepage_btn" alignment="CENTER" onMouseClicked="#onSwitchToAdmin" prefHeight="100.0" prefWidth="200.0" styleClass="sidebar-btn" stylesheets="@../../../../css/dashboardStyle.css">
                <children>
                   <ImageView fitHeight="33.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>

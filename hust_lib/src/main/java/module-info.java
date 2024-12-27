@@ -5,6 +5,7 @@ module com.example.library {
     requires javafx.web;
     requires java.sql;
     requires org.postgresql.jdbc;
+<<<<<<< Updated upstream
 =======
     requires javafx.controls;        // Required for JavaFX controls
     requires javafx.fxml;           // Required for JavaFX FXML support
@@ -12,6 +13,9 @@ module com.example.library {
     requires java.sql;              // Required for SQL database connectivity
     requires org.postgresql.jdbc;
     requires java.desktop;   // Required for PostgreSQL JDBC driver
+>>>>>>> Stashed changes
+=======
+    requires java.desktop;
 >>>>>>> Stashed changes
 
     opens com.example.library to javafx.fxml; // Allow FXML to access this package

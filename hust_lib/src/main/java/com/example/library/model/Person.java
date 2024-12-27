@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 /**
  * Represents a person in the library system.
- * This is the base class for all user types (Employee, Customer, Customer).
+ * This is the base class for all user types (Employee, Customer, etc.).
  */
 public class Person {
     private int personId;
@@ -17,10 +17,11 @@ public class Person {
     private String password;
     private LocalDate dob;
     private char gender;
-    private String role;  // Employee, Customer, Customer
+    private String role;  // Employee, Customer, etc.
     private LocalDateTime createdDate;
     private LocalDateTime lastActiveDate;
 
+<<<<<<< Updated upstream
     // Constructor
     public Person() {
         this.createdDate = LocalDateTime.now();
@@ -77,6 +78,10 @@ public class Person {
                   String password, LocalDate dob, char gender,
                   String role, LocalDateTime createdDate,
                   LocalDateTime lastActiveDate) {
+=======
+    // Full constructor for all fields
+    public Person(int personId, String firstName, String lastName, String address, String phoneNumber, String email, String password, LocalDate dob, char gender, String role, LocalDateTime createdDate, LocalDateTime lastActiveDate) {
+>>>>>>> Stashed changes
         this.personId = personId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -91,7 +96,26 @@ public class Person {
         this.lastActiveDate = lastActiveDate;
     }
 
+<<<<<<< Updated upstream
     // Getters and Setters thêm sau (sau này cần gì thì tạo)
+=======
+    // Constructor for member search (updated to match your requirements)
+    public Person(String firstName, String lastName, String address, String phoneNumber, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
+    }
+
+    // Default constructor
+    public Person() {
+    }
+>>>>>>> Stashed changes
+
+    // Getters and setters
+    // (same as before)
 
     public int getPersonId() {
         return personId;
@@ -144,6 +168,7 @@ public class Person {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+<<<<<<< Updated upstream
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -175,4 +200,6 @@ public class Person {
 
 
     // Method
+=======
+>>>>>>> Stashed changes
 }

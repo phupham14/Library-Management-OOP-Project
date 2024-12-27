@@ -1,10 +1,8 @@
 package com.example.library.model;
 
-import java.math.BigDecimal;
-
 /**
  * Represents a book in the library system.
- * Maps directly to the Book table in database.
+ * Maps directly to the Book table in the database.
  */
 public class Book {
     private int bookId;           // BookID SERIAL NOT NULL
@@ -12,8 +10,9 @@ public class Book {
     private int publisherId;      // PublisherID INT NOT NULL
     private int quantity;         // Quantity INT NOT NULL
     private int publishYear;      // PublishYear INT NOT NULL
-    private BigDecimal worth;     // Worth NUMERIC NOT NULL
+    private double worth;         // Worth NUMERIC NOT NULL
     private String image;         // Image VARCHAR(255)
+<<<<<<< Updated upstream
 
     //region Constructors
     public Book() {
@@ -38,6 +37,13 @@ public class Book {
     public Book(int bookId, String title, int publisherId,
                 int quantity, int publishYear, BigDecimal worth,
                 String image) {
+=======
+    private String author;        // Author's name
+    private String publisher;     // Publisher's name
+
+    // Constructor that requires all parameters
+    public Book(int bookId, String title, int publisherId, int quantity, int publishYear, double worth, String image, String author, String publisher) {
+>>>>>>> Stashed changes
         this.bookId = bookId;
         this.title = title;
         this.publisherId = publisherId;
@@ -45,19 +51,26 @@ public class Book {
         this.publishYear = publishYear;
         this.worth = worth;
         this.image = image;
+<<<<<<< Updated upstream
     }
     //endregion
 
     //region Methods
+=======
+        this.author = author;
+        this.publisher = publisher;
+    }
+
+>>>>>>> Stashed changes
     /**
-     * Check if book is available for borrowing
+     * Check if the book is available for borrowing
      */
     public boolean isAvailable() {
         return quantity > 0;
     }
 
     /**
-     * Decrease quantity when book is borrowed
+     * Decrease quantity when the book is borrowed
      */
     public boolean decreaseQuantity() {
         if (quantity > 0) {
@@ -68,12 +81,11 @@ public class Book {
     }
 
     /**
-     * Increase quantity when book is returned
+     * Increase quantity when the book is returned
      */
     public void increaseQuantity() {
         quantity++;
     }
-    //endregion
 
     //region Getters and Setters
     public int getBookId() {
@@ -116,11 +128,11 @@ public class Book {
         this.publishYear = publishYear;
     }
 
-    public BigDecimal getWorth() {
+    public double getWorth() {
         return worth;
     }
 
-    public void setWorth(BigDecimal worth) {
+    public void setWorth(double worth) {
         this.worth = worth;
     }
 

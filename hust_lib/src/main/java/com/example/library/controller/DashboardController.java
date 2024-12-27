@@ -5,8 +5,10 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
@@ -24,6 +26,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -155,6 +158,26 @@ public class DashboardController {
 
         ObservableList<String> listData = FXCollections.observableArrayList(listQ); // Create an ObservableList
         analytics_comBox.setItems(listData); // Set items in the ComboBox
+    }
+
+    public void onSwitchToAdmin() throws IOException {
+        // Load the FXML file
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/admin-page.fxml")));
+
+        // Create a new Scene with the loaded content
+        Scene scene = new Scene(root);
+
+        // Get the current window
+        Stage window = (Stage) homepage_btn.getScene().getWindow();
+
+        // Set the scene to the window
+        window.setScene(scene);
+
+        // Optionally, you can set the window to be resizable
+        window.setResizable(true);
+
+        // Show the window with preferred size
+        window.sizeToScene();
     }
 
     private void initializePieChart() {
