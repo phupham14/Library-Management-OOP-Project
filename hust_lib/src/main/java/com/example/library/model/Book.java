@@ -13,6 +13,7 @@ public class Book {
     private double worth;         // Worth NUMERIC NOT NULL
     private String image;         // Image VARCHAR(255)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
     //region Constructors
     public Book() {
@@ -44,6 +45,13 @@ public class Book {
     // Constructor that requires all parameters
     public Book(int bookId, String title, int publisherId, int quantity, int publishYear, double worth, String image, String author, String publisher) {
 >>>>>>> Stashed changes
+=======
+    private String author;        // Author's name
+    private String publisher;     // Publisher's name
+
+    // Constructor that requires all parameters
+    public Book(int bookId, String title, int publisherId, int quantity, int publishYear, double worth, String image, String author, String publisher) {
+>>>>>>> Stashed changes
         this.bookId = bookId;
         this.title = title;
         this.publisherId = publisherId;
@@ -61,6 +69,9 @@ public class Book {
         this.publisher = publisher;
     }
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     /**
      * Check if the book is available for borrowing

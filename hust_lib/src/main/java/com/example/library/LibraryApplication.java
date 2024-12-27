@@ -12,7 +12,11 @@ public class LibraryApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 getClass().getResource("/com/example/library/view/employee-page.fxml")
+=======
+                getClass().getResource("/com/example/library/view/user-page.fxml")
+>>>>>>> Stashed changes
 =======
                 getClass().getResource("/com/example/library/view/user-page.fxml")
 >>>>>>> Stashed changes

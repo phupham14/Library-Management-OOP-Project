@@ -22,6 +22,7 @@ public class Person {
     private LocalDateTime lastActiveDate;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     // Constructor
     public Person() {
         this.createdDate = LocalDateTime.now();
@@ -79,6 +80,8 @@ public class Person {
                   String role, LocalDateTime createdDate,
                   LocalDateTime lastActiveDate) {
 =======
+=======
+>>>>>>> Stashed changes
     // Full constructor for all fields
     public Person(int personId, String firstName, String lastName, String address, String phoneNumber, String email, String password, LocalDate dob, char gender, String role, LocalDateTime createdDate, LocalDateTime lastActiveDate) {
 >>>>>>> Stashed changes
@@ -97,8 +100,11 @@ public class Person {
     }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     // Getters and Setters thêm sau (sau này cần gì thì tạo)
 =======
+=======
+>>>>>>> Stashed changes
     // Constructor for member search (updated to match your requirements)
     public Person(String firstName, String lastName, String address, String phoneNumber, String email, String password) {
         this.firstName = firstName;
@@ -113,6 +119,9 @@ public class Person {
     public Person() {
     }
 >>>>>>> Stashed changes
+
+    // Getters and setters
+    // (same as before)
 
     // Getters and setters
     // (same as before)
@@ -173,6 +182,7 @@ public class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+<<<<<<< Updated upstream
 
     public void setAddress(String address) {
         this.address = address;
@@ -200,6 +210,8 @@ public class Person {
 
 
     // Method
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 }
