@@ -55,6 +55,27 @@ public class searchBookService {
     }
 
     /**
+     * Issues a book by reducing its quantity in the database.
+     * @param bookId The ID of the book to be issued.
+     */
+    public void issueBook(int bookId) {
+        String query = "UPDATE book SET quantity = quantity - 1 WHERE bookid = ?";
+
+        try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, bookId);
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new RuntimeException("No book found with ID: " + bookId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error issuing book: " + e.getMessage());
+        }
+    }
+
+    /**
      * Retrieves all books from the database.
      * @return A list of all books.
      */
@@ -135,27 +156,6 @@ public class searchBookService {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Error updating book: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Issues a book by reducing its quantity in the database.
-     * @param bookId The ID of the book to be issued.
-     */
-    public void issueBook(int bookId) {
-        String query = "UPDATE book SET quantity = quantity - 1 WHERE bookid = ?";
-
-        try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            preparedStatement.setInt(1, bookId);
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected == 0) {
-                throw new RuntimeException("No book found with ID: " + bookId);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error issuing book: " + e.getMessage());
         }
     }
 

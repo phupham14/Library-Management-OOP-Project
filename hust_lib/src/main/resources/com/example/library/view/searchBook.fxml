@@ -12,27 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.SearchMemberController">
-   <children>
-      <Label layoutX="93.0" layoutY="73.0" text="Book Name" />
-      <TextField fx:id="searchBook_textfield" layoutX="178.0" layoutY="69.0" />
-      <ListView fx:id="searchBook_listView" layoutY="123.0" prefHeight="276.0" prefWidth="600.0" />
-      <Label layoutX="203.0" layoutY="24.0" text="Search Book">
-         <font>
-            <Font name="Georgia Bold" size="30.0" />
-         </font>
-      </Label>
-      <Button fx:id="searchBook_searchBtn" layoutX="477.0" layoutY="82.0" mnemonicParsing="false" text="Search" />
-   </children>
-</AnchorPane>
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.SearchBookController">
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="600.0">
@@ -47,13 +26,13 @@
             <Button fx:id="searchBook_searchBtn" layoutX="345.0" layoutY="69.0" mnemonicParsing="false" text="Search" />
             <Button fx:id="searchBook_delBtn" layoutX="521.0" layoutY="82.0" mnemonicParsing="false" text="Delete" />
             <TableView fx:id="searchBook_tableView" layoutY="120.0" prefHeight="282.0" prefWidth="603.0">
-              <columns>
-                <TableColumn fx:id="searchBook_tableViewTitle" prefWidth="196.00000607967377" text="Title" />
-                <TableColumn fx:id="searchBook_tableViewPublisherID" minWidth="9.5999755859375" prefWidth="92.0" text="Publisher ID" />
-                  <TableColumn fx:id="searchBook_tableViewPublishYear" minWidth="0.0" prefWidth="91.199951171875" text="Publish Year" />
-                  <TableColumn fx:id="searchBook_tableViewQuantity" minWidth="0.0" prefWidth="94.4000244140625" text="Quantity" />
-                  <TableColumn fx:id="searchBook_tableViewWorth" minWidth="0.0" prefWidth="127.19996948242192" text="Worth" />
-              </columns>
+               <columns>
+                  <TableColumn fx:id="searchBook_tableViewTitle" prefWidth="196.0" text="Title" />
+                  <TableColumn fx:id="searchBook_tableViewPublisher" prefWidth="92.0" text="Publisher" />
+                  <TableColumn fx:id="searchBook_tableViewPublishYear" prefWidth="91.2" text="Publish Year" />
+                  <TableColumn fx:id="searchBook_tableViewQuantity" prefWidth="94.4" text="Quantity" />
+                  <TableColumn fx:id="searchBook_tableViewWorth" prefWidth="127.2" text="Worth" />
+               </columns>
             </TableView>
             <Button fx:id="searchBook_addBookBtn" layoutX="439.0" layoutY="82.0" mnemonicParsing="false" onAction="#onOpenAddBook" text="Add Book" />
          </children>
@@ -66,7 +45,7 @@
             <TextField fx:id="searchBook_worth" layoutX="25.0" layoutY="302.0" promptText="Worth" />
             <TextField fx:id="searchBook_quantity" layoutX="26.0" layoutY="261.0" promptText="Quantity" />
             <TextField fx:id="searchBook_year" layoutX="26.0" layoutY="221.0" promptText="Publish Year" />
-            <TextField fx:id="searchBook_publisherId" layoutX="26.0" layoutY="183.0" promptText="Publisher ID" />
+            <TextField fx:id="searchBook_publisher" layoutX="26.0" layoutY="183.0" promptText="Publisher" />
             <Button fx:id="searchBook_saveAddBtn" layoutX="14.0" layoutY="345.0" mnemonicParsing="false" text="Save" />
             <Button fx:id="searchBook_cancelBtn" layoutX="134.0" layoutY="345.0" mnemonicParsing="false" text="Cancel" />
             <HBox alignment="CENTER" layoutX="-2.0" layoutY="24.0" prefHeight="107.0" prefWidth="201.0">
@@ -82,10 +61,3 @@
       </AnchorPane>
    </right>
 </BorderPane>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes

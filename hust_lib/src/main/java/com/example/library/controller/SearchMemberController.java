@@ -1,7 +1,7 @@
 package com.example.library.controller;
 
 import com.example.library.model.Person;
-import com.example.library.service.SearchMemberService;
+import com.example.library.service.searchMemberService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,57 +20,77 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Controller for managing member search functionality in the library system.
- */
 public class SearchMemberController {
 
     @FXML
-    private TextField searchMem_textfield;
-    @FXML
-    private TableView<Person> searchMem_tableView;
-    @FXML
-    private TableColumn<Person, String> searchMem_firstNameTable;
-    @FXML
-    private TableColumn<Person, String> searchMem_lastNameTable;
+    private TextField searchMem_address;
+
     @FXML
     private TableColumn<Person, String> searchMem_addressTable;
-    @FXML
-    private TableColumn<Person, String> searchMem_phoneNumberTable;
-    @FXML
-    private TableColumn<Person, String> searchMem_emailTable;
-    @FXML
-    private TableColumn<Person, String> searchMem_roleTable;
-    @FXML
-    private TextField searchMem_firstName;
-    @FXML
-    private TextField searchMem_lastName;
-    @FXML
-    private TextField searchMem_address;
-    @FXML
-    private TextField searchMem_phoneNumber;
-    @FXML
-    private TextField searchMem_email;
-    @FXML
-    private TextField searchMem_password;
-    @FXML
-    private ImageView searchMem_image;
-    @FXML
-    private Button searchMem_searchBtn;
+
     @FXML
     private Button searchMem_cancelBtn;
-    @FXML
-    private Button searchMem_saveBtn;
+
     @FXML
     private Button searchMem_delBtn;
+
+    @FXML
+    private TextField searchMem_email;
+
+    @FXML
+    private TableColumn<Person, String> searchMem_emailTable;
+
+    @FXML
+    private TextField searchMem_firstName;
+
+    @FXML
+    private TableColumn<Person, String> searchMem_firstNameTable;
+
+    @FXML
+    private ImageView searchMem_image;
+
+    @FXML
+    private TextField searchMem_lastName;
+
+    @FXML
+    private TableColumn<Person, String> searchMem_lastNameTable;
+
     @FXML
     private Button searchMem_newUserBtn;
 
-    private final SearchMemberService memberService = new SearchMemberService();
+    @FXML
+    private TextField searchMem_password;
+
+    @FXML
+    private TableColumn<Person, String> searchMem_passwordTable;
+
+    @FXML
+    private TextField searchMem_phoneNumber;
+
+    @FXML
+    private TableColumn<Person, String> searchMem_phoneNumberTable;
+
+    @FXML
+    private TableColumn<Person, String> searchMem_roleTable;
+
+    @FXML
+    private Button searchMem_saveBtn;
+
+    @FXML
+    private Button searchMem_searchBtn;
+
+    @FXML
+    private TableView<Person> searchMem_tableView;
+
+    @FXML
+    private TextField searchMem_textfield;
+
+    private final searchMemberService memberService = new searchMemberService();
+    private Person selectedMember; // Variable to hold the currently selected member
 
     @FXML
     private void initialize() {
-        // Configure table columns
+        // Set up the cell value factories for each column
         searchMem_firstNameTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstName()));
         searchMem_lastNameTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLastName()));
         searchMem_addressTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAddress()));
@@ -78,29 +98,45 @@ public class SearchMemberController {
         searchMem_emailTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
         searchMem_roleTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRole()));
 
-        // Initialize buttons and actions
         searchMem_searchBtn.setOnAction(event -> handleSearch());
-        searchMem_cancelBtn.setOnAction(event -> clearFields());
-        searchMem_saveBtn.setOnAction(event -> saveMember());
-        searchMem_delBtn.setOnAction(event -> deleteMember());
+        loadAllMembers(); // Populate all members on initialization
+
+        // Add mouse click event to the TableView
+        searchMem_tableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) { // Double-click to edit
+                selectedMember = searchMem_tableView.getSelectionModel().getSelectedItem();
+                if (selectedMember != null) {
+                    populateTextFields(selectedMember);
+                }
+            }
+        });
+
+        // Add click event to the ImageView for uploading an image
         searchMem_image.setOnMouseClicked(event -> uploadImage());
 
-        // Load all members at startup
-        loadAllMembers();
+        // Add click event to the Cancel button
+        searchMem_cancelBtn.setOnAction(event -> clearFields());
 
-        // Add TableView row selection event
-        searchMem_tableView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1) {
-                Person selectedPerson = searchMem_tableView.getSelectionModel().getSelectedItem();
-                if (selectedPerson != null) {
-                    populateTextFields(selectedPerson);
-                }
+        // Add click event to the Save button
+        searchMem_saveBtn.setOnAction(event -> saveMember());
+
+        // Add click event to the Delete button
+        searchMem_delBtn.setOnAction(event -> deleteMember());
+
+        // Add click event to the New User button
+        searchMem_newUserBtn.setOnAction(event -> {
+            try {
+                onOpenNewUser();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }
 
     private void loadAllMembers() {
         List<Person> members = memberService.getAllMembers();
+        System.out.println("Loaded members: " + members.size());
+
         ObservableList<Person> memberDetails = FXCollections.observableArrayList(members);
         searchMem_tableView.setItems(memberDetails);
     }
@@ -109,6 +145,7 @@ public class SearchMemberController {
         String keyword = searchMem_textfield.getText().trim();
         if (!keyword.isEmpty()) {
             List<Person> members = memberService.searchMembersByName(keyword);
+            System.out.println("Search keyword: " + keyword + ", Members found: " + members.size());
             ObservableList<Person> memberDetails = FXCollections.observableArrayList(members);
             searchMem_tableView.setItems(memberDetails);
         } else {
@@ -118,13 +155,13 @@ public class SearchMemberController {
         }
     }
 
-    private void populateTextFields(Person selectedPerson) {
-        searchMem_firstName.setText(selectedPerson.getFirstName());
-        searchMem_lastName.setText(selectedPerson.getLastName());
-        searchMem_address.setText(selectedPerson.getAddress());
-        searchMem_phoneNumber.setText(selectedPerson.getPhoneNumber());
-        searchMem_email.setText(selectedPerson.getEmail());
-        searchMem_password.setText("Password not displayed");
+    private void populateTextFields(Person selectedItem) {
+        searchMem_firstName.setText(selectedItem.getFirstName());
+        searchMem_lastName.setText(selectedItem.getLastName());
+        searchMem_address.setText(selectedItem.getAddress());
+        searchMem_phoneNumber.setText(selectedItem.getPhoneNumber());
+        searchMem_email.setText(selectedItem.getEmail());
+        searchMem_password.setText(""); // Do not display password
     }
 
     private void uploadImage() {
@@ -145,49 +182,68 @@ public class SearchMemberController {
         searchMem_email.clear();
         searchMem_password.clear();
         searchMem_image.setImage(null);
-        searchMem_tableView.getSelectionModel().clearSelection();
+        searchMem_tableView.getSelectionModel().clearSelection(); // Clear selection
+        selectedMember = null; // Reset selected member
     }
 
-    public void onOpenNewUser() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/member-add.fxml")));
-        Stage addMemberStage = new Stage();
-        addMemberStage.setScene(new Scene(root));
-        addMemberStage.setTitle("Add Member Page");
-        addMemberStage.setResizable(true);
-        addMemberStage.show();
-    }
-
+    @FXML
     private void saveMember() {
+        if (selectedMember == null) {
+            System.out.println("No member selected for update. Please select a member.");
+            return; // Early exit if no member is selected
+        }
+
+        // Get updated field values
         String firstName = searchMem_firstName.getText().trim();
         String lastName = searchMem_lastName.getText().trim();
         String address = searchMem_address.getText().trim();
         String phoneNumber = searchMem_phoneNumber.getText().trim();
         String email = searchMem_email.getText().trim();
-        String password = searchMem_password.getText().trim();
+        String password = searchMem_password.getText().trim(); // Handle password as necessary
 
-        Person existingMember = memberService.findMemberByPhoneNumberOrEmail(phoneNumber, email);
-        if (existingMember != null) {
-            existingMember.setFirstName(firstName);
-            existingMember.setLastName(lastName);
-            existingMember.setAddress(address);
-            existingMember.setEmail(email);
-            existingMember.setPassword(password);
-            memberService.updateMember(existingMember);
-        } else {
-            Person newMember = new Person(firstName, lastName, address, phoneNumber, email, password);
-            memberService.addMember(newMember);
-        }
+        // Update existing member's details
+        selectedMember.setFirstName(firstName);
+        selectedMember.setLastName(lastName);
+        selectedMember.setAddress(address);
+        selectedMember.setPhoneNumber(phoneNumber);
+        selectedMember.setEmail(email);
+        selectedMember.setPassword(password); // Update password if necessary
 
-        clearFields();
-        loadAllMembers();
+        // Call updateMember method in service
+        memberService.updateMember(selectedMember);
+        System.out.println("Updated existing member: " + selectedMember.getFirstName() + " " + selectedMember.getLastName());
+
+        clearFields(); // Clear fields after saving
+        loadAllMembers(); // Reload members to reflect changes
     }
 
     private void deleteMember() {
-        Person selectedPerson = searchMem_tableView.getSelectionModel().getSelectedItem();
-        if (selectedPerson != null) {
-            memberService.deleteMember(selectedPerson.getPhoneNumber());
-            clearFields();
-            loadAllMembers();
+        Person selectedItem = searchMem_tableView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            String phoneNumber = selectedItem.getPhoneNumber(); // Extract phone number
+            memberService.deleteMember(phoneNumber);
+            System.out.println("Deleted member with phone number: " + phoneNumber);
+            clearFields(); // Clear fields after deletion
+            loadAllMembers(); // Refresh the table view
+        } else {
+            System.out.println("No member selected for deletion.");
         }
+    }
+
+    public void onOpenNewUser() throws IOException {
+        // Load the FXML file for the admin page
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/member-add.fxml")));
+
+        // Create a new Stage for the new window
+        Stage addMember = new Stage();
+
+        // Create a new Scene with the loaded content
+        Scene scene = new Scene(root);
+
+        // Set the scene to the new window
+        addMember.setScene(scene);
+        addMember.setResizable(true);
+        addMember.setTitle("Add Member Page");
+        addMember.show();
     }
 }

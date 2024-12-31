@@ -27,84 +27,66 @@ import java.util.Optional;
 public class SearchBookController {
 
     @FXML
+    private Button searchBook_addBookBtn;
+    @FXML
     private Button searchBook_cancelBtn;
-
     @FXML
     private Button searchBook_delBtn;
-
+    @FXML
+    private Button searchBook_saveAddBtn; // Button to save changes
     @FXML
     private ImageView searchBook_image;
-
     @FXML
-    private TextField searchBook_publisherId;
-
-    @FXML
-    private Button searchBook_addBookBtn;
-
+    private TextField searchBook_publisher;
     @FXML
     private TextField searchBook_quantity;
-
-    @FXML
-    private Button searchBook_saveAddBtn;
-
     @FXML
     private Button searchBook_searchBtn;
-
     @FXML
     private TableView<Book> searchBook_tableView;
-
     @FXML
     private TableColumn<Book, String> searchBook_tableViewTitle;
-
     @FXML
-    private TableColumn<Book, Integer> searchBook_tableViewPublisherID;
-
+    private TableColumn<Book, String> searchBook_tableViewPublisher;
     @FXML
     private TableColumn<Book, Integer> searchBook_tableViewPublishYear;
-
     @FXML
     private TableColumn<Book, Integer> searchBook_tableViewQuantity;
-
     @FXML
     private TableColumn<Book, Double> searchBook_tableViewWorth;
-
     @FXML
     private TextField searchBook_textfield;
-
     @FXML
     private TextField searchBook_title;
-
     @FXML
     private TextField searchBook_worth;
-
     @FXML
     private TextField searchBook_year;
 
     private final searchBookService bookService = new searchBookService();
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
+    private Book selectedBook; // Store the currently selected book
 
     @FXML
     private void initialize() {
         loadAllBooks();
         searchBook_searchBtn.setOnAction(event -> handleSearch());
-
         searchBook_tableViewTitle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
-        searchBook_tableViewPublisherID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPublisherId()).asObject());
+        searchBook_tableViewPublisher.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPublisher()));
         searchBook_tableViewPublishYear.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPublishYear()).asObject());
         searchBook_tableViewQuantity.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
         searchBook_tableViewWorth.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getWorth()).asObject());
 
         searchBook_tableView.setOnMouseClicked(this::handleMouseClick);
         searchBook_image.setOnMouseClicked(this::handleImageClick);
-
         searchBook_cancelBtn.setOnAction(event -> clearFields());
         searchBook_delBtn.setOnAction(event -> handleDelete());
-        searchBook_saveAddBtn.setOnAction(event -> handleSaveOrUpdate());
+        searchBook_saveAddBtn.setOnAction(event -> handleSaveUpdate()); // Save button action
     }
 
     private void handleMouseClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            Book selectedBook = searchBook_tableView.getSelectionModel().getSelectedItem();
+            selectedBook = searchBook_tableView.getSelectionModel().getSelectedItem();
             if (selectedBook != null) {
                 populateFields(selectedBook);
             }
@@ -124,16 +106,17 @@ public class SearchBookController {
 
     private void clearFields() {
         searchBook_title.clear();
-        searchBook_publisherId.clear();
+        searchBook_publisher.clear();
         searchBook_year.clear();
         searchBook_quantity.clear();
         searchBook_worth.clear();
         searchBook_image.setImage(null);
+        selectedBook = null; // Reset selected book
     }
 
     private void populateFields(Book book) {
         searchBook_title.setText(book.getTitle());
-        searchBook_publisherId.setText(String.valueOf(book.getPublisherId()));
+        searchBook_publisher.setText(book.getPublisher());
         searchBook_year.setText(String.valueOf(book.getPublishYear()));
         searchBook_quantity.setText(String.valueOf(book.getQuantity()));
         searchBook_worth.setText(String.valueOf(book.getWorth()));
@@ -165,12 +148,12 @@ public class SearchBookController {
         Scene scene = new Scene(root);
         addBook.setScene(scene);
         addBook.setResizable(true);
-        addBook.setTitle("Add Member Page");
+        addBook.setTitle("Add Book Page");
         addBook.show();
     }
 
     private void handleDelete() {
-        Book selectedBook = searchBook_tableView.getSelectionModel().getSelectedItem();
+        Book selectedBook = (Book) searchBook_tableView.getSelectionModel().getSelectedItem();
         if (selectedBook != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Deletion");
@@ -191,64 +174,23 @@ public class SearchBookController {
         }
     }
 
-    private void handleSaveOrUpdate() {
-        String title = searchBook_title.getText().trim();
-        String publisherInput = searchBook_publisherId.getText().trim();
-        String yearInput = searchBook_year.getText().trim();
-        String quantityInput = searchBook_quantity.getText().trim();
-        String worthInput = searchBook_worth.getText().trim();
+    private void handleSaveUpdate() {
+        if (selectedBook != null) {
+            selectedBook.setTitle(searchBook_title.getText());
+            selectedBook.setPublisher(searchBook_publisher.getText());
+            selectedBook.setPublishYear(Integer.parseInt(searchBook_year.getText()));
+            selectedBook.setQuantity(Integer.parseInt(searchBook_quantity.getText()));
+            selectedBook.setWorth(Double.parseDouble(searchBook_worth.getText()));
 
-        if (title.isEmpty() || publisherInput.isEmpty() || yearInput.isEmpty() || quantityInput.isEmpty() || worthInput.isEmpty()) {
-            System.out.println("Please fill in all fields.");
-            return;
-        }
-
-        int publisherId;
-        try {
-            publisherId = Integer.parseInt(publisherInput);
-        } catch (NumberFormatException e) {
-            System.err.println("Publisher ID must be a valid integer.");
-            return;
-        }
-
-        int publishYear;
-        try {
-            publishYear = Integer.parseInt(yearInput);
-        } catch (NumberFormatException e) {
-            System.err.println("Publish Year must be a valid integer.");
-            return;
-        }
-
-        int quantity;
-        try {
-            quantity = Integer.parseInt(quantityInput);
-        } catch (NumberFormatException e) {
-            System.err.println("Quantity must be a valid integer.");
-            return;
-        }
-
-        double worth;
-        try {
-            worth = Double.parseDouble(worthInput);
-        } catch (NumberFormatException e) {
-            System.err.println("Worth must be a valid number.");
-            return;
-        }
-
-        Book existingBook = bookService.findBookByTitle(title);
-        if (existingBook != null) {
-            existingBook.setPublisherId(publisherId);
-            existingBook.setPublishYear(publishYear);
-            existingBook.setQuantity(quantity);
-            existingBook.setWorth(worth);
-            bookService.updateBook(existingBook);
-            System.out.println("Book updated successfully!");
+            bookService.updateBook(selectedBook); // Assuming you have an update method in your service
+            loadAllBooks(); // Reload the table to reflect changes
+            clearFields(); // Clear fields after saving
         } else {
-            System.err.println("No book found with the title: " + title);
-            return;
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Book Selected");
+            alert.setContentText("Please select a book to update.");
+            alert.showAndWait();
         }
-
-        loadAllBooks();
-        clearFields();
     }
 }
