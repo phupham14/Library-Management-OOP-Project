@@ -7,10 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginService {
+public class loginService {
     private Connection connection;
 
-    public void loginService() {
+    public loginService() {
         // Initialize the database connection (replace with your actual database URL, username, password)
         String dbName = "hust_lib";
         String user = "hustlib_admin";

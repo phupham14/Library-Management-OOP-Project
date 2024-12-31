@@ -131,6 +131,9 @@ public class UserPageController {
         Book selectedBook = user_tableView.getSelectionModel().getSelectedItem();
 
         if (selectedBook != null) {
+            // Assuming you have a way to get the current customer ID
+//            int customerId = getCurrentCustomerId(); // Replace with actual method to get customer ID
+
             // Debug: Print the selected book title and ID
             System.out.println("Selected book title: " + selectedBook.getTitle());
             System.out.println("Selected book ID: " + selectedBook.getBookId());
@@ -139,7 +142,7 @@ public class UserPageController {
             try {
                 bookService.issueBookById(selectedBook.getBookId());
                 // Add the book to the cart
-                CartService.getInstance().addToCart(selectedBook);
+//                CartService.getInstance().addBookToCart(selectedBook, customerId); // Pass customer ID
             } catch (Exception e) {
                 System.err.println("Error issuing book: " + e.getMessage());
                 return; // Exit if there's an issue

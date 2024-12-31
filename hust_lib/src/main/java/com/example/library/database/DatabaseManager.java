@@ -11,9 +11,9 @@ public class DatabaseManager {
 
     private DatabaseManager() {
         // Khởi tạo kết nối trong constructor
-        String dbName = "hustlib";
-        String user = "postgres";
-        String password = "skadi123";
+        String dbName = "hust_lib";
+        String user = "hustlib_admin";
+        String password = "hustlib_admin";
 
         connection = ConnectionUtil.getInstance().connect_to_db(dbName, user, password);
     }

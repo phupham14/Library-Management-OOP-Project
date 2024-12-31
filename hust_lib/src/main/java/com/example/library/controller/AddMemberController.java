@@ -1,5 +1,6 @@
 package com.example.library.controller;
 
+import com.example.library.service.addMemberService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -7,26 +8,35 @@ import javafx.stage.Stage;
 
 public class AddMemberController {
 
-    @FXML // fx:id="addMem_adress"
-    private TextField addMem_adress; // Value injected by FXMLLoader
+    @FXML
+    private TextField addMem_adress;
 
-    @FXML // fx:id="addMem_cancelBtn"
-    private Button addMem_cancelBtn; // Value injected by FXMLLoader
+    @FXML
+    private Button addMem_cancelBtn;
 
-    @FXML // fx:id="addMem_contact"
-    private TextField addMem_contact; // Value injected by FXMLLoader
+    @FXML
+    private TextField addMem_contact;
 
-    @FXML // fx:id="addMem_email"
-    private TextField addMem_email; // Value injected by FXMLLoader
+    @FXML
+    private TextField addMem_email;
 
-    @FXML // fx:id="addMem_firstName"
-    private TextField addMem_firstName; // Value injected by FXMLLoader
+    @FXML
+    private TextField addMem_firstName;
 
-    @FXML // fx:id="addMem_lastName"
-    private TextField addMem_lastName; // Value injected by FXMLLoader
+    @FXML
+    private TextField addMem_lastName;
 
-    @FXML // fx:id="addMem_saveBtn"
-    private Button addMem_saveBtn; // Value injected by FXMLLoader
+    @FXML
+    private TextField addMem_password;
+
+    @FXML
+    private Button addMem_saveBtn;
+
+    private addMemberService memberService;
+
+    public AddMemberController() {
+        memberService = new addMemberService(); // Initialize the service
+    }
 
     // Handle the action when the Cancel button is pressed
     @FXML
@@ -38,7 +48,22 @@ public class AddMemberController {
     // Handle the action when the Save button is pressed
     @FXML
     private void handleSaveAction() {
-        Stage stage = (Stage) addMem_saveBtn.getScene().getWindow();
-        stage.close();
+        String firstName = addMem_firstName.getText();
+        String lastName = addMem_lastName.getText();
+        String mobile = addMem_contact.getText();
+        String email = addMem_email.getText();
+        String address = addMem_adress.getText();
+        String password = addMem_password.getText();
+
+        try {
+            memberService.handleSaveAction(firstName, lastName, mobile, email, address, password);
+            // Optionally show a success message
+            System.out.println("Member added successfully.");
+            handleCancelAction(); // Close the window after saving
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Optionally show an error message
+            System.err.println("Error adding member: " + e.getMessage());
+        }
     }
 }

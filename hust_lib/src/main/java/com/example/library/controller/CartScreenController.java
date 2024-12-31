@@ -39,8 +39,8 @@ public class CartScreenController {
 
     @FXML
     private void initialize() {
-        // Initialize cartItems from CartService
-        cartItems = CartService.getInstance().getCartItems();
+        // Load cart items from the database using CartService
+        cartItems = FXCollections.observableArrayList(CartService.getInstance().getCartItemsFromDatabase());
         cart_tableView.setItems(cartItems);
 
         // Set up table columns to display cart item details
@@ -58,18 +58,20 @@ public class CartScreenController {
         cart_labelTotalCost.setText("Total Cost: $" + totalCost);
     }
 
-    // Method to handle adding a book to the cart from another controller
-    public void addToCart(Book book) {
-        cartItems.add(book);
-        updateTotalCost();
-    }
-
-    @FXML
     private void handleRemoveBook() {
         Book selectedBook = cart_tableView.getSelectionModel().getSelectedItem();
         if (selectedBook != null) {
+            // Remove the book from the database
+            CartService.getInstance().removeBookFromCart(selectedBook);
             cartItems.remove(selectedBook);
             updateTotalCost();
         }
+    }
+
+    public void addToCart(Book book) {
+        // Persist the book to the database
+//        CartService.getInstance().addBookToCart(book);
+        cartItems.add(book);
+        updateTotalCost();
     }
 }
