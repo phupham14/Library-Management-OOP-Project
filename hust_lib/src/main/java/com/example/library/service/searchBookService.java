@@ -35,13 +35,12 @@ public class searchBookService {
                     Book book = new Book(
                             resultSet.getInt("bookid"),
                             resultSet.getString("title"),
-                            resultSet.getInt("publisherid"),
+                            resultSet.getString("publisher"), // Changed from publisherId to publisher
                             resultSet.getInt("quantity"),
                             resultSet.getInt("publishyear"),
                             worth,
                             resultSet.getString("image"),
-                            resultSet.getString("author"),
-                            resultSet.getString("publisher")
+                            resultSet.getString("author")
                     );
 
                     books.add(book);
@@ -73,13 +72,12 @@ public class searchBookService {
                 Book book = new Book(
                         resultSet.getInt("bookid"),
                         resultSet.getString("title"),
-                        resultSet.getInt("publisherid"),
+                        resultSet.getString("publisher"), // Changed from publisherId to publisher
                         resultSet.getInt("quantity"),
                         resultSet.getInt("publishyear"),
                         worth,
                         resultSet.getString("image"),
-                        resultSet.getString("author"),
-                        resultSet.getString("publisher")
+                        resultSet.getString("author")
                 );
 
                 books.add(book);
@@ -115,7 +113,7 @@ public class searchBookService {
      * @param book The book object containing updated data.
      */
     public void updateBook(Book book) {
-        String query = "UPDATE book SET title = ?, author = ?, publisherid = ?, quantity = ?, publishyear = ?, worth = ?, image = ? WHERE bookid = ?";
+        String query = "UPDATE book SET title = ?, author = ?, publisher = ?, quantity = ?, publishyear = ?, worth = ?, image = ? WHERE bookid = ?";
 
         try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -123,7 +121,7 @@ public class searchBookService {
             // Set the values from the book object
             preparedStatement.setString(1, book.getTitle());
             preparedStatement.setString(2, book.getAuthor());
-            preparedStatement.setInt(3, book.getPublisherId());
+            preparedStatement.setString(3, book.getPublisher()); // Changed to use publisher
             preparedStatement.setInt(4, book.getQuantity());
             preparedStatement.setInt(5, book.getPublishYear());
             preparedStatement.setBigDecimal(6, BigDecimal.valueOf(book.getWorth()));
@@ -141,26 +139,24 @@ public class searchBookService {
     }
 
     /**
-     * Retrieves the publisher by ID.
-     * @param publisherId The ID of the publisher.
-     * @return The publisher name if found, otherwise null.
+     * Issues a book by reducing its quantity in the database.
+     * @param bookId The ID of the book to be issued.
      */
-    public String getPublisherById(int publisherId) {
-        String query = "SELECT publisher_name FROM publisher WHERE publisherid = ?";
+    public void issueBook(int bookId) {
+        String query = "UPDATE book SET quantity = quantity - 1 WHERE bookid = ?";
+
         try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setInt(1, publisherId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return resultSet.getString("publisher_name");
+            preparedStatement.setInt(1, bookId);
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new RuntimeException("No book found with ID: " + bookId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Error retrieving publisher by ID: " + e.getMessage());
+            throw new RuntimeException("Error issuing book: " + e.getMessage());
         }
-
-        return null; // Return null if not found
     }
 
     /**
@@ -181,16 +177,15 @@ public class searchBookService {
             if (rs.next()) {
                 int bookId = rs.getInt("bookid");
                 String bookTitle = rs.getString("title");
-                int publisherId = rs.getInt("publisherid");
+                String publisher = rs.getString("publisher"); // Changed from publisherId to publisher
                 int quantity = rs.getInt("quantity");
                 int publishYear = rs.getInt("publishyear");
                 BigDecimal worthBD = rs.getBigDecimal("worth");
                 double worth = (worthBD != null) ? worthBD.doubleValue() : 0.0; // Handle null case
                 String image = rs.getString("image");
                 String author = rs.getString("author");
-                String publisher = rs.getString("publisher");
 
-                book = new Book(bookId, bookTitle, publisherId, quantity, publishYear, worth, image, author, publisher);
+                book = new Book(bookId, bookTitle, publisher, quantity, publishYear, worth, image, author);
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error finding book by title: " + e.getMessage(), e);

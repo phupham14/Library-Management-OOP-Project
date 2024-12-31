@@ -13,54 +13,48 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.SearchMemberController">
-   <center>
-      <AnchorPane prefHeight="368.0" prefWidth="392.0">
-         <children>
+    <center>
+        <AnchorPane prefHeight="368.0" prefWidth="392.0">
             <Label layoutX="75.0" layoutY="73.0" text="Member Name" />
             <TextField fx:id="searchMem_textfield" layoutX="178.0" layoutY="69.0" />
             <Label layoutX="178.0" layoutY="24.0" text="Search Member">
-               <font>
-                  <Font name="Georgia Bold" size="30.0" />
-               </font>
+                <font>
+                    <Font name="Georgia Bold" size="30.0" />
+                </font>
             </Label>
             <Button fx:id="searchMem_searchBtn" layoutX="354.0" layoutY="69.0" mnemonicParsing="false" text="Search" />
             <Button fx:id="searchMem_delBtn" layoutX="534.0" layoutY="82.0" mnemonicParsing="false" text="Delete" />
             <Button fx:id="searchMem_newUserBtn" layoutX="450.0" layoutY="82.0" mnemonicParsing="false" onAction="#onOpenNewUser" text="New User" />
             <TableView fx:id="searchMem_tableView" layoutY="119.0" prefHeight="282.0" prefWidth="586.0">
-              <columns>
-                <TableColumn fx:id="searchMem_firstNameTable" prefWidth="65.60000914335251" text="First Name" />
-                <TableColumn fx:id="searchMem_lastNameTable" prefWidth="68.80001831054688" text="Last Name" />
-                  <TableColumn fx:id="searchMem_addressTable" prefWidth="104.00006103515625" text="Address" />
-                  <TableColumn fx:id="searchMem_phoneNumberTable" prefWidth="91.99998474121094" text="Phone Number" />
-                  <TableColumn fx:id="searchMem_emailTable" prefWidth="86.4000244140625" text="Email" />
-                  <TableColumn fx:id="searchMem_passwordTable" prefWidth="92.0" text="Password" />
-                  <TableColumn fx:id="searchMem_roleTable" prefWidth="62.4000244140625" text="Role" />
-              </columns>
+                <columns>
+                    <TableColumn fx:id="searchMem_firstNameTable" prefWidth="69.60000914335251" text="First Name" />
+                    <TableColumn fx:id="searchMem_lastNameTable" prefWidth="66.39999389648438" text="Last Name" />
+                    <TableColumn fx:id="searchMem_addressTable" prefWidth="104.00006103515625" text="Address" />
+                    <TableColumn fx:id="searchMem_phoneNumberTable" prefWidth="91.99998474121094" text="Phone Number" />
+                    <TableColumn fx:id="searchMem_emailTable" prefWidth="86.4000244140625" text="Email" />
+                    <TableColumn fx:id="searchMem_passwordTable" prefWidth="92.0" text="Password" />
+                    <TableColumn fx:id="searchMem_roleTable" prefWidth="56.79998779296875" text="Role" />
+                </columns>
             </TableView>
-         </children>
-      </AnchorPane>
-   </center>
-   <right>
-      <AnchorPane prefHeight="399.0" prefWidth="238.0" BorderPane.alignment="CENTER">
-         <children>
+        </AnchorPane>
+    </center>
+    <right>
+        <AnchorPane prefHeight="399.0" prefWidth="238.0" BorderPane.alignment="CENTER">
             <VBox alignment="CENTER" layoutY="14.0" prefHeight="105.0" prefWidth="239.0">
-               <children>
-                  <ImageView fx:id="searchMem_image" fitHeight="128.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../icons/people.png" />
-                     </image>
-                  </ImageView>
-               </children>
+                <ImageView fx:id="searchMem_image" fitHeight="128.0" fitWidth="116.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <Image url="@../../../../icons/people.png"/>
+                </ImageView>
             </VBox>
-            <TextField fx:id="searchMem_firstName" layoutX="44.0" layoutY="138.0" promptText="First Name" />
-            <TextField fx:id="searchMem_phoneNumber" layoutX="44.0" layoutY="249.0" promptText="Phone Number" />
-            <TextField fx:id="searchMem_address" layoutX="44.0" layoutY="211.0" promptText="Address" />
-            <TextField fx:id="searchMem_lastName" layoutX="44.0" layoutY="174.0" promptText="Last Name" />
-            <TextField fx:id="searchMem_password" layoutX="44.0" layoutY="316.0" promptText="Password" />
-            <Button fx:id="searchMem_saveBtn" layoutX="24.0" layoutY="353.0" mnemonicParsing="false" text="Save" />
-            <Button fx:id="searchMem_cancelBtn" layoutX="168.0" layoutY="353.0" mnemonicParsing="false" text="Cancel" />
-            <TextField fx:id="searchMem_email" layoutX="44.0" layoutY="284.0" promptText="Email" />
-         </children>
-      </AnchorPane>
-   </right>
+            <TextField fx:id="searchMem_firstName" layoutX="44.0" layoutY="138.0" promptText="First Name"/>
+            <TextField fx:id="searchMem_phoneNumber" layoutX="44.0" layoutY="249.0" promptText="Phone Number"/>
+            <TextField fx:id="searchMem_address" layoutX="44.0" layoutY="211.0" promptText="Address"/>
+            <TextField fx:id="searchMem_lastName" layoutX="44.0" layoutY="174.0" promptText="Last Name"/>
+            <TextField fx:id="searchMem_password" layoutX="44.0" layoutY="316.0" promptText="Password"/>
+            <Button fx:id="searchMem_saveBtn" layoutX="24.0" layoutY="353.0" mnemonicParsing="false"
+                    onAction="#saveMember" text="Save"/>
+            <Button fx:id="searchMem_cancelBtn" layoutX="168.0" layoutY="353.0" mnemonicParsing="false" text="Cancel"/>
+            <TextField fx:id="searchMem_email" layoutX="44.0" layoutY="284.0" promptText="Email"/>
+        </AnchorPane>
+    </right>
 </BorderPane>

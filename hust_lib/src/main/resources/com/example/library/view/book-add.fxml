@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.AddBookController">
+<AnchorPane prefHeight="413.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.AddBookController">
    <children>
       <VBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0">
          <children>
@@ -20,31 +20,41 @@
             </Label>
          </children>
       </VBox>
-      <VBox alignment="CENTER" layoutY="57.0" prefHeight="278.0" prefWidth="600.0">
+      <VBox alignment="CENTER" layoutY="57.0" prefHeight="230.0" prefWidth="600.0">
          <children>
             <TextField fx:id="addBook_bookTitle" promptText="Book Title">
                <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="addBook_bookID" promptText="Book ID">
+            <TextField fx:id="addBook_bookPrice" promptText="Book Price">
                <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="addBook_author" promptText="Book Author">
+            <TextField fx:id="addBook_author" promptText="Author">
                <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="addBook_publishYear" promptText="Publish Year">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="addBook_quantity" promptText="Book Quantity">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextField>
             <TextField fx:id="addBook_publisher" promptText="Publisher">
                <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextField>
          </children>
       </VBox>
-      <HBox layoutY="335.0" prefHeight="70.0" prefWidth="600.0">
+      <HBox layoutY="342.0" prefHeight="70.0" prefWidth="600.0">
          <children>
             <Button fx:id="addBook_saveBtn" mnemonicParsing="false" onAction="#handleSaveAction" prefHeight="120.0" prefWidth="307.0" styleClass="btn" stylesheets="@../../../../css/add-member.css" text="Save">
                <font>
