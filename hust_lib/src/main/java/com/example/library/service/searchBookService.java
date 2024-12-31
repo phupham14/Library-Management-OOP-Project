@@ -55,25 +55,46 @@ public class searchBookService {
     }
 
     /**
-     * Issues a book by reducing its quantity in the database.
+     * Issues a book by its ID, reducing the quantity in the database.
      * @param bookId The ID of the book to be issued.
+     * @throws Exception if no book is found with the specified ID.
      */
-    public void issueBook(int bookId) {
-        String query = "UPDATE book SET quantity = quantity - 1 WHERE bookid = ?";
+    public void issueBookById(int bookId) throws Exception {
+        String query = "UPDATE book SET quantity = quantity - 1 WHERE bookid = ? AND quantity > 0";
 
         try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setInt(1, bookId);
             int rowsAffected = preparedStatement.executeUpdate();
+
             if (rowsAffected == 0) {
-                throw new RuntimeException("No book found with ID: " + bookId);
+                throw new Exception("No book found with the ID: " + bookId + " or no copies available.");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Error issuing book: " + e.getMessage());
+            throw new RuntimeException("Error issuing book by ID: " + e.getMessage());
         }
     }
+
+//    public void issueBookByTitle(String title) {
+//        // Logic to reduce the quantity of the book in the database based on the title
+//        String query = "UPDATE book SET quantity = quantity - 1 WHERE title = ?";
+//
+//        try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
+//             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+//
+//            preparedStatement.setString(1, title);
+//            int rowsAffected = preparedStatement.executeUpdate();
+//
+//            if (rowsAffected == 0) {
+//                throw new Exception("No book found with the title: " + title);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new RuntimeException("Error issuing book: " + e.getMessage());
+//        }
+//    }
 
     /**
      * Retrieves all books from the database.

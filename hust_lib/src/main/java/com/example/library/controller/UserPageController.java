@@ -1,6 +1,7 @@
 package com.example.library.controller;
 
 import com.example.library.model.Book;
+import com.example.library.service.CartService; // Import the CartService
 import com.example.library.service.searchBookService;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -19,7 +20,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 public class UserPageController {
 
@@ -59,23 +59,6 @@ public class UserPageController {
     private final searchBookService bookService = new searchBookService();
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
 
-    public void onOpenCart() throws IOException {
-        // Load the FXML file for the admin page
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/Cart.fxml")));
-
-        // Create a new Stage for the new window
-        Stage openCart = new Stage();
-
-        // Create a new Scene with the loaded content
-        Scene scene = new Scene(root);
-
-        // Set the scene to the new window
-        openCart.setScene(scene);
-        openCart.setResizable(true);
-        openCart.setTitle("Cart Page");
-        openCart.show();
-    }
-
     @FXML
     private void initialize() {
         // Set up table columns to display book details
@@ -93,18 +76,70 @@ public class UserPageController {
 
         // Set up issue book button action
         user_issueBookBtn.setOnAction(event -> handleIssueBook());
+
+        // Set up check cart button action
+        user_checkCart.setOnAction(event -> {
+            try {
+                onOpenCart();
+            } catch (IOException e) {
+                System.err.println("Error opening cart: " + e.getMessage());
+            }
+        });
     }
+
+    public void onOpenCart() throws IOException {
+        // Load the cart FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/library/view/Cart.fxml"));
+        Parent root = loader.load();
+
+        // Show the cart
+        Stage openCart = new Stage();
+        openCart.setScene(new Scene(root));
+        openCart.setResizable(true);
+        openCart.setTitle("Cart Page");
+        openCart.show();
+    }
+
+//    private void handleIssueBook() {
+//        Book selectedBook = user_tableView.getSelectionModel().getSelectedItem();
+//
+//        if (selectedBook != null) {
+//            // Debug: Print the selected book title
+//            System.out.println("Selected book title: " + selectedBook.getTitle());
+//            System.out.println("Selected book ID: " + selectedBook.getBookId());
+//
+//            // Reduce the book quantity in the database using the title
+//            try {
+//                bookService.issueBookByTitle(selectedBook.getTitle());
+//                // Add the book to the cart
+//                CartService.getInstance().addToCart(selectedBook);
+//            } catch (Exception e) {
+//                System.err.println("Error issuing book: " + e.getMessage());
+//                return; // Exit if there's an issue
+//            }
+//
+//            // Update the local book list
+//            selectedBook.setQuantity(selectedBook.getQuantity() - 1);
+//            loadAllBooks(); // Reload books to reflect the change
+//        } else {
+//            // Handle no book selected case (optional)
+//            System.out.println("No book selected.");
+//        }
+//    }
 
     private void handleIssueBook() {
         Book selectedBook = user_tableView.getSelectionModel().getSelectedItem();
 
         if (selectedBook != null) {
-            // Debug: Print the selected book ID
-            System.out.println("Selected book ID: " + selectedBook.getId());
+            // Debug: Print the selected book title and ID
+            System.out.println("Selected book title: " + selectedBook.getTitle());
+            System.out.println("Selected book ID: " + selectedBook.getBookId());
 
-            // Reduce the book quantity in the database
+            // Reduce the book quantity in the database using the book ID
             try {
-                bookService.issueBook(selectedBook.getId());
+                bookService.issueBookById(selectedBook.getBookId());
+                // Add the book to the cart
+                CartService.getInstance().addToCart(selectedBook);
             } catch (Exception e) {
                 System.err.println("Error issuing book: " + e.getMessage());
                 return; // Exit if there's an issue
@@ -113,10 +148,6 @@ public class UserPageController {
             // Update the local book list
             selectedBook.setQuantity(selectedBook.getQuantity() - 1);
             loadAllBooks(); // Reload books to reflect the change
-
-            // Add the book to the cart
-            CartScreenController cartController = new CartScreenController(); // Ensure this is properly initialized
-            cartController.addToCart(selectedBook);
         } else {
             // Handle no book selected case (optional)
             System.out.println("No book selected.");
@@ -128,7 +159,22 @@ public class UserPageController {
         bookList.clear();
         bookList.addAll(books);
         user_tableView.setItems(bookList);
+
+        // Debug: Print all book details including Id and other data types
+        System.out.println("Loaded books:");
+        for (Book book : books) {
+            System.out.println("Book ID: " + book.getBookId() +
+                    ", Title: " + book.getTitle() +
+                    ", Publisher: " + book.getPublisher() +
+                    ", Publisher ID: " + book.getPublisherId() +
+                    ", Quantity: " + book.getQuantity() +
+                    ", Publish Year: " + book.getPublishYear() +
+                    ", Price: " + book.getWorth() +
+                    ", Author: " + book.getAuthor() +
+                    ", Image: " + book.getImage());
+        }
     }
+
 
     private void handleSearch() {
         String bookName = user_bookNameFind.getText().trim();
