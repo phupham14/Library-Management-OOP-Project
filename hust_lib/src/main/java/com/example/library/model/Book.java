@@ -5,26 +5,29 @@ package com.example.library.model;
  * Maps directly to the Book table in the database.
  */
 public class Book {
-    private int bookId;           // BookID SERIAL NOT NULL
-    private String title;         // Title VARCHAR(500) NOT NULL
-    private int publisherId;      // PublisherID INT NOT NULL
-    private int quantity;         // Quantity INT NOT NULL
-    private int publishYear;      // PublishYear INT NOT NULL
-    private double worth;         // Worth NUMERIC NOT NULL
-    private String image;         // Image VARCHAR(255)
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+    private int bookId;           // Unique identifier for the book
+    private String title;         // Title of the book
+    private int publisherId;      // Publisher's ID
+    private int quantity;         // Available quantity
+    private int publishYear;      // Year of publication
+    private double worth;         // Monetary value of the book
+    private String image;         // Path or URL to the book's image
 
-    //region Constructors
+    // Default constructor
     public Book() {
     }
 
     /**
-     * Constructor for creating new book
+     * Constructor for creating a new book.
+     *
+     * @param title        Title of the book
+     * @param publisherId  Publisher's ID
+     * @param quantity     Quantity available
+     * @param publishYear  Year of publication
+     * @param worth        Monetary value
+     * @param image        Path or URL to the book's image
      */
-    public Book(String title, int publisherId, int quantity,
-                int publishYear, BigDecimal worth, String image) {
+    public Book(String title, int publisherId, int quantity, int publishYear, double worth, String image) {
         this.title = title;
         this.publisherId = publisherId;
         this.quantity = quantity;
@@ -34,32 +37,17 @@ public class Book {
     }
 
     /**
-     * Constructor with all fields
+     * Constructor with all fields, including bookId.
+     *
+     * @param bookId       Unique identifier
+     * @param title        Title of the book
+     * @param publisherId  Publisher's ID
+     * @param quantity     Quantity available
+     * @param publishYear  Year of publication
+     * @param worth        Monetary value
+     * @param image        Path or URL to the book's image
      */
-    public Book(int bookId, String title, int publisherId,
-                int quantity, int publishYear, BigDecimal worth,
-                String image) {
-=======
-    private String author;        // Author's name
-    private String publisher;     // Publisher's name
-
-    // Constructor that requires all parameters
-    public Book(int bookId, String title, int publisherId, int quantity, int publishYear, double worth, String image, String author, String publisher) {
->>>>>>> Stashed changes
-=======
-    private String author;        // Author's name
-    private String publisher;     // Publisher's name
-
-    // Constructor that requires all parameters
-    public Book(int bookId, String title, int publisherId, int quantity, int publishYear, double worth, String image, String author, String publisher) {
->>>>>>> Stashed changes
-=======
-    private String author;        // Author's name
-    private String publisher;     // Publisher's name
-
-    // Constructor that requires all parameters
-    public Book(int bookId, String title, int publisherId, int quantity, int publishYear, double worth, String image, String author, String publisher) {
->>>>>>> Stashed changes
+    public Book(int bookId, String title, int publisherId, int quantity, int publishYear, double worth, String image) {
         this.bookId = bookId;
         this.title = title;
         this.publisherId = publisherId;
@@ -67,32 +55,21 @@ public class Book {
         this.publishYear = publishYear;
         this.worth = worth;
         this.image = image;
-<<<<<<< Updated upstream
-    }
-    //endregion
-
-    //region Methods
-=======
-        this.author = author;
-        this.publisher = publisher;
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     /**
-     * Check if the book is available for borrowing
+     * Checks if the book is available for borrowing.
+     *
+     * @return True if available, false otherwise
      */
     public boolean isAvailable() {
         return quantity > 0;
     }
 
     /**
-     * Decrease quantity when the book is borrowed
+     * Decreases the quantity of the book when borrowed.
+     *
+     * @return True if successful, false if no copies are available
      */
     public boolean decreaseQuantity() {
         if (quantity > 0) {
@@ -103,13 +80,13 @@ public class Book {
     }
 
     /**
-     * Increase quantity when the book is returned
+     * Increases the quantity of the book when returned.
      */
     public void increaseQuantity() {
         quantity++;
     }
 
-    //region Getters and Setters
+    // Getters and Setters
     public int getBookId() {
         return bookId;
     }
@@ -165,5 +142,4 @@ public class Book {
     public void setImage(String image) {
         this.image = image;
     }
-    //endregion
 }

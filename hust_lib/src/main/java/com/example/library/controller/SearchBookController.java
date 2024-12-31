@@ -1,7 +1,5 @@
 package com.example.library.controller;
 
-<<<<<<< Updated upstream
-=======
 import com.example.library.model.Book;
 import com.example.library.service.searchBookService;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -9,7 +7,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
->>>>>>> Stashed changes
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,18 +18,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-public class SearchBookController {
-
-    @FXML
-    private ListView<?> searchBook_listView;
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -61,13 +46,6 @@ public class SearchBookController {
 
     @FXML
     private Button searchBook_saveAddBtn;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
     @FXML
     private Button searchBook_searchBtn;
@@ -93,14 +71,6 @@ public class SearchBookController {
     @FXML
     private TextField searchBook_textfield;
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     @FXML
     private TextField searchBook_title;
 
@@ -115,32 +85,20 @@ public class SearchBookController {
 
     @FXML
     private void initialize() {
-        // Load all books on page open
         loadAllBooks();
-
-        // Set up the search button action
         searchBook_searchBtn.setOnAction(event -> handleSearch());
 
-        // Setup table columns to display book details
         searchBook_tableViewTitle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         searchBook_tableViewPublisherID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPublisherId()).asObject());
         searchBook_tableViewPublishYear.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPublishYear()).asObject());
         searchBook_tableViewQuantity.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
         searchBook_tableViewWorth.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getWorth()).asObject());
 
-        // Add double-click event to the table view
         searchBook_tableView.setOnMouseClicked(this::handleMouseClick);
-
-        // Add click event to the image view for image upload
         searchBook_image.setOnMouseClicked(this::handleImageClick);
 
-        // Add action for cancel button
         searchBook_cancelBtn.setOnAction(event -> clearFields());
-
-        // Add action for delete button
         searchBook_delBtn.setOnAction(event -> handleDelete());
-
-        // Add action for save button
         searchBook_saveAddBtn.setOnAction(event -> handleSaveOrUpdate());
     }
 
@@ -170,7 +128,7 @@ public class SearchBookController {
         searchBook_year.clear();
         searchBook_quantity.clear();
         searchBook_worth.clear();
-        searchBook_image.setImage(null); // Optionally clear the image
+        searchBook_image.setImage(null);
     }
 
     private void populateFields(Book book) {
@@ -179,8 +137,6 @@ public class SearchBookController {
         searchBook_year.setText(String.valueOf(book.getPublishYear()));
         searchBook_quantity.setText(String.valueOf(book.getQuantity()));
         searchBook_worth.setText(String.valueOf(book.getWorth()));
-        // Optionally set the image if available in the Book model
-        // If your Book model has an image path, load it here
     }
 
     private void loadAllBooks() {
@@ -204,16 +160,9 @@ public class SearchBookController {
     }
 
     public void onOpenAddBook() throws IOException {
-        // Load the FXML file for the admin page
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/book-add.fxml")));
-
-        // Create a new Stage for the new window
         Stage addBook = new Stage();
-
-        // Create a new Scene with the loaded content
         Scene scene = new Scene(root);
-
-        // Set the scene to the new window
         addBook.setScene(scene);
         addBook.setResizable(true);
         addBook.setTitle("Add Member Page");
@@ -223,7 +172,6 @@ public class SearchBookController {
     private void handleDelete() {
         Book selectedBook = searchBook_tableView.getSelectionModel().getSelectedItem();
         if (selectedBook != null) {
-            // Confirm deletion
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Deletion");
             alert.setHeaderText("Are you sure you want to delete this book?");
@@ -231,11 +179,10 @@ public class SearchBookController {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                bookService.deleteBook(selectedBook); // Assuming this method exists in your service
-                bookList.remove(selectedBook); // Remove from ObservableList
+                bookService.deleteBook(selectedBook);
+                bookList.remove(selectedBook);
             }
         } else {
-            // Optionally show a warning if no book is selected
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Book Selected");
@@ -251,7 +198,6 @@ public class SearchBookController {
         String quantityInput = searchBook_quantity.getText().trim();
         String worthInput = searchBook_worth.getText().trim();
 
-        // Check if any fields are empty
         if (title.isEmpty() || publisherInput.isEmpty() || yearInput.isEmpty() || quantityInput.isEmpty() || worthInput.isEmpty()) {
             System.out.println("Please fill in all fields.");
             return;
@@ -291,7 +237,6 @@ public class SearchBookController {
 
         Book existingBook = bookService.findBookByTitle(title);
         if (existingBook != null) {
-            // Update existing book
             existingBook.setPublisherId(publisherId);
             existingBook.setPublishYear(publishYear);
             existingBook.setQuantity(quantity);
@@ -303,14 +248,7 @@ public class SearchBookController {
             return;
         }
 
-        loadAllBooks(); // Refresh the table
-        clearFields(); // Clear fields after update
+        loadAllBooks();
+        clearFields();
     }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }
