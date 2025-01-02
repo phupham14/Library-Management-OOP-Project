@@ -3,6 +3,7 @@ package com.example.library.controller;
 import com.example.library.service.addMemberService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -27,7 +28,7 @@ public class AddMemberController {
     private TextField addMem_lastName;
 
     @FXML
-    private TextField addMem_password;
+    private PasswordField addMem_password;
 
     @FXML
     private Button addMem_saveBtn;

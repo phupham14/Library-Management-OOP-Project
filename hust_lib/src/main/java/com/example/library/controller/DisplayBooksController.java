@@ -1,55 +1,77 @@
 package com.example.library.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import com.example.library.model.Book;
+import com.example.library.service.displayBooksService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class DisplayBooksController {
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
+    @FXML
     private ResourceBundle resources;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
+    @FXML
     private URL location;
 
-    @FXML // fx:id="displayBooks_bookID"
-    private TableColumn<?, ?> displayBooks_bookID; // Value injected by FXMLLoader
+    @FXML
+    private TableColumn<Book, Integer> displayBooks_bookID;
 
-    @FXML // fx:id="displayBooks_publishYear"
-    private TableColumn<?, ?> displayBooks_publishYear; // Value injected by FXMLLoader
+    @FXML
+    private TableColumn<Book, String> displayBooks_title;
 
-    @FXML // fx:id="displayBooks_publisherID"
-    private TableColumn<?, ?> displayBooks_publisherID; // Value injected by FXMLLoader
+    @FXML
+    private TableColumn<Book, Integer> displayBooks_publishYear;
 
-    @FXML // fx:id="displayBooks_quantity"
-    private TableColumn<?, ?> displayBooks_quantity; // Value injected by FXMLLoader
+    @FXML
+    private TableColumn<Book, Integer> displayBooks_publisherID;
 
-    @FXML // fx:id="displayBooks_title"
-    private TableColumn<?, ?> displayBooks_title; // Value injected by FXMLLoader
+    @FXML
+    private TableColumn<Book, Integer> displayBooks_quantity;
 
-    @FXML // fx:id="displayBooks_worth"
-    private TableColumn<?, ?> displayBooks_worth; // Value injected by FXMLLoader
+    @FXML
+    private TableColumn<Book, Double> displayBooks_worth;
 
-    @FXML // fx:id="rootPane"
-    private AnchorPane rootPane; // Value injected by FXMLLoader
+    @FXML
+    private AnchorPane rootPane;
 
-    @FXML // fx:id="tableView"
-    private TableView<?> tableView; // Value injected by FXMLLoader
+    @FXML
+    private TableView<Book> tableView;
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    private final displayBooksService bookService = new displayBooksService();
+
+    @FXML
     void initialize() {
         assert displayBooks_bookID != null : "fx:id=\"displayBooks_bookID\" was not injected: check your FXML file 'displayBooks.fxml'.";
+        assert displayBooks_title != null : "fx:id=\"displayBooks_title\" was not injected: check your FXML file 'displayBooks.fxml'.";
         assert displayBooks_publishYear != null : "fx:id=\"displayBooks_publishYear\" was not injected: check your FXML file 'displayBooks.fxml'.";
         assert displayBooks_publisherID != null : "fx:id=\"displayBooks_publisherID\" was not injected: check your FXML file 'displayBooks.fxml'.";
         assert displayBooks_quantity != null : "fx:id=\"displayBooks_quantity\" was not injected: check your FXML file 'displayBooks.fxml'.";
-        assert displayBooks_title != null : "fx:id=\"displayBooks_title\" was not injected: check your FXML file 'displayBooks.fxml'.";
         assert displayBooks_worth != null : "fx:id=\"displayBooks_worth\" was not injected: check your FXML file 'displayBooks.fxml'.";
         assert rootPane != null : "fx:id=\"rootPane\" was not injected: check your FXML file 'displayBooks.fxml'.";
         assert tableView != null : "fx:id=\"tableView\" was not injected: check your FXML file 'displayBooks.fxml'.";
 
+        setupTable();
+        loadBooks();
     }
 
+    private void setupTable() {
+        displayBooks_bookID.setCellValueFactory(new PropertyValueFactory<>("bookId"));
+        displayBooks_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        displayBooks_publisherID.setCellValueFactory(new PropertyValueFactory<>("publisherId"));
+        displayBooks_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        displayBooks_worth.setCellValueFactory(new PropertyValueFactory<>("worth"));
+    }
+
+    private void loadBooks() {
+        ObservableList<Book> bookList = FXCollections.observableArrayList(bookService.getBooks());
+        tableView.setItems(bookList);
+    }
 }

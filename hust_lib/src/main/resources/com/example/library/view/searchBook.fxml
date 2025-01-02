@@ -25,19 +25,24 @@
             </Label>
             <Button fx:id="searchBook_searchBtn" layoutX="345.0" layoutY="69.0" mnemonicParsing="false" text="Search" />
             <Button fx:id="searchBook_delBtn" layoutX="521.0" layoutY="82.0" mnemonicParsing="false" text="Delete" />
+
+            <!-- Updated TableView with new columns -->
             <TableView fx:id="searchBook_tableView" layoutY="120.0" prefHeight="282.0" prefWidth="603.0">
                <columns>
-                  <TableColumn fx:id="searchBook_tableViewTitle" prefWidth="196.0" text="Title" />
-                  <TableColumn fx:id="searchBook_tableViewPublisher" prefWidth="92.0" text="Publisher" />
-                  <TableColumn fx:id="searchBook_tableViewPublishYear" prefWidth="91.2" text="Publish Year" />
-                  <TableColumn fx:id="searchBook_tableViewQuantity" prefWidth="94.4" text="Quantity" />
-                  <TableColumn fx:id="searchBook_tableViewWorth" prefWidth="127.2" text="Worth" />
+                  <TableColumn fx:id="searchBook_tableViewBookId" prefWidth="100.0" text="Book ID" />
+                  <TableColumn fx:id="searchBook_tableViewTitle" prefWidth="150.0" text="Title" />
+                  <TableColumn fx:id="searchBook_tableViewPublisher" prefWidth="100.0" text="Publisher" />
+                  <TableColumn fx:id="searchBook_tableViewQuantity" prefWidth="80.0" text="Quantity" />
+                  <TableColumn fx:id="searchBook_tableViewWorth" prefWidth="100.0" text="Worth" />
+                  <TableColumn fx:id="searchBook_tableViewAuthor" prefWidth="120.0" text="Author" />
                </columns>
             </TableView>
+
             <Button fx:id="searchBook_addBookBtn" layoutX="439.0" layoutY="82.0" mnemonicParsing="false" onAction="#onOpenAddBook" text="Add Book" />
          </children>
       </AnchorPane>
    </center>
+
    <right>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -48,6 +53,7 @@
             <TextField fx:id="searchBook_publisher" layoutX="26.0" layoutY="183.0" promptText="Publisher" />
             <Button fx:id="searchBook_saveAddBtn" layoutX="14.0" layoutY="345.0" mnemonicParsing="false" text="Save" />
             <Button fx:id="searchBook_cancelBtn" layoutX="134.0" layoutY="345.0" mnemonicParsing="false" text="Cancel" />
+
             <HBox alignment="CENTER" layoutX="-2.0" layoutY="24.0" prefHeight="107.0" prefWidth="201.0">
                <children>
                   <ImageView fx:id="searchBook_image" fitHeight="92.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">

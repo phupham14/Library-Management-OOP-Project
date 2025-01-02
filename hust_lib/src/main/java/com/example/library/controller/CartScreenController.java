@@ -10,7 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import com.example.library.model.Book;
-import com.example.library.service.CartService; // Import CartService
+import com.example.library.service.cartService; // Import CartService
+
+import java.sql.SQLException;
 
 public class CartScreenController {
 
@@ -40,7 +42,7 @@ public class CartScreenController {
     @FXML
     private void initialize() {
         // Load cart items from the database using CartService
-        cartItems = FXCollections.observableArrayList(CartService.getInstance().getCartItemsFromDatabase());
+        cartItems = FXCollections.observableArrayList();
         cart_tableView.setItems(cartItems);
 
         // Set up table columns to display cart item details
@@ -58,20 +60,21 @@ public class CartScreenController {
         cart_labelTotalCost.setText("Total Cost: $" + totalCost);
     }
 
-    private void handleRemoveBook() {
+    private void removeBookFromCart(int bookId, int customerId) throws SQLException {
         Book selectedBook = cart_tableView.getSelectionModel().getSelectedItem();
         if (selectedBook != null) {
             // Remove the book from the database
-            CartService.getInstance().removeBookFromCart(selectedBook);
+            cartService.getInstance().removeBookFromCart(bookId, customerId);
             cartItems.remove(selectedBook);
             updateTotalCost();
         }
     }
 
-    public void addToCart(Book book) {
+    public void addBookToCart(Book book, int customerId) throws SQLException {
         // Persist the book to the database
-//        CartService.getInstance().addBookToCart(book);
+        cartService.getInstance().addBookToCart(book, customerId);
         cartItems.add(book);
         updateTotalCost();
     }
+
 }

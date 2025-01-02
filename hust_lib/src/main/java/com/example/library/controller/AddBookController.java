@@ -15,8 +15,6 @@ public class AddBookController {
     @FXML
     private TextField addBook_bookPrice; // Book Price field
     @FXML
-    private TextField addBook_publishYear; // Publish Year field
-    @FXML
     private TextField addBook_quantity; // Book Quantity field
     @FXML
     private TextField addBook_publisher; // Publisher field
@@ -38,62 +36,43 @@ public class AddBookController {
         String publisher = addBook_publisher.getText().trim();
         String author = addBook_author.getText().trim();
         String quantityText = addBook_quantity.getText().trim();
-        String publishYearText = addBook_publishYear.getText().trim();
         String priceText = addBook_bookPrice.getText().trim();
 
-        // Validate fields
+        // Kiểm tra xem các trường có bị trống hay không
         if (bookTitle.isEmpty() || publisher.isEmpty() || author.isEmpty() ||
-                quantityText.isEmpty() || publishYearText.isEmpty() || priceText.isEmpty()) {
-            System.out.println("Please fill in all the fields.");
+                quantityText.isEmpty() || priceText.isEmpty()) {
+            System.out.println("Vui lòng điền đầy đủ thông tin.");
             return;
         }
 
         int quantity;
-        int publishYear;
         double price;
 
+        // Chuyển đổi và kiểm tra giá trị của quantity và price
         try {
             quantity = Integer.parseInt(quantityText);
-            publishYear = Integer.parseInt(publishYearText);
             price = Double.parseDouble(priceText);
         } catch (NumberFormatException e) {
-            System.err.println("Invalid input: " + e.getMessage());
+            System.err.println("Số lượng (quantity) phải là số nguyên và giá (price) phải là số thực.");
             return;
         }
 
+        addBookService service = new addBookService();
+
         try {
-            int bookID = service.getNextBookId(); // Get the next available book ID
-            System.out.println("Next available book ID: " + bookID); // Debug statement to print the book ID
-            Book newBook = new Book(bookID, bookTitle, publisher, quantity, publishYear, price, null, author); // Ensure author is passed
-            service.handleSaveAction(newBook);
-            System.out.println("Book saved successfully!");
+            // Truyền các tham số đầy đủ vào Service
+            service.handleSaveAction(bookTitle, publisher, author, quantity, price);
+            System.out.println("Sách đã được lưu thành công!");
 
-            // Fetch the saved book by ID to get the correct ID from the database
-            Book savedBook = service.fetchBookById(bookID);
-            if (savedBook != null) {
-                newBook.setBookId(savedBook.getBookId()); // Update the ID
-                System.out.println("Updated Book ID: " + newBook.getBookId()); // Debug statement
-            } else {
-                System.err.println("Error: No book found with ID: " + bookID);
-            }
-
-            // Debug: Print out the book details after fetching
-            System.out.println("Saved Book Details:");
-            System.out.println("ID: " + newBook.getBookId());
-            System.out.println("Title: " + newBook.getTitle());
-            System.out.println("Publisher: " + newBook.getPublisher());
-            System.out.println("Quantity: " + newBook.getQuantity());
-            System.out.println("Publish Year: " + newBook.getPublishYear());
-            System.out.println("Price: " + newBook.getWorth());
-            System.out.println("Author: " + newBook.getAuthor());
-
-            // Close the window after successful save
+            // Đóng cửa sổ sau khi lưu thành công
             Stage stage = (Stage) addBook_saveBtn.getScene().getWindow();
             stage.close();
         } catch (Exception e) {
-            System.err.println("Error while saving book: " + e.getMessage());
+            System.err.println("Lỗi khi lưu sách: " + e.getMessage());
         }
     }
+
+
 
     public void handleCancelAction(ActionEvent actionEvent) {
         // Close the current window when the cancel button is pressed

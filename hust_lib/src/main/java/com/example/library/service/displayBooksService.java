@@ -24,11 +24,7 @@ public class displayBooksService {
                         resultSet.getString("title"),
                         resultSet.getInt("publisherid"),
                         resultSet.getInt("quantity"),
-                        resultSet.getInt("publishyear"),
-                        resultSet.getDouble("worth"),
-                        resultSet.getString("image"),      // Include image
-                        resultSet.getString("author"),     // Include author
-                        resultSet.getString("publisher")   // Include publisher
+                        resultSet.getDouble("worth")
                 ));
             }
         } catch (Exception e) {

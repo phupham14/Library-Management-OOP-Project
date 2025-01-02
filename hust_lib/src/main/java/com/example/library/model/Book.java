@@ -1,5 +1,7 @@
 package com.example.library.model;
 
+import java.math.BigDecimal;
+
 /**
  * Represents a book in the library system.
  * Maps directly to the Book table in the database.
@@ -77,17 +79,31 @@ public class Book {
      * @param author       Author of the book
      * @param publisher    Publisher's name
      */
-    public Book(int bookId, String title, int publisherId, int quantity, int publishYear, double worth, String image, String author, String publisher) {
+    public Book(int bookId, String title, int publisherId, int quantity, double worth, String image, String author, String publisher) {
         this.bookId = bookId;
         this.title = title;
         this.publisher = publisher; // Use the publisher's name
         this.quantity = quantity;
-        this.publishYear = publishYear;
         this.worth = worth;
         this.image = image;
         this.author = author;
         // Note: publisherId is not stored, but can be included if needed
     }
+
+    //cart
+    public Book(int bookId, String title, String publisher, double worth) {
+    }
+
+    public Book(int bookId, String bookTitle, String publisher, int quantity, double worth, String image, String author) {
+    }
+
+    //display books
+    public Book(int bookid, String title, int quantity, double worth, String image, String author, String publisher) {
+    }
+
+    public Book(int bookid, String title, int publisherid, int quantity, double worth) {
+    }
+
 
     /**
      * Checks if the book is available for borrowing.

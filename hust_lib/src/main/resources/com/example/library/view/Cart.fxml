@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="544.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.CartScreenController">
+<BorderPane prefHeight="544.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.CartScreenController">
     <top>
         <VBox prefWidth="100.0" BorderPane.alignment="CENTER">
-            <Label text="CART" textFill="AQUA">
+            <Label text="HUSTLIB" textFill="AQUA">
                 <font>
                     <Font size="50.0" />
                 </font>

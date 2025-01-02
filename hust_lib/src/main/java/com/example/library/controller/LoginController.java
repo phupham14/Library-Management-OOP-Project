@@ -290,9 +290,24 @@ public class LoginController {
 
         // Use the loginService to validate the login
         if (loginService.validateLogin(enteredEmail, enteredPassword)) {
-            // Proceed to the next screen or show success message
+            // Show success message
             showSuccess("Login successful!");
-            // Load the next scene here...
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/library/view/loginAs.fxml"));
+
+                Parent root = loader.load();
+
+                // Get the current stage and set the new scene
+                Stage stage = (Stage) login_btn.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                showError("Error loading next screen: " + e.getMessage());
+            }
+
         } else {
             // Show error message for invalid credentials
             showError("Invalid email or password. Please try again.");

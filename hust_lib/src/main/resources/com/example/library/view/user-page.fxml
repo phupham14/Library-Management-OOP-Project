@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.UserPageController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.UserPageController">
     <Label layoutX="54.0" layoutY="25.0" text="HustLib">
         <font>
           <Font name="Georgia Bold" size="30.0" />
@@ -28,10 +28,9 @@
     <TableView fx:id="user_tableView" layoutX="2.0" layoutY="186.0" prefHeight="164.0" prefWidth="600.0">
       <columns>
           <TableColumn fx:id="user_bookTitle" prefWidth="203.20001530647278" text="Title" />
-          <TableColumn fx:id="user_bookPublisher" prefWidth="108.79997253417969" text="Publisher" />
-          <TableColumn fx:id="user_bookQuantity" prefWidth="109.5999755859375" text="Quantity" />
-          <TableColumn fx:id="user_publishYear" prefWidth="94.39996337890625" text="Publish Year" />
-          <TableColumn fx:id="user_bookPrice" prefWidth="83.99993896484375" text="Price" />
+          <TableColumn fx:id="user_bookPublisher" prefWidth="177.59996032714844" text="Publisher" />
+          <TableColumn fx:id="user_bookQuantity" prefWidth="88.00006103515625" text="Quantity" />
+          <TableColumn fx:id="user_bookPrice" prefWidth="128.79998779296875" text="Price" />
       </columns>
     </TableView>
    <Button fx:id="user_checkCart" layoutX="519.0" layoutY="360.0" mnemonicParsing="false" onAction="#onOpenCart" text="Check Cart" />

@@ -42,6 +42,7 @@ public class SearchBookController {
     private TextField searchBook_quantity;
     @FXML
     private Button searchBook_searchBtn;
+
     @FXML
     private TableView<Book> searchBook_tableView;
     @FXML
@@ -49,11 +50,14 @@ public class SearchBookController {
     @FXML
     private TableColumn<Book, String> searchBook_tableViewPublisher;
     @FXML
-    private TableColumn<Book, Integer> searchBook_tableViewPublishYear;
+    private TableColumn<Book, String> searchBook_tableViewAuthor;
+    @FXML
+    private TableColumn<Book, Integer> searchBook_tableViewBookId;
     @FXML
     private TableColumn<Book, Integer> searchBook_tableViewQuantity;
     @FXML
     private TableColumn<Book, Double> searchBook_tableViewWorth;
+
     @FXML
     private TextField searchBook_textfield;
     @FXML
@@ -71,11 +75,12 @@ public class SearchBookController {
     private void initialize() {
         loadAllBooks();
         searchBook_searchBtn.setOnAction(event -> handleSearch());
+        searchBook_tableViewBookId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getBookId()).asObject());
         searchBook_tableViewTitle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         searchBook_tableViewPublisher.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPublisher()));
-        searchBook_tableViewPublishYear.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPublishYear()).asObject());
         searchBook_tableViewQuantity.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
         searchBook_tableViewWorth.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getWorth()).asObject());
+        searchBook_tableViewAuthor.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
 
         searchBook_tableView.setOnMouseClicked(this::handleMouseClick);
         searchBook_image.setOnMouseClicked(this::handleImageClick);
@@ -124,7 +129,13 @@ public class SearchBookController {
 
     private void loadAllBooks() {
         List<Book> books = bookService.getAllBooks();
+        if (books == null || books.isEmpty()) {
+            System.out.println("No books found.");
+        } else {
+            System.out.println("Loaded books: " + books.size());
+        }
         bookList.clear();
+        assert books != null;
         bookList.addAll(books);
         searchBook_tableView.setItems(bookList);
     }

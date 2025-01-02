@@ -30,28 +30,26 @@ public class addBookService {
     }
 
     // Method to save a book
-    public void handleSaveAction(Book book) {
-        String query = "INSERT INTO book (bookid, title, publisher, quantity, publishyear, worth, author) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public void handleSaveAction(String bookTitle, String publisher, String author, int quantity, double price) {
+        String query = "INSERT INTO book (title, publisher, author, quantity, worth) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            // Set the values from the book object
-            preparedStatement.setInt(1, book.getBookId());
-            preparedStatement.setString(2, book.getTitle());
-            preparedStatement.setString(3, book.getPublisher());
-            preparedStatement.setInt(4, book.getQuantity());
-            preparedStatement.setInt(5, book.getPublishYear());
-            preparedStatement.setDouble(6, book.getWorth());
-            preparedStatement.setString(7, book.getAuthor()); // Add this line for the author
+            // Gán giá trị từ tham số vào câu lệnh SQL
+            preparedStatement.setString(1, bookTitle);
+            preparedStatement.setString(2, publisher);
+            preparedStatement.setString(3, author);
+            preparedStatement.setInt(4, quantity);
+            preparedStatement.setDouble(5, price);
 
-            // Execute the insert query
+            // Thực thi câu lệnh SQL
             preparedStatement.executeUpdate();
-            System.out.println("Book saved successfully!");
+            System.out.println("Sách đã được lưu thành công!");
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Error saving book: " + e.getMessage());
+            throw new RuntimeException("Lỗi khi lưu sách: " + e.getMessage());
         }
     }
 
@@ -73,7 +71,6 @@ public class addBookService {
                         resultSet.getString("title"),
                         resultSet.getString("publisher"),
                         resultSet.getInt("quantity"),
-                        resultSet.getInt("publishyear"),
                         resultSet.getDouble("worth"),
                         null, // Assuming image is not needed here
                         resultSet.getString("author")
