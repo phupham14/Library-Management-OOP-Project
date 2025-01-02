@@ -112,6 +112,7 @@ public class LoginController {
         String enteredPassword = signup_pass.getText(); // Assuming you have a PasswordField for the password
 
         try {
+<<<<<<< HEAD
             // Load the FXML file for the next view
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/loginAs.fxml")));
 
@@ -129,6 +130,25 @@ public class LoginController {
             window.sizeToScene();
 
             // Show an error message if credentials are invalid
+=======
+                // Load the FXML file for the next view
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/loginAs.fxml")));
+
+                // Create a new Scene with the loaded content
+                Scene scene = new Scene(root);
+
+                // Get the current window (Stage) and set the new scene
+                Stage window = (Stage) login_btn.getScene().getWindow();
+                window.setScene(scene);
+
+                // Optionally, you can set the window to be resizable
+                window.setResizable(true);
+
+                // Adjust the window size to fit the content
+                window.sizeToScene();
+
+                // Show an error message if credentials are invalid
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 //                Alert alert = new Alert(Alert.AlertType.ERROR);
 //                alert.setTitle("Login Failed");
 //                alert.setHeaderText("Invalid Credentials");
@@ -152,6 +172,34 @@ public class LoginController {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
+<<<<<<< HEAD
+=======
+        assert changePass_Pass != null : "fx:id=\"changePass_Pass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert changePass_backBtn != null : "fx:id=\"changePass_backBtn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert changePass_btn != null : "fx:id=\"changePass_btn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert changePass_cPass != null : "fx:id=\"changePass_cPass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert changePass_form != null : "fx:id=\"changePass_form\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert changePass_showPass != null : "fx:id=\"changePass_showPass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert forgor_backBtn != null : "fx:id=\"forgor_backBtn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert forgor_btn != null : "fx:id=\"forgor_btn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert forgor_email != null : "fx:id=\"forgor_email\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert forgor_form != null : "fx:id=\"forgor_form\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_btn != null : "fx:id=\"login_btn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_email != null : "fx:id=\"login_email\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_forgorPass != null : "fx:id=\"login_forgorPass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_form != null : "fx:id=\"login_form\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_pass != null : "fx:id=\"login_pass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_showPass != null : "fx:id=\"login_showPass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert login_signUpBtn != null : "fx:id=\"login_signUpBtn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_btn != null : "fx:id=\"signup_btn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_cPass != null : "fx:id=\"signup_cPass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_email != null : "fx:id=\"signup_email\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_form != null : "fx:id=\"signup_form\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_logInBtn != null : "fx:id=\"signup_logInBtn\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_pass != null : "fx:id=\"signup_pass\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_firstName != null : "fx:id=\"signup_username\" was not injected: check your FXML file 'login-view.fxml'.";
+        assert signup_lastName != null : "fx:id=\"signup_username\" was not injected: check your FXML file 'login-view.fxml'.";
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
         login_signUpBtn.setOnAction(this::handleLoginButtonClick);
         signup_btn.setOnAction(this::handleSignupButtonClick);
         signup_logInBtn.setOnAction(this::handleSignupButtonClick);
@@ -159,7 +207,10 @@ public class LoginController {
         forgor_backBtn.setOnAction(this::handleSignupButtonClick);
         changePass_btn.setOnAction(this::handleChangePassButtonClick);
         changePass_backBtn.setOnAction(this::handleForgorPassLinkClick);
+<<<<<<< HEAD
         login_btn.setOnAction(this::performLogin);
+=======
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 
         // Initialize tooltips
         changePassTooltip = new Tooltip();
@@ -284,6 +335,7 @@ public class LoginController {
         signup_form.setVisible(true);
     }
 
+<<<<<<< HEAD
     private void performLogin(ActionEvent actionEvent) {
         String enteredEmail = login_email.getText();
         String enteredPassword = login_pass.getText();
@@ -314,6 +366,8 @@ public class LoginController {
         }
     }
 
+=======
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
     private void togglePasswordVisibility(CheckBox checkBox, PasswordField passwordField, Tooltip tooltip) {
         if (checkBox.isSelected()) {
             tooltip.setText(passwordField.getText());

@@ -65,6 +65,10 @@ public class DisplayBooksController {
     private void setupTable() {
         displayBooks_bookID.setCellValueFactory(new PropertyValueFactory<>("bookId"));
         displayBooks_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+<<<<<<< HEAD
+=======
+        displayBooks_publishYear.setCellValueFactory(new PropertyValueFactory<>("publishYear"));
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
         displayBooks_publisherID.setCellValueFactory(new PropertyValueFactory<>("publisherId"));
         displayBooks_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         displayBooks_worth.setCellValueFactory(new PropertyValueFactory<>("worth"));
@@ -74,4 +78,8 @@ public class DisplayBooksController {
         ObservableList<Book> bookList = FXCollections.observableArrayList(bookService.getBooks());
         tableView.setItems(bookList);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60

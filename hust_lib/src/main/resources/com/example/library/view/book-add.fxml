@@ -9,7 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane prefHeight="413.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.AddBookController">
+=======
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.AddBookController">
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
    <children>
       <VBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0">
          <children>
@@ -20,6 +24,7 @@
             </Label>
          </children>
       </VBox>
+<<<<<<< HEAD
       <VBox alignment="CENTER" layoutY="43.0" prefHeight="288.0" prefWidth="600.0">
          <children>
             <TextField fx:id="addBook_bookTitle" promptText="Book Title">
@@ -40,16 +45,41 @@
             <TextField fx:id="addBook_quantity" promptText="Book Quantity">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+=======
+      <VBox alignment="CENTER" layoutY="57.0" prefHeight="278.0" prefWidth="600.0">
+         <children>
+            <TextField fx:id="addBook_bookTitle" promptText="Book Title">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="addBook_bookID" promptText="Book ID">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="addBook_author" promptText="Book Author">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
                </VBox.margin>
             </TextField>
             <TextField fx:id="addBook_publisher" promptText="Publisher">
                <VBox.margin>
+<<<<<<< HEAD
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+=======
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
                </VBox.margin>
             </TextField>
          </children>
       </VBox>
+<<<<<<< HEAD
       <HBox layoutY="342.0" prefHeight="70.0" prefWidth="600.0">
+=======
+      <HBox layoutY="335.0" prefHeight="70.0" prefWidth="600.0">
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
          <children>
             <Button fx:id="addBook_saveBtn" mnemonicParsing="false" onAction="#handleSaveAction" prefHeight="120.0" prefWidth="307.0" styleClass="btn" stylesheets="@../../../../css/add-member.css" text="Save">
                <font>

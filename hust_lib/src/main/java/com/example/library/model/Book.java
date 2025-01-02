@@ -7,6 +7,7 @@ import java.math.BigDecimal;
  * Maps directly to the Book table in the database.
  */
 public class Book {
+<<<<<<< HEAD
     private int bookId;           // Unique identifier for the book
     private String title;         // Title of the book
     private String publisher;     // Publisher's name
@@ -56,6 +57,19 @@ public class Book {
      * @param author       Author of the book
      */
     public Book(int bookId, String title, String publisher, int quantity, int publishYear, double worth, String image, String author) {
+=======
+    private int bookId;           // BookID SERIAL NOT NULL
+    private String title;         // Title VARCHAR(500) NOT NULL
+    private int publisherId;      // PublisherID INT NOT NULL
+    private int quantity;         // Quantity INT NOT NULL
+    private int publishYear;      // PublishYear INT NOT NULL
+    private BigDecimal worth;     // Worth NUMERIC NOT NULL
+    private String image;         // Image VARCHAR(255)
+    private String author;
+    private String publisher;
+
+    public Book(int bookId, String title, int publisherId, int quantity, int publishYear, BigDecimal worth, String image, String author, String publisher) {
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
         this.bookId = bookId;
         this.title = title;
         this.publisher = publisher;
@@ -64,6 +78,19 @@ public class Book {
         this.worth = worth;
         this.image = image;
         this.author = author;
+<<<<<<< HEAD
+=======
+        this.publisher = publisher;
+    }
+
+    public Book(int bookID, String title, int publishYear, int publisherID, int quantity, double worth) {
+        this.bookId = bookID;
+        this.publisherId = publisherID;
+        this.title = title;
+        this.publishYear = publishYear;
+        this.quantity = quantity;
+        this.worth = BigDecimal.valueOf(worth);
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
     }
 
     /**
@@ -199,6 +226,7 @@ public class Book {
         this.author = author;
     }
 
+<<<<<<< HEAD
     public int getPublisherId() {
         return publisherId; // Added return statement
     }
@@ -210,4 +238,15 @@ public class Book {
     public int getId() {
         return id;
     }
+=======
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    //endregion
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 }

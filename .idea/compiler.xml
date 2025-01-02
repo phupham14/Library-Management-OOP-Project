@@ -10,4 +10,12 @@
       </profile>
     </annotationProcessing>
   </component>
+<<<<<<< HEAD
+=======
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="hust_lib" options="--add-exports jdk.javadoc/jdk.javadoc.internal.doclets.formats.html.markup=com.example.library" />
+    </option>
+  </component>
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 </project>

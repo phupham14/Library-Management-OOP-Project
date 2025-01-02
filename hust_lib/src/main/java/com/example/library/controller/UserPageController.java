@@ -1,5 +1,6 @@
 package com.example.library.controller;
 
+<<<<<<< HEAD
 import com.example.library.model.Book;
 import com.example.library.service.cartService; // Import the CartService
 import com.example.library.service.searchBookService;
@@ -20,6 +21,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+=======
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 
 public class UserPageController {
 
@@ -30,6 +37,7 @@ public class UserPageController {
     private TextField user_bookNameFind;
 
     @FXML
+<<<<<<< HEAD
     private TableColumn<Book, String> user_bookTitle;
 
     @FXML
@@ -43,11 +51,24 @@ public class UserPageController {
 
     @FXML
     private TableView<Book> user_tableView;
+=======
+    private TableColumn<?, ?> user_bookPrice;
+
+    @FXML
+    private TableColumn<?, ?> user_bookPublisher;
+
+    @FXML
+    private TableColumn<?, ?> user_bookQuantity;
+
+    @FXML
+    private TableColumn<?, ?> user_bookTitle;
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 
     @FXML
     private Button user_findBookBtn;
 
     @FXML
+<<<<<<< HEAD
     private Button user_checkCart;
 
     @FXML
@@ -171,4 +192,11 @@ public class UserPageController {
             loadAllBooks();
         }
     }
+=======
+    private Button user_issueBookBtn;
+
+    @FXML
+    private TableColumn<?, ?> user_publishYear;
+
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 }

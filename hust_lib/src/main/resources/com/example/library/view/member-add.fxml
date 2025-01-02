@@ -10,7 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane prefHeight="471.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.AddMemberController">
+=======
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.AddMemberController">
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
    <children>
       <VBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0">
          <children>
@@ -21,7 +25,11 @@
             </Label>
          </children>
       </VBox>
+<<<<<<< HEAD
       <VBox alignment="CENTER" layoutY="57.0" prefHeight="278.0" prefWidth="600.0">
+=======
+      <VBox alignment="CENTER" layoutY="59.0" prefHeight="278.0" prefWidth="600.0">
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
          <children>
             <HBox>
                <VBox.margin>
@@ -38,11 +46,16 @@
             </HBox>
             <TextField fx:id="addMem_contact" promptText="Mobile">
                <VBox.margin>
+<<<<<<< HEAD
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+=======
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="5.0" />
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
                </VBox.margin>
             </TextField>
             <TextField fx:id="addMem_email" promptText="Email">
                <VBox.margin>
+<<<<<<< HEAD
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </TextField>
@@ -54,6 +67,24 @@
          </children>
       </VBox>
       <HBox layoutY="400.0" prefHeight="70.0" prefWidth="600.0">
+=======
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="addMem_adress" promptText="Adress">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <PasswordField fx:id="addMem_pswd" promptText="Password" scaleX="0.93">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </PasswordField>
+         </children>
+      </VBox>
+      <HBox layoutY="335.0" prefHeight="70.0" prefWidth="600.0">
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
          <children>
             <Button fx:id="addMem_saveBtn" mnemonicParsing="false" onAction="#handleSaveAction" prefHeight="120.0" prefWidth="307.0" styleClass="btn" stylesheets="@../../../../css/add-member.css" text="Save">
                <font>
@@ -67,6 +98,9 @@
             </Button>
          </children>
       </HBox>
+<<<<<<< HEAD
       <PasswordField fx:id="addMem_password" layoutX="24.0" layoutY="346.0" prefHeight="26.0" prefWidth="560.0" />
+=======
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
    </children>
 </AnchorPane>

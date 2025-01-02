@@ -28,6 +28,7 @@ public class searchMemberService {
 
             // Process the result set
             while (resultSet.next()) {
+<<<<<<< HEAD
                 Person member = new Person(
                         resultSet.getString("firstname"),
                         resultSet.getString("lastname"),
@@ -39,6 +40,16 @@ public class searchMemberService {
                 members.add(member);
             }
             System.out.println("Number of members found by name '" + keyword + "': " + members.size());
+=======
+                System.out.println("First Name: " + resultSet.getString("firstname")); // Debug log
+                System.out.println("Last Name: " + resultSet.getString("lastname"));   // Debug log
+
+                Person member = new Person(
+                );
+                members.add(member);
+            }
+
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Error searching for members by name: " + e.getMessage());
@@ -46,6 +57,7 @@ public class searchMemberService {
 
         return members;
     }
+<<<<<<< HEAD
 
     public List<Person> getAllMembers() {
         List<Person> members = new ArrayList<>();
@@ -208,3 +220,6 @@ public class searchMemberService {
         }
     }
 }
+=======
+}
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60

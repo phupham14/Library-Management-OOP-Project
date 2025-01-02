@@ -4,10 +4,19 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+<<<<<<< HEAD
+=======
+
+import javafx.event.ActionEvent;
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+<<<<<<< HEAD
+=======
+import javafx.scene.control.Alert;
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -241,4 +250,8 @@ public class AdminPageController {
         // Show the new window
         issuedBooks.show();
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 }

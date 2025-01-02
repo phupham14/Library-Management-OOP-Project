@@ -21,6 +21,7 @@ public class Person {
     private LocalDateTime createdDate;
     private LocalDateTime lastActiveDate;
 
+<<<<<<< HEAD
     // Default constructor
     public Person() {
         this.createdDate = LocalDateTime.now();
@@ -47,6 +48,9 @@ public class Person {
     public Person(int personId, String firstName, String lastName, String address, String phoneNumber,
                   String email, String password, LocalDate dob, char gender, String role,
                   LocalDateTime createdDate, LocalDateTime lastActiveDate) {
+=======
+    public Person(int personId, String firstName, String lastName, String address, String phoneNumber, String email, String password, LocalDate dob, char gender, String role, LocalDateTime createdDate, LocalDateTime lastActiveDate) {
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
         this.personId = personId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -61,7 +65,11 @@ public class Person {
         this.lastActiveDate = lastActiveDate;
     }
 
+<<<<<<< HEAD
     // Constructor for specific use cases (e.g., member search)
+=======
+    // Members Search
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
     public Person(String firstName, String lastName, String address, String phoneNumber, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -70,6 +78,13 @@ public class Person {
         this.email = email;
         this.password = password;
     }
+<<<<<<< HEAD
+=======
+
+    public Person() {
+
+    }
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 
     // Getters and setters
     public int getPersonId() {
@@ -155,6 +170,7 @@ public class Person {
     public LocalDateTime getCreatedDate() {
         return createdDate;
     }
+<<<<<<< HEAD
 
     public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
@@ -168,3 +184,19 @@ public class Person {
         this.lastActiveDate = lastActiveDate;
     }
 }
+=======
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public LocalDateTime getLastActiveDate() {
+        return lastActiveDate;
+    }
+
+    public void setLastActiveDate(LocalDateTime lastActiveDate) {
+        this.lastActiveDate = lastActiveDate;
+    }
+
+}
+>>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
