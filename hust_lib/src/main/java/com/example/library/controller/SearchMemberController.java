@@ -77,7 +77,7 @@ public class SearchMemberController {
     private Button searchMem_saveBtn;
 
     @FXML
-    private ListView<String> searchMem_listView; // ListView for displaying member details
+    private ListView<String> searchMem_listView;
 
     @FXML
     private Button searchMem_searchBtn;
@@ -89,7 +89,7 @@ public class SearchMemberController {
     private TextField searchMem_textfield;
 
     private final searchMemberService memberService = new searchMemberService();
-    private Person selectedMember; // Variable to hold the currently selected member
+    private Person selectedMember;
 
     @FXML
     private void initialize() {
@@ -100,13 +100,13 @@ public class SearchMemberController {
         searchMem_phoneNumberTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhoneNumber()));
         searchMem_emailTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
         searchMem_roleTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRole()));
+        searchMem_passwordTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPassword())); // New line for password
 
         searchMem_searchBtn.setOnAction(event -> handleSearch());
-        loadAllMembers(); // Populate all members on initialization
+        loadAllMembers();
 
-        // Add mouse click event to the TableView
         searchMem_tableView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) { // Double-click to edit
+            if (event.getClickCount() == 2) {
                 selectedMember = searchMem_tableView.getSelectionModel().getSelectedItem();
                 if (selectedMember != null) {
                     populateTextFields(selectedMember);
@@ -114,19 +114,10 @@ public class SearchMemberController {
             }
         });
 
-        // Add click event to the ImageView for uploading an image
         searchMem_image.setOnMouseClicked(event -> uploadImage());
-
-        // Add click event to the Cancel button
         searchMem_cancelBtn.setOnAction(event -> clearFields());
-
-        // Add click event to the Save button
         searchMem_saveBtn.setOnAction(event -> saveMember());
-
-        // Add click event to the Delete button
         searchMem_delBtn.setOnAction(event -> deleteMember());
-
-        // Add click event to the New User button
         searchMem_newUserBtn.setOnAction(event -> {
             try {
                 onOpenNewUser();
@@ -162,7 +153,7 @@ public class SearchMemberController {
         searchMem_address.setText(selectedItem.getAddress());
         searchMem_phoneNumber.setText(selectedItem.getPhoneNumber());
         searchMem_email.setText(selectedItem.getEmail());
-        searchMem_password.setText(""); // Do not display password
+        searchMem_password.setText(selectedItem.getPassword()); // Populate password field
     }
 
     private void uploadImage() {
@@ -181,67 +172,58 @@ public class SearchMemberController {
         searchMem_address.clear();
         searchMem_phoneNumber.clear();
         searchMem_email.clear();
-        searchMem_password.clear();
+        searchMem_password.clear(); // Clear password
         searchMem_image.setImage(null);
-        searchMem_tableView.getSelectionModel().clearSelection(); // Clear selection
-        selectedMember = null; // Reset selected member
+        searchMem_tableView.getSelectionModel().clearSelection();
+        selectedMember = null;
     }
 
     @FXML
     private void saveMember() {
         if (selectedMember == null) {
             System.out.println("No member selected for update. Please select a member.");
-            return; // Early exit if no member is selected
+            return;
         }
 
-        // Get updated field values
         String firstName = searchMem_firstName.getText().trim();
         String lastName = searchMem_lastName.getText().trim();
         String address = searchMem_address.getText().trim();
         String phoneNumber = searchMem_phoneNumber.getText().trim();
         String email = searchMem_email.getText().trim();
-        String password = searchMem_password.getText().trim(); // Handle password as necessary
+        String password = searchMem_password.getText().trim();
 
-        // Update existing member's details
         selectedMember.setFirstName(firstName);
         selectedMember.setLastName(lastName);
         selectedMember.setAddress(address);
         selectedMember.setPhoneNumber(phoneNumber);
         selectedMember.setEmail(email);
-        selectedMember.setPassword(password); // Update password if necessary
+        selectedMember.setPassword(password);
 
-        // Call updateMember method in service
         memberService.updateMember(selectedMember);
         System.out.println("Updated existing member: " + selectedMember.getFirstName() + " " + selectedMember.getLastName());
 
-        clearFields(); // Clear fields after saving
-        loadAllMembers(); // Reload members to reflect changes
+        clearFields();
+        loadAllMembers();
     }
 
     private void deleteMember() {
         Person selectedItem = searchMem_tableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            String phoneNumber = selectedItem.getPhoneNumber(); // Extract phone number
+            String phoneNumber = selectedItem.getPhoneNumber();
             memberService.deleteMember(phoneNumber);
             System.out.println("Deleted member with phone number: " + phoneNumber);
-            clearFields(); // Clear fields after deletion
-            loadAllMembers(); // Refresh the table view
+            clearFields();
+            loadAllMembers();
         } else {
             System.out.println("No member selected for deletion.");
         }
     }
 
     public void onOpenNewUser() throws IOException {
-        // Load the FXML file for the admin page
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/member-add.fxml")));
 
-        // Create a new Stage for the new window
         Stage addMember = new Stage();
-
-        // Create a new Scene with the loaded content
         Scene scene = new Scene(root);
-
-        // Set the scene to the new window
         addMember.setScene(scene);
         addMember.setResizable(true);
         addMember.setTitle("Add Member Page");

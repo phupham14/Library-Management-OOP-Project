@@ -77,12 +77,36 @@ public class Book {
         this.worth = worth;
     }
 
-
-
-    public Book(int bookid, String title, String publisher, int quantity, double worth, String image, String author) {
+    // Constructor to match service expectations
+    public Book(int bookId, String title, String publisher, int quantity, BigDecimal worth, String image, String author) {
+        this.bookId = bookId;
+        this.title = title;
+        this.publisher = publisher;
+        this.quantity = quantity;
+        this.worth = worth;
+        this.image = image;
+        this.author = author;
     }
 
-    public Book(int bookid, String title, int publisherid, int quantity, double worth) {
+    // Newly added constructor to resolve the error
+    public Book(int bookId, String title, String publisher, int quantity, int publishYear, BigDecimal worth, String image, String author) {
+        this.bookId = bookId;
+        this.title = title;
+        this.publisher = publisher;
+        this.quantity = quantity;
+        this.publishYear = publishYear;
+        this.worth = worth;
+        this.image = image;
+        this.author = author;
+    }
+
+    // Another constructor for the service requirements
+    public Book(int bookId, String title, int publisherId, int quantity, double worth) {
+        this.bookId = bookId;
+        this.title = title;
+        this.publisherId = publisherId;
+        this.quantity = quantity;
+        this.worth = BigDecimal.valueOf(worth); // Convert double to BigDecimal
     }
 
     /**

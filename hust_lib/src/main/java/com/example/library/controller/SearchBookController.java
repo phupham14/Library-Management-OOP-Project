@@ -72,12 +72,13 @@ public class SearchBookController {
     private void initialize() {
         loadAllBooks();
         searchBook_searchBtn.setOnAction(event -> handleSearch());
+
+        // Bind TableView columns
         searchBook_tableViewTitle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         searchBook_tableViewPublisher.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPublisher()));
         searchBook_tableViewAuthor.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPublishYear()).asObject());
         searchBook_tableViewQuantity.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
         searchBook_tableViewWorth.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getWorth() != null ? cellData.getValue().getWorth().doubleValue() : 0.0).asObject());
-
 
         searchBook_tableView.setOnMouseClicked(this::handleMouseClick);
         searchBook_image.setOnMouseClicked(this::handleImageClick);
@@ -126,6 +127,7 @@ public class SearchBookController {
 
     private void loadAllBooks() {
         List<Book> books = bookService.getAllBooks();
+        System.out.println("Loaded books: " + books.size()); // Debug line
         bookList.clear();
         bookList.addAll(books);
         searchBook_tableView.setItems(bookList);
@@ -180,7 +182,7 @@ public class SearchBookController {
         if (selectedBook != null) {
             selectedBook.setTitle(searchBook_title.getText());
             selectedBook.setPublisher(searchBook_publisher.getText());
-            selectedBook.setAuthor(String.valueOf(searchBook_year.getText()));
+            selectedBook.setPublishYear(Integer.parseInt(searchBook_year.getText())); // Corrected to setPublishYear
             selectedBook.setQuantity(Integer.parseInt(searchBook_quantity.getText()));
             selectedBook.setWorth(BigDecimal.valueOf(Double.parseDouble(searchBook_worth.getText())));
 

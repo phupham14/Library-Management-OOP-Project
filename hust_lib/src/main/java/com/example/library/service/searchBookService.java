@@ -33,13 +33,12 @@ public class searchBookService {
                 Book book = new Book(
                         resultSet.getInt("bookid"),
                         resultSet.getString("title"),
-                        resultSet.getInt("publisherid"),
+                        resultSet.getString("publisher"), // Ensure publisher is correctly retrieved
                         resultSet.getInt("quantity"),
                         resultSet.getInt("publishyear"),
                         resultSet.getBigDecimal("worth"),
                         resultSet.getString("image"),
-                        resultSet.getString("author"),
-                        resultSet.getString("publisher")
+                        resultSet.getString("author")
                 );
                 books.add(book);
             }
@@ -79,19 +78,19 @@ public class searchBookService {
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
-                int bookId = resultSet.getInt("bookid");
-                String title = resultSet.getString("title");
-                String publisher = resultSet.getString("publisher");
-                int quantity = resultSet.getInt("quantity");
-                BigDecimal worthBD = resultSet.getBigDecimal("worth");
-                double worth = worthBD != null ? worthBD.doubleValue() : 0.0; // Handle null worth
-                String image = resultSet.getString("image");
-                String author = resultSet.getString("author");
-
-                Book book = new Book(bookId, title, publisher, quantity, worth, image, author);
-
+                Book book = new Book(
+                        resultSet.getInt("bookid"),
+                        resultSet.getString("title"),
+                        resultSet.getString("publisher"), // Ensure this is correct
+                        resultSet.getInt("quantity"),
+                        resultSet.getBigDecimal("worth"),
+                        resultSet.getString("image"),
+                        resultSet.getString("author")
+                );
                 books.add(book);
             }
+
+            System.out.println("Total books retrieved: " + books.size()); // Debug line
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,7 +107,11 @@ public class searchBookService {
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setInt(1, book.getBookId());
-            preparedStatement.executeUpdate();
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("No book found with ID: " + book.getBookId());
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Error deleting book: " + e.getMessage());
@@ -123,11 +126,11 @@ public class searchBookService {
 
             preparedStatement.setString(1, book.getTitle());
             preparedStatement.setString(2, book.getAuthor());
-            preparedStatement.setString(3, book.getPublisher()); // Changed to use publisher
+            preparedStatement.setString(3, book.getPublisher());
             preparedStatement.setInt(4, book.getQuantity());
-            preparedStatement.setBigDecimal(6, book.getWorth());
-            preparedStatement.setString(7, book.getImage());
-            preparedStatement.setInt(8, book.getBookId());
+            preparedStatement.setBigDecimal(5, book.getWorth()); // Corrected index
+            preparedStatement.setString(6, book.getImage());
+            preparedStatement.setInt(7, book.getBookId());
 
             preparedStatement.executeUpdate();
             System.out.println("Book updated successfully!");
@@ -149,16 +152,15 @@ public class searchBookService {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                int bookId = rs.getInt("bookid");
-                String bookTitle = rs.getString("title");
-                String publisher = rs.getString("publisher");
-                int quantity = rs.getInt("quantity");
-                BigDecimal worthBD = rs.getBigDecimal("worth");
-                double worth = (worthBD != null) ? worthBD.doubleValue() : 0.0;
-                String image = rs.getString("image");
-                String author = rs.getString("author");
-
-                book = new Book(bookId, bookTitle, publisher, quantity, worth, image, author);
+                book = new Book(
+                        rs.getInt("bookid"),
+                        rs.getString("title"),
+                        rs.getString("publisher"),
+                        rs.getInt("quantity"),
+                        rs.getBigDecimal("worth"),
+                        rs.getString("image"),
+                        rs.getString("author")
+                );
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error finding book by title: " + e.getMessage(), e);
