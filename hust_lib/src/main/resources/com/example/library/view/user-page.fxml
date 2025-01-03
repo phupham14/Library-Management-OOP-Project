@@ -14,7 +14,7 @@
             <Font name="Georgia Bold" size="30.0" />
         </font>
     </Label>
-    <Label layoutX="321.0" layoutY="77.0" text="~@~ Welcome everyone ~@~">
+    <Label layoutX="388.0" layoutY="77.0" text="~@~ Welcome ~@~">
         <font>
             <Font name="Times New Roman" size="20.0" />
         </font>
@@ -34,4 +34,9 @@
         </columns>
     </TableView>
     <Button fx:id="user_checkCart" layoutX="519.0" layoutY="360.0" mnemonicParsing="false" onAction="#onOpenCart" text="Check Cart" />
+   <Label fx:id="user_username" layoutX="27.0" layoutY="63.0" prefHeight="27.0" prefWidth="62.0" text="Label">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font>
+   </Label>
 </AnchorPane>

@@ -27,6 +27,9 @@ public class UserPageController {
     private TextField user_bookNameFind;
 
     @FXML
+    private Label user_username;
+
+    @FXML
     private TableColumn<Book, String> user_bookTitle;
 
     @FXML

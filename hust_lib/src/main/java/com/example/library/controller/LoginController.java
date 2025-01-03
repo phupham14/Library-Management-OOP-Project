@@ -337,9 +337,12 @@ public class LoginController {
             // Show success message
             showSuccess("Login successful!");
 
+            // Retrieve and print the user ID
+            String userId = loginService.getUserId(enteredEmail);
+            System.out.println("User ID: " + userId);  // Print user ID
+
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/library/view/loginAs.fxml"));
-
                 Parent root = loader.load();
 
                 // Get the current stage and set the new scene
