@@ -5,15 +5,10 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-<<<<<<< HEAD
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-=======
-import javafx.geometry.Insets;
-import javafx.scene.Node;
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
@@ -31,10 +26,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-<<<<<<< HEAD
 import java.io.IOException;
-=======
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -168,7 +160,6 @@ public class DashboardController {
         analytics_comBox.setItems(listData); // Set items in the ComboBox
     }
 
-<<<<<<< HEAD
     public void onSwitchToAdmin() throws IOException {
         // Load the FXML file
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/admin-page.fxml")));
@@ -189,8 +180,6 @@ public class DashboardController {
         window.sizeToScene();
     }
 
-=======
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
     private void initializePieChart() {
         // Sample data for the pie chart
         PieChart.Data data1 = new PieChart.Data("Category 1", 30);

@@ -2,7 +2,8 @@ package com.example.library.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 import com.example.library.service.loginService;
 import javafx.event.ActionEvent;
@@ -15,86 +16,87 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LoginController {
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
-
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
-
-    @FXML // fx:id="changePass_Pass"
-    private PasswordField changePass_Pass; // Value injected by FXMLLoader
-
-    @FXML // fx:id="changePass_backBtn"
-    private Button changePass_backBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="changePass_btn"
-    private Button changePass_btn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="changePass_cPass"
-    private PasswordField changePass_cPass; // Value injected by FXMLLoader
-
-    @FXML // fx:id="changePass_form"
-    private AnchorPane changePass_form; // Value injected by FXMLLoader
-
-    @FXML // fx:id="changePass_showPass"
-    private CheckBox changePass_showPass; // Value injected by FXMLLoader
-
-    @FXML // fx:id="forgor_backBtn"
-    private Button forgor_backBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="forgor_btn"
-    private Button forgor_btn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="forgor_email"
-    private TextField forgor_email; // Value injected by FXMLLoader
-
-    @FXML // fx:id="forgor_form"
-    private AnchorPane forgor_form; // Value injected by FXMLLoader
-
-    @FXML // fx:id="login_btn"
-    private Button login_btn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="login_email"
-    private TextField login_email; // Value injected by FXMLLoader
-
-    @FXML // fx:id="login_forgorPass"
-    private Hyperlink login_forgorPass; // Value injected by FXMLLoader
-
-    @FXML // fx:id="login_form"
-    private AnchorPane login_form; // Value injected by FXMLLoader
-
-    @FXML // fx:id="login_pass"
-    private PasswordField login_pass; // Value injected by FXMLLoader
-
-    @FXML // fx:id="login_showPass"
-    private CheckBox login_showPass; // Value injected by FXMLLoader
-
-    @FXML // fx:id="login_signUpBtn"
-    private Button login_signUpBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="signup_btn"
-    private Button signup_btn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="signup_cPass"
-    private PasswordField signup_cPass; // Value injected by FXMLLoader
-
-    @FXML // fx:id="signup_email"
-    private TextField signup_email; // Value injected by FXMLLoader
-
-    @FXML // fx:id="signup_form"
-    private AnchorPane signup_form; // Value injected by FXMLLoader
-
-    @FXML // fx:id="signup_logInBtn"
-    private Button signup_logInBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="signup_pass"
-    private PasswordField signup_pass; // Value injected by FXMLLoader
-
-    @FXML // fx:id="signup_firstname"
-    private TextField  signup_firstName; // Value injected by FXMLLoader
 
     @FXML
-    private TextField  signup_lastName; // Value injected by FXMLLoader
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private PasswordField changePass_Pass;
+
+    @FXML
+    private Button changePass_backBtn;
+
+    @FXML
+    private Button changePass_btn;
+
+    @FXML
+    private PasswordField changePass_cPass;
+
+    @FXML
+    private AnchorPane changePass_form;
+
+    @FXML
+    private CheckBox changePass_showPass;
+
+    @FXML
+    private Button forgor_backBtn;
+
+    @FXML
+    private Button forgor_btn;
+
+    @FXML
+    private TextField forgor_email;
+
+    @FXML
+    private AnchorPane forgor_form;
+
+    @FXML
+    private Button login_btn;
+
+    @FXML
+    private TextField login_email;
+
+    @FXML
+    private Hyperlink login_forgorPass;
+
+    @FXML
+    private AnchorPane login_form;
+
+    @FXML
+    private PasswordField login_pass;
+
+    @FXML
+    private CheckBox login_showPass;
+
+    @FXML
+    private Button login_signUpBtn;
+
+    @FXML
+    private Button signup_btn;
+
+    @FXML
+    private PasswordField signup_cPass;
+
+    @FXML
+    private TextField signup_email;
+
+    @FXML
+    private AnchorPane signup_form;
+
+    @FXML
+    private Button signup_logInBtn;
+
+    @FXML
+    private PasswordField signup_pass;
+
+    @FXML
+    private TextField signup_firstName;
+
+    @FXML
+    private TextField signup_lastName;
 
     @FXML
     private Label successLabel;
@@ -105,14 +107,17 @@ public class LoginController {
     private Tooltip changePassTooltip;
     private Tooltip loginTooltip;
 
-    private com.example.library.service.loginService loginService = new loginService();
+    private loginService loginService = new loginService();
+
+    public LoginController() {
+        this.loginService = new loginService();
+    }
 
     public void onSwitchToLoginAs() {
         String enteredEmail = signup_email.getText(); // Assuming you have a TextField for the email
         String enteredPassword = signup_pass.getText(); // Assuming you have a PasswordField for the password
 
         try {
-<<<<<<< HEAD
             // Load the FXML file for the next view
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/loginAs.fxml")));
 
@@ -130,25 +135,6 @@ public class LoginController {
             window.sizeToScene();
 
             // Show an error message if credentials are invalid
-=======
-                // Load the FXML file for the next view
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/loginAs.fxml")));
-
-                // Create a new Scene with the loaded content
-                Scene scene = new Scene(root);
-
-                // Get the current window (Stage) and set the new scene
-                Stage window = (Stage) login_btn.getScene().getWindow();
-                window.setScene(scene);
-
-                // Optionally, you can set the window to be resizable
-                window.setResizable(true);
-
-                // Adjust the window size to fit the content
-                window.sizeToScene();
-
-                // Show an error message if credentials are invalid
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 //                Alert alert = new Alert(Alert.AlertType.ERROR);
 //                alert.setTitle("Login Failed");
 //                alert.setHeaderText("Invalid Credentials");
@@ -160,20 +146,8 @@ public class LoginController {
         }
     }
 
-    // Helper method to show an error message to the user
-    private void showError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
     void initialize() {
-<<<<<<< HEAD
-=======
         assert changePass_Pass != null : "fx:id=\"changePass_Pass\" was not injected: check your FXML file 'login-view.fxml'.";
         assert changePass_backBtn != null : "fx:id=\"changePass_backBtn\" was not injected: check your FXML file 'login-view.fxml'.";
         assert changePass_btn != null : "fx:id=\"changePass_btn\" was not injected: check your FXML file 'login-view.fxml'.";
@@ -199,34 +173,27 @@ public class LoginController {
         assert signup_pass != null : "fx:id=\"signup_pass\" was not injected: check your FXML file 'login-view.fxml'.";
         assert signup_firstName != null : "fx:id=\"signup_username\" was not injected: check your FXML file 'login-view.fxml'.";
         assert signup_lastName != null : "fx:id=\"signup_username\" was not injected: check your FXML file 'login-view.fxml'.";
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
+
         login_signUpBtn.setOnAction(this::handleLoginButtonClick);
         signup_btn.setOnAction(this::handleSignupButtonClick);
         signup_logInBtn.setOnAction(this::handleSignupButtonClick);
         forgor_btn.setOnAction(this::handleForgorButtonClick);
-        forgor_backBtn.setOnAction(this::handleSignupButtonClick);
+        forgor_backBtn.setOnAction(this::handleForgorPassLinkClick);
         changePass_btn.setOnAction(this::handleChangePassButtonClick);
         changePass_backBtn.setOnAction(this::handleForgorPassLinkClick);
-<<<<<<< HEAD
         login_btn.setOnAction(this::performLogin);
-=======
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 
         // Initialize tooltips
         changePassTooltip = new Tooltip();
         loginTooltip = new Tooltip();
-
-        // Set tooltip properties
         changePassTooltip.setAutoHide(true);
         loginTooltip.setAutoHide(true);
 
-        // Set action for change password checkbox
+        // Password visibility toggle
         changePass_showPass.setOnAction(event -> togglePasswordVisibility(changePass_showPass, changePass_Pass, changePassTooltip));
-
-        // Set action for login password checkbox
         login_showPass.setOnAction(event -> togglePasswordVisibility(login_showPass, login_pass, loginTooltip));
 
-        // Update the tooltip while typing in change password field
+        // Tooltip for password fields
         changePass_Pass.textProperty().addListener((observable, oldValue, newValue) -> {
             if (changePass_showPass.isSelected()) {
                 changePassTooltip.setText(newValue);
@@ -236,7 +203,6 @@ public class LoginController {
             }
         });
 
-        // Update the tooltip while typing in login password field
         login_pass.textProperty().addListener((observable, oldValue, newValue) -> {
             if (login_showPass.isSelected()) {
                 loginTooltip.setText(newValue);
@@ -247,20 +213,12 @@ public class LoginController {
         });
     }
 
-    private boolean isValidEmail(String email) {
-        return email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-    }
-
-    private void handleForgorPassLinkClick(ActionEvent actionEvent) {
-        // Set visibility for forgot password form
+    private void handleLoginButtonClick(javafx.event.ActionEvent actionEvent) {
+        // Set visibility of forms
         login_form.setVisible(false);
-        signup_form.setVisible(false);
+        forgor_form.setVisible(false);
         changePass_form.setVisible(false);
-        forgor_form.setVisible(true);
-    }
-
-    public LoginController() {
-        this.loginService = new loginService();
+        signup_form.setVisible(true);
     }
 
     private void handleSignupButtonClick(ActionEvent event) {
@@ -303,12 +261,33 @@ public class LoginController {
         // Gọi phương thức đăng ký từ LoginService để lưu thông tin người dùng vào cơ sở dữ liệu
         boolean isRegistered = loginService.registerUser(firstName, lastName, email, password);
 
-        if (isRegistered) {
-            showSuccess("Signup successful!");
-            // Tiến hành các bước sau khi đăng ký thành công (ví dụ: chuyển sang trang đăng nhập hoặc trang chủ)
+        if (loginService.validateLogin(email, password)) {
+            // Show success message
+            showSuccess("Login successful!");
+
+            // Load the next scene or controller
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/loginas.fxml"));
+                Parent root = loader.load();
+
+//                // Optional: Pass data to the next controller
+//                LoginAsController loginasController = loader.getController();
+//                loginasController.setUserEmail(enteredEmail); // Example: pass user email to the next controller
+
+                // Get the current stage and set the new scene
+                Stage stage = (Stage) login_btn.getScene().getWindow(); // Replace 'currentButton' with a reference to any UI element in your current scene
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                showError("Error loading next screen: " + e.getMessage());
+            }
         } else {
-            showError("An error occurred during signup. Please try again.");
+            // Show error message
+            showError("Invalid email or password!");
         }
+
     }
 
     private void handleForgorButtonClick(ActionEvent actionEvent) {
@@ -319,6 +298,14 @@ public class LoginController {
         signup_form.setVisible(false);
     }
 
+    private void handleForgorPassLinkClick(ActionEvent event) {
+        // Show the forgot password form
+        login_form.setVisible(false);
+        signup_form.setVisible(false);
+        changePass_form.setVisible(false);
+        forgor_form.setVisible(true);
+    }
+
     private void handleChangePassButtonClick(ActionEvent actionEvent) {
         // Set visibility of forms
         login_form.setVisible(true);
@@ -327,15 +314,20 @@ public class LoginController {
         signup_form.setVisible(false);
     }
 
-    private void handleLoginButtonClick(javafx.event.ActionEvent actionEvent) {
-        // Set visibility of forms
-        login_form.setVisible(false);
-        forgor_form.setVisible(false);
-        changePass_form.setVisible(false);
-        signup_form.setVisible(true);
+    private void togglePasswordVisibility(CheckBox checkbox, PasswordField passwordField, Tooltip tooltip) {
+        if (checkbox.isSelected()) {
+            passwordField.setPromptText(passwordField.getText());
+            passwordField.setText("");
+            passwordField.setPromptText(passwordField.getPromptText());
+        } else {
+            passwordField.setText(tooltip.getText());
+        }
     }
 
-<<<<<<< HEAD
+    private boolean isValidEmail(String email) {
+        return email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+    }
+
     private void performLogin(ActionEvent actionEvent) {
         String enteredEmail = login_email.getText();
         String enteredPassword = login_pass.getText();
@@ -366,21 +358,14 @@ public class LoginController {
         }
     }
 
-=======
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
-    private void togglePasswordVisibility(CheckBox checkBox, PasswordField passwordField, Tooltip tooltip) {
-        if (checkBox.isSelected()) {
-            tooltip.setText(passwordField.getText());
-            tooltip.show(passwordField,
-                    passwordField.getScene().getWindow().getX() + passwordField.getLayoutX(),
-                    passwordField.getScene().getWindow().getY() + passwordField.getLayoutY() - 25);
-        } else {
-            tooltip.hide();
-        }
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
-
-    // Hàm hiển thị thông báo thành công
     private void showSuccess(String message) {
         if (successLabel != null) {
             successLabel.setText(message);

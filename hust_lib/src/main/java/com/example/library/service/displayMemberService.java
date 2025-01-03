@@ -36,9 +36,4 @@ public class displayMemberService {
 
         return membersList;
     }
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60

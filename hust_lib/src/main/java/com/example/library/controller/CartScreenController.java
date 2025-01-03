@@ -48,7 +48,7 @@ public class CartScreenController {
         // Set up table columns to display cart item details
         cart_title.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         cart_publisher.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPublisher()));
-        cart_worth.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getWorth()).asObject());
+        cart_worth.setCellValueFactory(cellData -> new SimpleDoubleProperty().asObject());
 
         // Update total cost
         updateTotalCost();
@@ -56,7 +56,7 @@ public class CartScreenController {
 
     // Method to update the total cost label
     private void updateTotalCost() {
-        double totalCost = cartItems.stream().mapToDouble(Book::getWorth).sum();
+        double totalCost = cartItems.stream().mapToDouble(book -> book.getWorth().doubleValue()).sum();
         cart_labelTotalCost.setText("Total Cost: $" + totalCost);
     }
 

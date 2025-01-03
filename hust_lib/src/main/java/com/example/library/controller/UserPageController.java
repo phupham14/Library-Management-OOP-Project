@@ -1,8 +1,7 @@
 package com.example.library.controller;
 
-<<<<<<< HEAD
 import com.example.library.model.Book;
-import com.example.library.service.cartService; // Import the CartService
+import com.example.library.service.cartService;
 import com.example.library.service.searchBookService;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -13,20 +12,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
-=======
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 
 public class UserPageController {
 
@@ -37,7 +27,6 @@ public class UserPageController {
     private TextField user_bookNameFind;
 
     @FXML
-<<<<<<< HEAD
     private TableColumn<Book, String> user_bookTitle;
 
     @FXML
@@ -51,24 +40,11 @@ public class UserPageController {
 
     @FXML
     private TableView<Book> user_tableView;
-=======
-    private TableColumn<?, ?> user_bookPrice;
-
-    @FXML
-    private TableColumn<?, ?> user_bookPublisher;
-
-    @FXML
-    private TableColumn<?, ?> user_bookQuantity;
-
-    @FXML
-    private TableColumn<?, ?> user_bookTitle;
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 
     @FXML
     private Button user_findBookBtn;
 
     @FXML
-<<<<<<< HEAD
     private Button user_checkCart;
 
     @FXML
@@ -79,22 +55,15 @@ public class UserPageController {
 
     @FXML
     private void initialize() {
-        // Set up table columns to display book details
         user_bookTitle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         user_bookPublisher.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPublisher()));
         user_bookQuantity.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
-        user_bookPrice.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getWorth()).asObject());
+        user_bookPrice.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getWorth() != null ? cellData.getValue().getWorth().doubleValue() : 0.0).asObject());
 
-        // Load all books on page open
-        bookService.getAllBooks();
+        loadAllBooks();
 
-        // Set up search button action
         user_findBookBtn.setOnAction(event -> handleSearch());
-
-        // Set up issue book button action
         user_issueBookBtn.setOnAction(event -> handleIssueBook());
-
-        // Set up check cart button action
         user_checkCart.setOnAction(event -> {
             try {
                 onOpenCart();
@@ -105,11 +74,8 @@ public class UserPageController {
     }
 
     public void onOpenCart() throws IOException {
-        // Load the cart FXML
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/library/view/Cart.fxml"));
         Parent root = loader.load();
-
-        // Show the cart
         Stage openCart = new Stage();
         openCart.setScene(new Scene(root));
         openCart.setResizable(true);
@@ -118,58 +84,37 @@ public class UserPageController {
     }
 
     private void handleIssueBook() {
-        // Get the selected book from the TableView
         Book selectedBook = user_tableView.getSelectionModel().getSelectedItem();
 
         if (selectedBook != null) {
-            // Ensure the selected book has a sufficient quantity
             if (selectedBook.getQuantity() <= 0) {
                 System.out.println("Book is out of stock.");
-                return; // Exit if there are no books left
+                return;
             }
 
-            // Debug: Print the selected book details
-            System.out.println("Selected book title: " + selectedBook.getTitle());
-            System.out.println("Selected book ID: " + selectedBook.getBookId());
-
-            // Retrieve the customer ID (replace this with your actual method)
-            int customerId = getCurrentCustomerId(); // Implement this method to get the current customer ID
+            int customerId = getCurrentCustomerId();
             if (customerId == -1) {
                 System.out.println("Invalid customer ID.");
                 return;
             }
 
             try {
-                // Issue the book by updating the database
                 bookService.issueBookById(selectedBook.getBookId());
-
-                // Optionally, add the book to the customer's cart
                 cartService.getInstance().addBookToCart(selectedBook, customerId);
-
-                // Update the local book quantity and reload the view
                 selectedBook.setQuantity(selectedBook.getQuantity() - 1);
-                loadAllBooks(); // Refresh the TableView to reflect changes
-
+                loadAllBooks();
                 System.out.println("Book issued successfully.");
             } catch (Exception e) {
                 System.err.println("Error issuing book: " + e.getMessage());
             }
         } else {
-            // Handle the case when no book is selected
             System.out.println("No book selected. Please select a book to issue.");
         }
     }
 
-    /**
-     * Dummy method to get the current customer ID.
-     * Replace this with the actual implementation for retrieving customer ID.
-     */
     private int getCurrentCustomerId() {
-        // Replace with logic to get the actual customer ID
-        // Returning -1 for invalid ID
-        return -1; // Example placeholder
+        return -1; // Replace with actual implementation
     }
-
 
     private void loadAllBooks() {
         List<Book> books = bookService.getAllBooks();
@@ -177,7 +122,6 @@ public class UserPageController {
         bookList.addAll(books);
         user_tableView.setItems(bookList);
     }
-
 
     private void handleSearch() {
         String bookName = user_bookNameFind.getText().trim();
@@ -188,15 +132,7 @@ public class UserPageController {
             bookList.addAll(books);
             user_tableView.setItems(bookList);
         } else {
-            // If the text field is empty, reload all books
             loadAllBooks();
         }
     }
-=======
-    private Button user_issueBookBtn;
-
-    @FXML
-    private TableColumn<?, ?> user_publishYear;
-
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 }

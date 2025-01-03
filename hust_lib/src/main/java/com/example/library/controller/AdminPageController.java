@@ -4,74 +4,66 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
-<<<<<<< HEAD
-=======
 
-import javafx.event.ActionEvent;
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-<<<<<<< HEAD
-=======
-import javafx.scene.control.Alert;
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class AdminPageController {
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
+    @FXML
     private ResourceBundle resources;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
+    @FXML
     private URL location;
 
-    @FXML // fx:id="admin_addBook"
-    private Button admin_addBook; // Value injected by FXMLLoader
+    @FXML
+    private Button admin_addBook;
 
-    @FXML // fx:id="admin_addMember"
-    private Button admin_addMember; // Value injected by FXMLLoader
+    @FXML
+    private Button admin_addMember;
 
-    @FXML // fx:id="admin_bookAuthor"
-    private Label admin_bookAuthor; // Value injected by FXMLLoader
+    @FXML
+    private Label admin_bookAuthor;
 
-    @FXML // fx:id="admin_bookCheck"
-    private Button admin_bookCheck; // Value injected by FXMLLoader
+    @FXML
+    private Button admin_bookCheck;
 
-    @FXML // fx:id="admin_bookName"
-    private Label admin_bookName; // Value injected by FXMLLoader
+    @FXML
+    private Label admin_bookName;
 
-    @FXML // fx:id="admin_issueBtn"
-    private Button admin_issueBtn; // Value injected by FXMLLoader
+    @FXML
+    private Button admin_issueBtn;
 
-    @FXML // fx:id="admin_issuedBooks"
-    private Button admin_issuedBooks; // Value injected by FXMLLoader
+    @FXML
+    private Button admin_issuedBooks;
 
-    @FXML // fx:id="admin_memberCheck"
-    private Button admin_memberCheck; // Value injected by FXMLLoader
+    @FXML
+    private Button admin_memberCheck;
 
-    @FXML // fx:id="admin_memberContact"
-    private Label admin_memberContact; // Value injected by FXMLLoader
+    @FXML
+    private Label admin_memberContact;
 
-    @FXML // fx:id="admin_memberNameText"
-    private Label admin_memberNameText; // Value injected by FXMLLoader
+    @FXML
+    private Label admin_memberNameText;
 
-    @FXML // fx:id="admin_renewBtn"
-    private Button admin_renewBtn; // Value injected by FXMLLoader
+    @FXML
+    private Button admin_renewBtn;
 
-    @FXML // fx:id="admin_searchBook"
-    private Button admin_searchBook; // Value injected by FXMLLoader
+    @FXML
+    private Button admin_searchBook;
 
-    @FXML // fx:id="admin_searchMember"
-    private Button admin_searchMember; // Value injected by FXMLLoader
+    @FXML
+    private Button admin_searchMember;
 
-    @FXML // fx:id="admin_submissionBtn"
-    private Button admin_submissionBtn; // Value injected by FXMLLoader
+    @FXML
+    private Button admin_submissionBtn;
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
     void initialize() {
         assert admin_addBook != null : "fx:id=\"admin_addBook\" was not injected: check your FXML file 'admin-page.fxml'.";
         assert admin_addMember != null : "fx:id=\"admin_addMember\" was not injected: check your FXML file 'admin-page.fxml'.";
@@ -87,171 +79,43 @@ public class AdminPageController {
         assert admin_searchBook != null : "fx:id=\"admin_searchBook\" was not injected: check your FXML file 'admin-page.fxml'.";
         assert admin_searchMember != null : "fx:id=\"admin_searchMember\" was not injected: check your FXML file 'admin-page.fxml'.";
         assert admin_submissionBtn != null : "fx:id=\"admin_submissionBtn\" was not injected: check your FXML file 'admin-page.fxml'.";
-
     }
 
     public void onOpenAddBook() throws IOException {
-        // Load the FXML file for the admin page
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/book-add.fxml")));
-
-        // Create a new Stage for the new window
-        Stage addBook = new Stage();
-
-        // Create a new Scene with the loaded content
-        Scene scene = new Scene(root);
-
-        // Set the scene to the new window
-        addBook.setScene(scene);
-
-        // Optionally, you can set the window to be resizable
-        addBook.setResizable(true);
-
-        // Set a title for the new window (optional)
-        addBook.setTitle("Add Book Page");
-
-        // Show the new window
-        addBook.show();
+        openNewWindow("/com/example/library/view/book-add.fxml", "Add Book Page");
     }
 
     public void onOpenAddMember() throws IOException {
-        // Load the FXML file for the admin page
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/member-add.fxml")));
-
-        // Create a new Stage for the new window
-        Stage addMember = new Stage();
-
-        // Create a new Scene with the loaded content
-        Scene scene = new Scene(root);
-
-        // Set the scene to the new window
-        addMember.setScene(scene);
-
-        // Optionally, you can set the window to be resizable
-        addMember.setResizable(true);
-
-        // Set a title for the new window (optional)
-        addMember.setTitle("Add Member Page");
-
-        // Show the new window
-        addMember.show();
+        openNewWindow("/com/example/library/view/member-add.fxml", "Add Member Page");
     }
 
     public void onOpenSearchMember() throws IOException {
-        // Load the FXML file for the admin page
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/searchMember.fxml")));
-
-        // Create a new Stage for the new window
-        Stage searchMember = new Stage();
-
-        // Create a new Scene with the loaded content
-        Scene scene = new Scene(root);
-
-        // Set the scene to the new window
-        searchMember.setScene(scene);
-
-        // Optionally, you can set the window to be resizable
-        searchMember.setResizable(true);
-
-        // Set a title for the new window (optional)
-        searchMember.setTitle("Search Member Page");
-
-        // Show the new window
-        searchMember.show();
+        openNewWindow("/com/example/library/view/searchMember.fxml", "Search Member Page");
     }
 
     public void onOpenSearchBook() throws IOException {
-        // Load the FXML file for the admin page
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/searchBook.fxml")));
-
-        // Create a new Stage for the new window
-        Stage searchBook = new Stage();
-
-        // Create a new Scene with the loaded content
-        Scene scene = new Scene(root);
-
-        // Set the scene to the new window
-        searchBook.setScene(scene);
-
-        // Optionally, you can set the window to be resizable
-        searchBook.setResizable(true);
-
-        // Set a title for the new window (optional)
-        searchBook.setTitle("Search Book Page");
-
-        // Show the new window
-        searchBook.show();
+        openNewWindow("/com/example/library/view/searchBook.fxml", "Search Book Page");
     }
 
     public void onOpenAllBooks() throws IOException {
-        // Load the FXML file for the admin page
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/displayBooks.fxml")));
-
-        // Create a new Stage for the new window
-        Stage allBooks = new Stage();
-
-        // Create a new Scene with the loaded content
-        Scene scene = new Scene(root);
-
-        // Set the scene to the new window
-        allBooks.setScene(scene);
-
-        // Optionally, you can set the window to be resizable
-        allBooks.setResizable(true);
-
-        // Set a title for the new window (optional)
-        allBooks.setTitle("All Books Page");
-
-        // Show the new window
-        allBooks.show();
+        openNewWindow("/com/example/library/view/displayBooks.fxml", "All Books Page");
     }
 
     public void onOpenAllMembers() throws IOException {
-        // Load the FXML file for the admin page
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/displayMembers.fxml")));
-
-        // Create a new Stage for the new window
-        Stage allMembers = new Stage();
-
-        // Create a new Scene with the loaded content
-        Scene scene = new Scene(root);
-
-        // Set the scene to the new window
-        allMembers.setScene(scene);
-
-        // Optionally, you can set the window to be resizable
-        allMembers.setResizable(true);
-
-        // Set a title for the new window (optional)
-        allMembers.setTitle("All Members Page");
-
-        // Show the new window
-        allMembers.show();
+        openNewWindow("/com/example/library/view/displayMembers.fxml", "All Members Page");
     }
 
     public void onOpenIssuedBooks() throws IOException {
-        // Load the FXML file for the admin page
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/issued-books.fxml")));
-
-        // Create a new Stage for the new window
-        Stage issuedBooks = new Stage();
-
-        // Create a new Scene with the loaded content
-        Scene scene = new Scene(root);
-
-        // Set the scene to the new window
-        issuedBooks.setScene(scene);
-
-        // Optionally, you can set the window to be resizable
-        issuedBooks.setResizable(true);
-
-        // Set a title for the new window (optional)
-        issuedBooks.setTitle("Issued Books Page");
-
-        // Show the new window
-        issuedBooks.show();
+        openNewWindow("/com/example/library/view/issued-books.fxml", "Issued Books Page");
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
+    private void openNewWindow(String fxmlPath, String title) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlPath)));
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.setTitle(title);
+        stage.show();
+    }
 }

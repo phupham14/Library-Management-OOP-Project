@@ -3,9 +3,7 @@ package com.example.library.service;
 import com.example.library.model.Person;
 import com.example.library.util.ConnectionUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,28 +26,18 @@ public class searchMemberService {
 
             // Process the result set
             while (resultSet.next()) {
-<<<<<<< HEAD
                 Person member = new Person(
                         resultSet.getString("firstname"),
                         resultSet.getString("lastname"),
                         resultSet.getString("address"),
                         resultSet.getString("phonenumber"),
                         resultSet.getString("email"),
+                        resultSet.getString("role"),
                         resultSet.getString("password")
                 );
                 members.add(member);
             }
             System.out.println("Number of members found by name '" + keyword + "': " + members.size());
-=======
-                System.out.println("First Name: " + resultSet.getString("firstname")); // Debug log
-                System.out.println("Last Name: " + resultSet.getString("lastname"));   // Debug log
-
-                Person member = new Person(
-                );
-                members.add(member);
-            }
-
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Error searching for members by name: " + e.getMessage());
@@ -57,33 +45,30 @@ public class searchMemberService {
 
         return members;
     }
-<<<<<<< HEAD
 
     public List<Person> getAllMembers() {
         List<Person> members = new ArrayList<>();
-        String query = "SELECT * FROM person";
+        String sql = "SELECT * FROM person"; // Câu lệnh SQL để lấy tất cả các thành viên
 
         try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
-             PreparedStatement preparedStatement = connection.prepareStatement(query);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                Person member = new Person(
-                        resultSet.getString("firstname"),
-                        resultSet.getString("lastname"),
-                        resultSet.getString("address"),
-                        resultSet.getString("phonenumber"),
-                        resultSet.getString("email"),
-                        resultSet.getString("password")
-                );
-                members.add(member);
+                Person person = new Person();
+                person.setFirstName(resultSet.getString("firstname"));
+                person.setLastName(resultSet.getString("lastname"));
+                person.setAddress(resultSet.getString("address"));
+                person.setPhoneNumber(resultSet.getString("phonenumber"));
+                person.setEmail(resultSet.getString("email"));
+                person.setRole(resultSet.getString("role"));
+                person.setPassword(resultSet.getString("password"));
+                members.add(person);
             }
-            System.out.println("Number of members retrieved: " + members.size());
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error retrieving all members: " + e.getMessage());
-        }
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return members;
     }
 
@@ -102,6 +87,7 @@ public class searchMemberService {
                         resultSet.getString("address"),
                         resultSet.getString("phonenumber"),
                         resultSet.getString("email"),
+                        resultSet.getString("role"),
                         resultSet.getString("password")
                 );
             }
@@ -129,6 +115,7 @@ public class searchMemberService {
                         resultSet.getString("address"),
                         resultSet.getString("phonenumber"),
                         resultSet.getString("email"),
+                        resultSet.getString("role"),
                         resultSet.getString("password")
                 );
             }
@@ -220,6 +207,3 @@ public class searchMemberService {
         }
     }
 }
-=======
-}
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60

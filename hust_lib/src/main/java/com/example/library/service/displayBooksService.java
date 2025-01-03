@@ -22,10 +22,6 @@ public class displayBooksService {
                 books.add(new Book(
                         resultSet.getInt("bookid"),
                         resultSet.getString("title"),
-<<<<<<< HEAD
-=======
-                        resultSet.getInt("publishYear"),
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
                         resultSet.getInt("publisherid"),
                         resultSet.getInt("quantity"),
                         resultSet.getDouble("worth")
@@ -38,8 +34,4 @@ public class displayBooksService {
 
         return books;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60

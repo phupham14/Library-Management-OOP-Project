@@ -2,7 +2,6 @@ package com.example.library.controller;
 
 import com.example.library.model.Book;
 import com.example.library.service.searchBookService;
-<<<<<<< HEAD
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -21,24 +20,14 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-=======
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-
-import java.util.List;
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
 
 public class SearchBookController {
 
     @FXML
-<<<<<<< HEAD
     private Button searchBook_addBookBtn;
     @FXML
     private Button searchBook_cancelBtn;
@@ -52,29 +41,20 @@ public class SearchBookController {
     private TextField searchBook_publisher;
     @FXML
     private TextField searchBook_quantity;
-=======
-    private ListView<String> searchBook_listView; // Hiển thị danh sách kết quả (String cho thông tin sách)
-
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
     @FXML
     private Button searchBook_searchBtn;
-
     @FXML
-<<<<<<< HEAD
     private TableView<Book> searchBook_tableView;
     @FXML
     private TableColumn<Book, String> searchBook_tableViewTitle;
     @FXML
     private TableColumn<Book, String> searchBook_tableViewPublisher;
     @FXML
-    private TableColumn<Book, String> searchBook_tableViewAuthor;
-    @FXML
-    private TableColumn<Book, Integer> searchBook_tableViewBookId;
+    private TableColumn<Book, Integer> searchBook_tableViewAuthor;
     @FXML
     private TableColumn<Book, Integer> searchBook_tableViewQuantity;
     @FXML
     private TableColumn<Book, Double> searchBook_tableViewWorth;
-
     @FXML
     private TextField searchBook_textfield;
     @FXML
@@ -92,12 +72,12 @@ public class SearchBookController {
     private void initialize() {
         loadAllBooks();
         searchBook_searchBtn.setOnAction(event -> handleSearch());
-        searchBook_tableViewBookId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getBookId()).asObject());
         searchBook_tableViewTitle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         searchBook_tableViewPublisher.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPublisher()));
+        searchBook_tableViewAuthor.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPublishYear()).asObject());
         searchBook_tableViewQuantity.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
-        searchBook_tableViewWorth.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getWorth()).asObject());
-        searchBook_tableViewAuthor.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
+        searchBook_tableViewWorth.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getWorth() != null ? cellData.getValue().getWorth().doubleValue() : 0.0).asObject());
+
 
         searchBook_tableView.setOnMouseClicked(this::handleMouseClick);
         searchBook_image.setOnMouseClicked(this::handleImageClick);
@@ -146,31 +126,15 @@ public class SearchBookController {
 
     private void loadAllBooks() {
         List<Book> books = bookService.getAllBooks();
-        if (books == null || books.isEmpty()) {
-            System.out.println("No books found.");
-        } else {
-            System.out.println("Loaded books: " + books.size());
-        }
         bookList.clear();
-        assert books != null;
         bookList.addAll(books);
         searchBook_tableView.setItems(bookList);
-=======
-    private TextField searchBook_textfield;
-
-    private final searchBookService bookService = new searchBookService();
-
-    @FXML
-    private void initialize() {
-        searchBook_searchBtn.setOnAction(event -> handleSearch());
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
     }
 
     private void handleSearch() {
         String keyword = searchBook_textfield.getText().trim();
 
         if (!keyword.isEmpty()) {
-<<<<<<< HEAD
             List<Book> books = bookService.searchBooksByTitle(keyword);
             bookList.clear();
             bookList.addAll(books);
@@ -216,9 +180,9 @@ public class SearchBookController {
         if (selectedBook != null) {
             selectedBook.setTitle(searchBook_title.getText());
             selectedBook.setPublisher(searchBook_publisher.getText());
-            selectedBook.setPublishYear(Integer.parseInt(searchBook_year.getText()));
+            selectedBook.setAuthor(String.valueOf(searchBook_year.getText()));
             selectedBook.setQuantity(Integer.parseInt(searchBook_quantity.getText()));
-            selectedBook.setWorth(Double.parseDouble(searchBook_worth.getText()));
+            selectedBook.setWorth(BigDecimal.valueOf(Double.parseDouble(searchBook_worth.getText())));
 
             bookService.updateBook(selectedBook); // Assuming you have an update method in your service
             loadAllBooks(); // Reload the table to reflect changes
@@ -232,30 +196,3 @@ public class SearchBookController {
         }
     }
 }
-=======
-            List<Book> books = bookService.searchBooksByTitle(keyword); // Search by title
-
-            ObservableList<String> bookDetails = FXCollections.observableArrayList();
-            if (books.isEmpty()) {
-                bookDetails.add("No books found!");
-            } else {
-                for (Book book : books) {
-                    String details = String.format(
-                            "Title: %s, Publisher: %d, Year: %d, Quantity: %d, Worth: %s",
-                            book.getTitle(),
-                            book.getPublisherId(),
-                            book.getPublishYear(),
-                            book.getQuantity(),
-                            book.getWorth()
-                    );
-                    bookDetails.add(details);
-                }
-            }
-
-            searchBook_listView.setItems(bookDetails);
-        } else {
-            searchBook_listView.setItems(FXCollections.observableArrayList("Please enter a keyword to search!"));
-        }
-    }
-}
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60

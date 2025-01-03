@@ -4,18 +4,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<<<<<<< HEAD
-<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.DisplayBooksController">
-   <children>
-      <TableView fx:id="tableView" prefHeight="400.0" prefWidth="600.0">
-         <columns>
-            <TableColumn fx:id="displayMembers_name" prefWidth="100.0" text="Name" />
-            <TableColumn fx:id="displayMembers_address" prefWidth="100.0" text="Address" />
-            <TableColumn fx:id="displayMembers_phoneNumber" prefWidth="100.0" text="Phone Number" />
-            <TableColumn fx:id="displayMembers_email" prefWidth="100.0" text="Email" />
-            <TableColumn fx:id="displayMembers_DOB" prefWidth="100.0" text="DOB" />
-=======
-<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.DisplayMembersController">
+<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.DisplayMembersController">
    <children>
       <TableView fx:id="tableView" prefHeight="400.0" prefWidth="600.0">
          <columns>
@@ -24,7 +13,6 @@
             <TableColumn fx:id="displayMembers_address" prefWidth="100.0" text="Address" />
             <TableColumn fx:id="displayMembers_phoneNumber" prefWidth="100.0" text="Phone Number" />
             <TableColumn fx:id="displayMembers_email" prefWidth="100.0" text="Email" />
->>>>>>> 7a7fadd8af3016c06c126e162be6add0a8d93a60
             <TableColumn fx:id="displayMembers_password" prefWidth="100.0" text="Password" />
          </columns>
       </TableView>
