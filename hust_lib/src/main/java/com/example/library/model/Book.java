@@ -68,12 +68,13 @@ public class Book {
     }
 
     /**
-     * Constructor for the cart, only including bookId, title, publisher, and worth.
+     * Constructor for the cart, only including bookId, title, publisher, author, and worth.
      */
-    public Book(int bookId, String title, String publisher, BigDecimal worth) {
+    public Book(int bookId, String title, String publisher, String author, BigDecimal worth) {
         this.bookId = bookId;
         this.title = title;
         this.publisher = publisher;
+        this.author = author;
         this.worth = worth;
     }
 

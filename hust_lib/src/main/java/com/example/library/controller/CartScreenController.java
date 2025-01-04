@@ -2,7 +2,6 @@ package com.example.library.controller;
 
 import com.example.library.model.Customer;
 import com.example.library.service.customerService;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,7 +38,7 @@ public class CartScreenController {
     private TableColumn<Book, String> cart_title;
 
     @FXML
-    private TableColumn<Book, Double> cart_worth;
+    private TableColumn<Book, String> cart_author;
 
     private ObservableList<Book> cartItems;
 
@@ -55,9 +54,9 @@ public class CartScreenController {
         // Set up table columns to display cart item details
         cart_title.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         cart_publisher.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPublisher()));
-        cart_worth.setCellValueFactory(cellData -> new SimpleDoubleProperty().asObject());
+        cart_author.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
 
-        updateTotalCost();
+        //updateTotalCost();
     }
 
     void loadCartContents(int customerId) throws SQLException {
@@ -69,7 +68,7 @@ public class CartScreenController {
         ObservableList<Book> cartContents = cartService.getInstance().getCartContents(customerId);
         // In ra các cuốn sách trong giỏ hàng vào console
         for (Book book : cartContents) {
-            System.out.println("Title: " + book.getTitle() + ", Publisher: " + book.getPublisher() + ", Worth: " + book.getWorth());
+            System.out.println("Title: " + book.getTitle() + ", Publisher: " + book.getPublisher() + ", Author: " + book.getAuthor());
         }
 
         // Add retrieved items to the cart
@@ -81,23 +80,40 @@ public class CartScreenController {
         System.out.println("Cart items set to TableView.");
 
         // Update the total cost label
-        updateTotalCost();
+        //updateTotalCost();
         System.out.println("Total cost updated.");
     }
 
     // Method to update the total cost label
-    private void updateTotalCost() {
-        double totalCost = cartItems.stream().mapToDouble(book -> book.getWorth().doubleValue()).sum();
-        cart_labelTotalCost.setText("Total Cost: $" + totalCost);
-    }
+//    private void updateTotalCost() {
+//        double totalCost = cartItems.stream().mapToDouble(book -> book.getWorth().doubleValue()).sum();
+//        cart_labelTotalCost.setText("Total Cost: " + totalCost);
+//    }
 
-    private void removeBookFromCart(int bookId, int customerId) throws SQLException {
+    @FXML
+    private void removeBookFromCart() throws SQLException {
+        // Lấy sách được chọn từ bảng
         Book selectedBook = cart_tableView.getSelectionModel().getSelectedItem();
         if (selectedBook != null) {
-            // Remove the book from the database
-            cartService.getInstance().removeBookFromCart(bookId, customerId);
-            cartItems.remove(selectedBook);
-            updateTotalCost();
+            int bookId = selectedBook.getBookId(); // Lấy ID sách
+            int customerId = Session.getInstance().getCustomerId(); // Lấy ID khách hàng
+
+            try {
+                // Gọi service để xóa sách khỏi cơ sở dữ liệu
+                cartService.getInstance().removeBookFromCart(bookId, customerId);
+
+                // Xóa sách khỏi giao diện
+                cartItems.remove(selectedBook);
+
+                // Cập nhật tổng chi phí
+                //updateTotalCost();
+
+                System.out.println("Book removed from cart: " + bookId);
+            } catch (SQLException e) {
+                System.err.println("Error removing book from cart: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No book selected to remove.");
         }
     }
 
@@ -105,7 +121,7 @@ public class CartScreenController {
         // Persist the book to the database
         cartService.getInstance().addBookToCart(book, customer);
         cartItems.add(book);
-        updateTotalCost();
+        //updateTotalCost();
     }
 
 }
