@@ -268,7 +268,7 @@ public class LoginController {
 
             // Load the next scene or controller
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/loginAs.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/library/view/loginAs.fxml.fxml"));
                 Parent root = loader.load();
 
 //                // Optional: Pass data to the next controller
