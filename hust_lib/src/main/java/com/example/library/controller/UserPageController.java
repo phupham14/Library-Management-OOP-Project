@@ -3,6 +3,7 @@ package com.example.library.controller;
 import com.example.library.model.Book;
 import com.example.library.model.Customer;
 import com.example.library.model.Person;
+import com.example.library.controller.CartScreenController;
 import com.example.library.service.cartService;
 import com.example.library.service.customerService;
 import com.example.library.service.searchBookService;
@@ -20,9 +21,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import static com.example.library.model.Person.getPersonId;
+import static com.example.library.util.Session.*;
 
 public class UserPageController {
 
@@ -64,6 +67,7 @@ public class UserPageController {
 
     private final searchBookService bookService = new searchBookService();
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
+    private CartScreenController cartScreenController = new CartScreenController();
 
     @FXML
     private void initialize() {
@@ -88,9 +92,31 @@ public class UserPageController {
         });
     }
 
+    // Setter để truyền đối tượng CartScreenController từ lớp khác
+    public void setCartScreenController(CartScreenController cartScreenController) {
+        this.cartScreenController = cartScreenController;
+    }
+
+    private CartScreenController getCartScreenController() {
+        return cartScreenController;
+    }
+
     public void onOpenCart() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/library/view/Cart.fxml"));
         Parent root = loader.load();
+
+        cartScreenController = loader.getController(); // Get CartScreenController from FXMLLoader
+        try {
+            int currentCustomerId = getCurrentCustomerId();
+            if (currentCustomerId == 0) {
+                System.err.println("Invalid customer ID. Cannot load cart contents.");
+                return;
+            }
+            cartScreenController.loadCartContents(getCurrentCustomerId());
+        } catch (SQLException e) {
+            System.err.println("Database error while loading cart contents: " + e.getMessage());
+        }
+
         Stage openCart = new Stage();
         openCart.setScene(new Scene(root));
         openCart.setResizable(true);
@@ -119,9 +145,16 @@ public class UserPageController {
             // Thực hiện mượn sách và thêm vào giỏ hàng
             try {
                 bookService.issueBookById(selectedBook.getBookId());
-                cartService.getInstance().addBookToCart(selectedBook, currentCustomer); // Sử dụng đối tượng Customer
+                cartService.getInstance().addBookToCart(selectedBook, currentCustomer);
                 selectedBook.setQuantity(selectedBook.getQuantity() - 1);
                 loadAllBooks();
+
+                // Sau khi mượn sách, chúng ta gọi CartScreenController để cập nhật giỏ hàng
+                if (cartScreenController != null) {
+                    cartScreenController.loadCartContents(currentCustomer.getCustomerId());
+                } else {
+                    System.err.println("CartScreenController is not initialized.");
+                }
 
                 System.out.println("Book issued and added to the cart successfully.");
             } catch (Exception e) {
@@ -132,16 +165,23 @@ public class UserPageController {
         }
     }
 
+
     private Customer getCurrentCustomer() {
-        int customerId = getCurrentCustomerId();
-        if (customerId == -1) {
+        int personId = getCurrentPersonId();
+        if (personId == -1) {
             return null;
         }
-        return customerService.getCustomerById(customerId);
+        return customerService.getCustomerById(personId);
+    }
+
+    private int getCurrentPersonId() {
+        int currentPersonId = getInstance().getPersonId();
+        System.out.println("Current Person ID: " + currentPersonId);
+        return currentPersonId;
     }
 
     private int getCurrentCustomerId() {
-        int currentCustomerId = Session.getInstance().getCustomerId();
+        int currentCustomerId = getInstance().getCustomerId();
         System.out.println("Current Customer ID: " + currentCustomerId);
         return currentCustomerId;
     }

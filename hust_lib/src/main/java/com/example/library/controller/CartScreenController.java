@@ -1,6 +1,7 @@
 package com.example.library.controller;
 
 import com.example.library.model.Customer;
+import com.example.library.service.customerService;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -12,8 +13,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import com.example.library.model.Book;
 import com.example.library.service.cartService;
-
+import com.example.library.util.Session;
 import java.sql.SQLException;
+
+import static com.example.library.model.Customer.getCustomerId;
 
 public class CartScreenController {
 
@@ -41,9 +44,12 @@ public class CartScreenController {
     private ObservableList<Book> cartItems;
 
     @FXML
-    private void initialize() {
-        // Load cart items from the database using CartService
-        cartItems = FXCollections.observableArrayList();
+    private void initialize() throws SQLException {
+        if (cartItems == null) {
+            cartItems = FXCollections.observableArrayList(); // Đảm bảo cartItems được khởi tạo
+        }
+
+        // Set các giá trị cho TableView
         cart_tableView.setItems(cartItems);
 
         // Set up table columns to display cart item details
@@ -51,19 +57,32 @@ public class CartScreenController {
         cart_publisher.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPublisher()));
         cart_worth.setCellValueFactory(cellData -> new SimpleDoubleProperty().asObject());
 
-        // Update total cost
         updateTotalCost();
     }
 
-    private void loadCartContents(int customerId) throws SQLException {
+    void loadCartContents(int customerId) throws SQLException {
+
+        // In ra customerId để kiểm tra đầu vào
+        System.out.println("Loading cart contents for customer ID: " + customerId);
+
         // Retrieve all books in the cart for the current customer
         ObservableList<Book> cartContents = cartService.getInstance().getCartContents(customerId);
-        cartItems.clear();
-        cartItems.addAll(cartContents);
+        // In ra các cuốn sách trong giỏ hàng vào console
+        for (Book book : cartContents) {
+            System.out.println("Title: " + book.getTitle() + ", Publisher: " + book.getPublisher() + ", Worth: " + book.getWorth());
+        }
 
+        // Add retrieved items to the cart
+        cartItems.addAll(cartContents);
+        System.out.println("Updated cart items: " + cartItems);
+
+        // Set items to the TableView
         cart_tableView.setItems(cartItems);
+        System.out.println("Cart items set to TableView.");
+
         // Update the total cost label
         updateTotalCost();
+        System.out.println("Total cost updated.");
     }
 
     // Method to update the total cost label

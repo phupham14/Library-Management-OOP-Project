@@ -341,10 +341,11 @@ public class LoginController {
 
             // Retrieve and print the user ID
             String userId = loginService.getUserId(enteredEmail);
-            System.out.println("User ID: " + userId);  // Print user ID
-
-            Session.getInstance().setCustomerId(Integer.parseInt(userId));
-
+            System.out.println("Person ID: " + userId);  // Print user ID
+            Session.getInstance().setPersonId(Integer.parseInt(userId));
+            String customerId = loginService.getCustomerId(userId);
+            System.out.println("Customer ID:" + customerId);
+            Session.getInstance().setCustomerId(Integer.parseInt(customerId));
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/library/view/loginAs.fxml"));
                 Parent root = loader.load();
