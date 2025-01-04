@@ -11,7 +11,7 @@ public class Book {
     private String title;         // Title of the book
     private int publisherId;      // Publisher's ID
     private int quantity;         // Available quantity
-    private int publishYear;      // Year of publication
+    private String publishYear;      // Year of publication
     private BigDecimal worth;     // Monetary value of the book
     private String image;         // Path or URL to the book's image
     private String author;        // Author of the book
@@ -32,7 +32,7 @@ public class Book {
      * @param image        Path or URL to the book's image
      * @param author       Author of the book
      */
-    public Book(String title, String publisher, int quantity, int publishYear, BigDecimal worth, String image, String author) {
+    public Book(String title, String publisher, int quantity, String publishYear, BigDecimal worth, String image, String author) {
         this.title = title;
         this.publisher = publisher;
         this.quantity = quantity;
@@ -55,7 +55,7 @@ public class Book {
      * @param author       Author of the book
      * @param publisher    Publisher's name
      */
-    public Book(int bookId, String title, int publisherId, int quantity, int publishYear, BigDecimal worth, String image, String author, String publisher) {
+    public Book(int bookId, String title, int publisherId, int quantity, String publishYear, BigDecimal worth, String image, String author, String publisher) {
         this.bookId = bookId;
         this.title = title;
         this.publisherId = publisherId;
@@ -89,7 +89,7 @@ public class Book {
     }
 
     // Newly added constructor to resolve the error
-    public Book(int bookId, String title, String publisher, int quantity, int publishYear, BigDecimal worth, String image, String author) {
+    public Book(int bookId, String title, String publisher, int quantity, String publishYear, BigDecimal worth, String image, String author) {
         this.bookId = bookId;
         this.title = title;
         this.publisher = publisher;
@@ -171,11 +171,11 @@ public class Book {
         this.quantity = quantity;
     }
 
-    public int getPublishYear() {
+    public String getPublishYear() {
         return publishYear;
     }
 
-    public void setPublishYear(int publishYear) {
+    public void setPublishYear(String publishYear) {
         this.publishYear = publishYear;
     }
 

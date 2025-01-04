@@ -18,24 +18,44 @@ public class addMemberService {
     }
 
     public void handleSaveAction(String firstName, String lastName, String mobile, String email, String address, String password) throws Exception {
-        String query = "INSERT INTO employee (firstname, lastname, phonenumber, email, address, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO employee (firstname, lastname, phonenumber, email, address, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String debugQuery = "SELECT address, role FROM employee WHERE email = ?";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            preparedStatement.setString(3, mobile);
-            preparedStatement.setString(4, email);
-            preparedStatement.setString(5, address);
-            preparedStatement.setString(6, password); // Mật khẩu lưu thẳng hoặc đã băm
-            preparedStatement.setString(7, "Employee"); // Role mặc định là Employee
+        try (PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
+             PreparedStatement debugStatement = connection.prepareStatement(debugQuery)) {
 
-            int rowsInserted = preparedStatement.executeUpdate();
+            // Insert the new member
+            insertStatement.setString(1, firstName);
+            insertStatement.setString(2, lastName);
+            insertStatement.setString(3, mobile);
+            insertStatement.setString(4, email);
+            insertStatement.setString(5, address);
+            insertStatement.setString(6, password);
+            insertStatement.setString(7, "admin");
+
+            int rowsInserted = insertStatement.executeUpdate();
             if (rowsInserted <= 0) {
-                throw new Exception("Không thể lưu người dùng.");
+                throw new Exception("Failed to save the member.");
+            }
+
+            // Fetch and print the role and address after insertion
+            debugStatement.setString(1, email);
+            try (var resultSet = debugStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    String savedAddress = resultSet.getString("address");
+                    String savedRole = resultSet.getString("role");
+
+                    System.out.println("Member saved successfully.");
+                    System.out.println("Saved Address: " + savedAddress);
+                    System.out.println("Saved Role: " + savedRole);
+                } else {
+                    throw new Exception("Failed to retrieve saved member data for debugging.");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Lỗi khi thêm người dùng vào cơ sở dữ liệu: " + e.getMessage());
+            throw new Exception("Error while saving the member to the database: " + e.getMessage());
         }
     }
+
 }

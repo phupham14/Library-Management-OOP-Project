@@ -35,7 +35,6 @@ public class searchBookService {
                         resultSet.getString("title"),
                         resultSet.getString("publisher"), // Ensure publisher is correctly retrieved
                         resultSet.getInt("quantity"),
-                        resultSet.getInt("publishyear"),
                         resultSet.getBigDecimal("worth"),
                         resultSet.getString("image"),
                         resultSet.getString("author")
@@ -128,7 +127,7 @@ public class searchBookService {
             preparedStatement.setString(2, book.getAuthor());
             preparedStatement.setString(3, book.getPublisher());
             preparedStatement.setInt(4, book.getQuantity());
-            preparedStatement.setBigDecimal(5, book.getWorth()); // Corrected index
+            preparedStatement.setBigDecimal(5, book.getWorth());
             preparedStatement.setString(6, book.getImage());
             preparedStatement.setInt(7, book.getBookId());
 

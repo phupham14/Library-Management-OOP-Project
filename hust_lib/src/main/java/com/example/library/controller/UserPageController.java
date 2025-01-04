@@ -116,7 +116,7 @@ public class UserPageController {
     }
 
     private int getCurrentCustomerId() {
-        return -1; // Replace with actual implementation
+        return 18; // Replace with actual implementation
     }
 
     private void loadAllBooks() {

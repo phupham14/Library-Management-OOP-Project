@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.SearchBookController">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.SearchBookController">
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -44,7 +44,7 @@
             <TextField fx:id="searchBook_title" layoutX="26.0" layoutY="145.0" promptText="Title" />
             <TextField fx:id="searchBook_worth" layoutX="25.0" layoutY="302.0" promptText="Worth" />
             <TextField fx:id="searchBook_quantity" layoutX="26.0" layoutY="261.0" promptText="Quantity" />
-            <TextField fx:id="searchBook_year" layoutX="26.0" layoutY="221.0" promptText="Author" />
+            <TextField fx:id="searchBook_author" layoutX="26.0" layoutY="221.0" promptText="Author" />
             <TextField fx:id="searchBook_publisher" layoutX="26.0" layoutY="183.0" promptText="Publisher" />
             <Button fx:id="searchBook_saveAddBtn" layoutX="14.0" layoutY="345.0" mnemonicParsing="false" text="Save" />
             <Button fx:id="searchBook_cancelBtn" layoutX="134.0" layoutY="345.0" mnemonicParsing="false" text="Cancel" />
