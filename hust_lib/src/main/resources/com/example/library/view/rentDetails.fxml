@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.RentDetailsController">
+   <children>
+      <Label layoutX="46.0" layoutY="23.0" text="Renting Details">
+         <font>
+            <Font name="Georgia Bold" size="24.0" />
+         </font>
+      </Label>
+      <TableView fx:id="rentDetails_tableView" layoutY="63.0" prefHeight="339.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="rentDetails_rentlineId" prefWidth="150.0" text="Rentline ID" />
+          <TableColumn fx:id="rentDetails_bookTitle" prefWidth="250.0" text="Book Title" />
+            <TableColumn fx:id="rentDetails_returnDate" prefWidth="100.0" text="Return Date" />
+            <TableColumn fx:id="rentDetails_rentStatus" prefWidth="100.0" text="Rent Status" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
