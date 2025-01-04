@@ -1,5 +1,6 @@
 package com.example.library.service;
 
+import com.example.library.model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import com.example.library.model.Book;
@@ -25,15 +26,16 @@ public class cartService {
     }
 
     // Add a book to the cart
-    public void addBookToCart(Book book, int customerId) throws SQLException {
-        String sql = "INSERT INTO cart (customerid, bookid, title, publisher, worth) VALUES (?, ?, ?, ?, ?)";
+    public void addBookToCart(Book book, Customer customer) throws SQLException {
+        String sql = "INSERT INTO cart (customerid, bookid, title, publisher, author, worth) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, customerId);
+            statement.setInt(1, customer.getCustomerId());
             statement.setInt(2, book.getBookId());
             statement.setString(3, book.getTitle());
             statement.setString(4, book.getPublisher());
-            statement.setBigDecimal(5, book.getWorth());
+            statement.setString(5, book.getAuthor());
+            statement.setBigDecimal(6, book.getWorth());
             statement.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error adding book to cart: " + e.getMessage());
@@ -44,7 +46,7 @@ public class cartService {
     // Retrieve all books in the cart for a specific customer
     public ObservableList<Book> getCartContents(int customerId) throws SQLException {
         ObservableList<Book> cartItems = FXCollections.observableArrayList();
-        String sql = "SELECT book_id, title, publisher, worth FROM cart WHERE customer_id = ?";
+        String sql = "SELECT bookid, title, publisher, author, worth FROM cart WHERE customerid = ?";
         try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, customerId);
@@ -52,9 +54,10 @@ public class cartService {
 
             while (resultSet.next()) {
                 Book book = new Book();
-                book.setBookId(resultSet.getInt("book_id"));
+                book.setBookId(resultSet.getInt("bookid"));
                 book.setTitle(resultSet.getString("title"));
                 book.setPublisher(resultSet.getString("publisher"));
+                book.setAuthor(resultSet.getString("author"));
                 book.setWorth(BigDecimal.valueOf(resultSet.getDouble("worth")));
                 cartItems.add(book);
             }
@@ -70,14 +73,23 @@ public class cartService {
         String sql = "DELETE FROM cart WHERE customerid = ? AND bookid = ?";
         try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, customerId);
-            statement.setInt(2, bookId);
-            statement.executeUpdate();
+
+            statement.setInt(1, customerId); // Đặt customerId
+            statement.setInt(2, bookId); // Đặt bookId
+
+            int rowsAffected = statement.executeUpdate(); // Thực thi truy vấn
+
+            if (rowsAffected > 0) {
+                System.out.println("Book removed successfully from database.");
+            } else {
+                System.out.println("No book found to remove with ID: " + bookId);
+            }
         } catch (SQLException e) {
             System.err.println("Error removing book from cart: " + e.getMessage());
             throw e;
         }
     }
+
 
     // Calculate the total cost for a specific customer
     public double calculateTotalCost(int customerId) throws SQLException {

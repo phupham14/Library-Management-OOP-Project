@@ -150,7 +150,7 @@ public class searchMemberService {
     }
 
     public void updateMember(Person member) {
-        String query = "UPDATE person SET firstname = ?, lastname = ?, address = ?, phonenumber = ?, email = ?, password = ? WHERE email = ?"; // or phone number
+        String query = "UPDATE person SET firstname = ?, lastname = ?, address = ?, phonenumber = ?, password = ? WHERE email = ?"; // or phone number
         try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -163,14 +163,13 @@ public class searchMemberService {
             System.out.println("Email: " + member.getEmail());
             System.out.println("Password: " + member.getPassword());
 
-            // Set parameters for the prepared statement
+            // Check if each field has changed before setting it
             preparedStatement.setString(1, member.getFirstName());
             preparedStatement.setString(2, member.getLastName());
             preparedStatement.setString(3, member.getAddress());
             preparedStatement.setString(4, member.getPhoneNumber());
-            preparedStatement.setString(5, member.getEmail());
-            preparedStatement.setString(6, member.getPassword());
-            preparedStatement.setString(7, member.getEmail()); // Use email to identify the row
+            preparedStatement.setString(5, member.getPassword());
+            preparedStatement.setString(6, member.getEmail()); // Use email to identify the row
 
             // Execute the update and check how many rows were affected
             int rowsAffected = preparedStatement.executeUpdate();
@@ -185,6 +184,7 @@ public class searchMemberService {
             throw new RuntimeException("Error updating member: " + e.getMessage());
         }
     }
+
 
     public void addMember(Person member) {
         String query = "INSERT INTO person (firstname, lastname, address, phonenumber, email, password) VALUES (?, ?, ?, ?, ?, ?)";

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.UserPageController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library.controller.UserPageController">
     <Label layoutX="54.0" layoutY="25.0" text="HustLib">
         <font>
             <Font name="Georgia Bold" size="30.0" />
@@ -27,14 +27,15 @@
     <TextField fx:id="user_authorFind" layoutX="117.0" layoutY="152.0" />
     <TableView fx:id="user_tableView" layoutX="2.0" layoutY="186.0" prefHeight="164.0" prefWidth="600.0">
         <columns>
-            <TableColumn fx:id="user_bookTitle" prefWidth="203.20001530647278" text="Title" />
-            <TableColumn fx:id="user_bookPublisher" prefWidth="108.79997253417969" text="Publisher" />
-            <TableColumn fx:id="user_bookQuantity" prefWidth="109.5999755859375" text="Quantity" />
-            <TableColumn fx:id="user_bookPrice" prefWidth="83.99993896484375" text="Price" />
+            <TableColumn fx:id="user_bookTitle" prefWidth="174.39996647834778" text="Title" />
+            <TableColumn fx:id="user_bookPublisher" prefWidth="133.59996032714844" text="Publisher" />
+         <TableColumn fx:id="user_author" prefWidth="112.79998779296875" text="Author" />
+            <TableColumn fx:id="user_bookQuantity" prefWidth="92.0" text="Quantity" />
+            <TableColumn fx:id="user_bookPrice" prefWidth="86.39996337890625" text="Price" />
         </columns>
     </TableView>
     <Button fx:id="user_checkCart" layoutX="519.0" layoutY="360.0" mnemonicParsing="false" onAction="#onOpenCart" text="Check Cart" />
-   <Label fx:id="user_username" layoutX="27.0" layoutY="63.0" prefHeight="27.0" prefWidth="62.0" text="Label">
+   <Label fx:id="user_username" layoutX="58.0" layoutY="63.0" prefHeight="27.0" prefWidth="62.0" text="Label">
       <font>
          <Font name="System Bold" size="18.0" />
       </font>

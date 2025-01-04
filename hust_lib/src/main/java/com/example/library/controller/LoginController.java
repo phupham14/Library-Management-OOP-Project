@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 import com.example.library.service.loginService;
+import com.example.library.util.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -267,7 +268,7 @@ public class LoginController {
 
             // Load the next scene or controller
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/loginas.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/loginAs.fxml"));
                 Parent root = loader.load();
 
 //                // Optional: Pass data to the next controller
@@ -334,13 +335,17 @@ public class LoginController {
 
         // Use the loginService to validate the login
         if (loginService.validateLogin(enteredEmail, enteredPassword)) {
+
             // Show success message
             showSuccess("Login successful!");
 
             // Retrieve and print the user ID
             String userId = loginService.getUserId(enteredEmail);
-            System.out.println("User ID: " + userId);  // Print user ID
-
+            System.out.println("Person ID: " + userId);  // Print user ID
+            Session.getInstance().setPersonId(Integer.parseInt(userId));
+            String customerId = loginService.getCustomerId(userId);
+            System.out.println("Customer ID:" + customerId);
+            Session.getInstance().setCustomerId(Integer.parseInt(customerId));
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/library/view/loginAs.fxml"));
                 Parent root = loader.load();

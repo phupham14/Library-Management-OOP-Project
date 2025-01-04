@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
  * This is the base class for all user types (e.g., Employee, Customer).
  */
 public class Person {
-    private int personId;
-    private String firstName;
+    private static int personId;
+    private static String firstName;
     private String lastName;
     private String address;
     private String phoneNumber;
@@ -66,7 +66,7 @@ public class Person {
     }
 
     // Getters and setters
-    public int getPersonId() {
+    public static int getPersonId() {
         return personId;
     }
 
@@ -74,7 +74,7 @@ public class Person {
         this.personId = personId;
     }
 
-    public String getFirstName() {
+    public static String getFirstName() {
         return firstName;
     }
 

@@ -56,6 +56,22 @@ public class loginService {
         return null; // Return null if no user found or an error occurs
     }
 
+    public String getCustomerId(String personid) {
+        String query = "SELECT customerid FROM customer JOIN person ON customer.personid = person.personid WHERE person.personid = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            int personIdInt = Integer.parseInt(personid); // personid là String
+            preparedStatement.setInt(1, personIdInt); // Truyền giá trị kiểu int vào PreparedStatement
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return String.valueOf(resultSet.getInt("customerid"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Trả về null nếu không tìm thấy
+    }
+
+
     // Kiểm tra xem email đã được đăng ký chưa.
     public boolean isEmailAlreadyRegistered(String email) {
         String query = "SELECT * FROM person WHERE email = ?";
