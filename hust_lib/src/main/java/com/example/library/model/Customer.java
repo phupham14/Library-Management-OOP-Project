@@ -4,11 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Customer extends Person{
-    private int customerId;
+    private static int customerId;
     private boolean blockRent;
 
-    public int getCustomerId() {
+    public static int getCustomerId() {
         return customerId;
+    }
+
+    public static Object getAttribute(String customerId) {
+        return null;
     }
 
     public void setCustomerId(int customerId) {

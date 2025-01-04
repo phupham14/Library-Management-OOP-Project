@@ -185,13 +185,15 @@ public class SearchMemberController {
             return;
         }
 
-        String firstName = searchMem_firstName.getText().trim();
-        String lastName = searchMem_lastName.getText().trim();
-        String address = searchMem_address.getText().trim();
-        String phoneNumber = searchMem_phoneNumber.getText().trim();
-        String email = searchMem_email.getText().trim();
-        String password = searchMem_password.getText().trim();
+        // Check if TextFields are null or empty, then trim the values to avoid NullPointerException
+        String firstName = searchMem_firstName != null && searchMem_firstName.getText() != null ? searchMem_firstName.getText().trim() : "";
+        String lastName = searchMem_lastName != null && searchMem_lastName.getText() != null ? searchMem_lastName.getText().trim() : "";
+        String address = searchMem_address != null && searchMem_address.getText() != null ? searchMem_address.getText().trim() : "";
+        String phoneNumber = searchMem_phoneNumber != null && searchMem_phoneNumber.getText() != null ? searchMem_phoneNumber.getText().trim() : "";
+        String email = searchMem_email != null && searchMem_email.getText() != null ? searchMem_email.getText().trim() : "";
+        String password = searchMem_password != null && searchMem_password.getText() != null ? searchMem_password.getText().trim() : "";
 
+        // Set the updated values to the selectedMember object
         selectedMember.setFirstName(firstName);
         selectedMember.setLastName(lastName);
         selectedMember.setAddress(address);
@@ -199,12 +201,15 @@ public class SearchMemberController {
         selectedMember.setEmail(email);
         selectedMember.setPassword(password);
 
+        // Call the service to update the member in the database
         memberService.updateMember(selectedMember);
         System.out.println("Updated existing member: " + selectedMember.getFirstName() + " " + selectedMember.getLastName());
 
+        // Clear the input fields and reload the members list
         clearFields();
         loadAllMembers();
     }
+
 
     private void deleteMember() {
         Person selectedItem = searchMem_tableView.getSelectionModel().getSelectedItem();

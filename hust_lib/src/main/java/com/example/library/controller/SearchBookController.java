@@ -50,7 +50,7 @@ public class SearchBookController {
     @FXML
     private TableColumn<Book, String> searchBook_tableViewPublisher;
     @FXML
-    private TableColumn<Book, Integer> searchBook_tableViewAuthor;
+    private TableColumn<Book, String> searchBook_tableViewAuthor;
     @FXML
     private TableColumn<Book, Integer> searchBook_tableViewQuantity;
     @FXML
@@ -76,7 +76,7 @@ public class SearchBookController {
         // Bind TableView columns
         searchBook_tableViewTitle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         searchBook_tableViewPublisher.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPublisher()));
-        searchBook_tableViewAuthor.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPublishYear()).asObject());
+        searchBook_tableViewAuthor.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         searchBook_tableViewQuantity.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
         searchBook_tableViewWorth.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getWorth() != null ? cellData.getValue().getWorth().doubleValue() : 0.0).asObject());
 
@@ -110,7 +110,7 @@ public class SearchBookController {
     private void clearFields() {
         searchBook_title.clear();
         searchBook_publisher.clear();
-        searchBook_year.clear();
+        //searchBook_year.clear();
         searchBook_quantity.clear();
         searchBook_worth.clear();
         searchBook_image.setImage(null);
@@ -120,7 +120,7 @@ public class SearchBookController {
     private void populateFields(Book book) {
         searchBook_title.setText(book.getTitle());
         searchBook_publisher.setText(book.getPublisher());
-        searchBook_year.setText(String.valueOf(book.getPublishYear()));
+        //searchBook_year.setText(String.valueOf(book.getPublishYear()));
         searchBook_quantity.setText(String.valueOf(book.getQuantity()));
         searchBook_worth.setText(String.valueOf(book.getWorth()));
     }
@@ -182,7 +182,7 @@ public class SearchBookController {
         if (selectedBook != null) {
             selectedBook.setTitle(searchBook_title.getText());
             selectedBook.setPublisher(searchBook_publisher.getText());
-            selectedBook.setPublishYear(Integer.parseInt(searchBook_year.getText())); // Corrected to setPublishYear
+            //selectedBook.setPublishYear(Integer.parseInt(searchBook_year.getText())); // Corrected to setPublishYear
             selectedBook.setQuantity(Integer.parseInt(searchBook_quantity.getText()));
             selectedBook.setWorth(BigDecimal.valueOf(Double.parseDouble(searchBook_worth.getText())));
 

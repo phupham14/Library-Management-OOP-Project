@@ -35,7 +35,7 @@ public class searchBookService {
                         resultSet.getString("title"),
                         resultSet.getString("publisher"), // Ensure publisher is correctly retrieved
                         resultSet.getInt("quantity"),
-                        resultSet.getInt("publishyear"),
+                        //resultSet.getInt("publishyear"),
                         resultSet.getBigDecimal("worth"),
                         resultSet.getString("image"),
                         resultSet.getString("author")

@@ -1,5 +1,6 @@
 package com.example.library.controller;
 
+import com.example.library.model.Customer;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -10,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import com.example.library.model.Book;
-import com.example.library.service.cartService; // Import CartService
+import com.example.library.service.cartService;
 
 import java.sql.SQLException;
 
@@ -26,10 +27,10 @@ public class CartScreenController {
     private Label cart_labelTotalCost;
 
     @FXML
-    private TableColumn<Book, String> cart_publisher;
+    private TableView<Book> cart_tableView;
 
     @FXML
-    private TableView<Book> cart_tableView;
+    private TableColumn<Book, String> cart_publisher;
 
     @FXML
     private TableColumn<Book, String> cart_title;
@@ -54,6 +55,17 @@ public class CartScreenController {
         updateTotalCost();
     }
 
+    private void loadCartContents(int customerId) throws SQLException {
+        // Retrieve all books in the cart for the current customer
+        ObservableList<Book> cartContents = cartService.getInstance().getCartContents(customerId);
+        cartItems.clear();
+        cartItems.addAll(cartContents);
+
+        cart_tableView.setItems(cartItems);
+        // Update the total cost label
+        updateTotalCost();
+    }
+
     // Method to update the total cost label
     private void updateTotalCost() {
         double totalCost = cartItems.stream().mapToDouble(book -> book.getWorth().doubleValue()).sum();
@@ -70,9 +82,9 @@ public class CartScreenController {
         }
     }
 
-    public void addBookToCart(Book book, int customerId) throws SQLException {
+    public void addBookToCart(Book book, Customer customer) throws SQLException {
         // Persist the book to the database
-        cartService.getInstance().addBookToCart(book, customerId);
+        cartService.getInstance().addBookToCart(book, customer);
         cartItems.add(book);
         updateTotalCost();
     }

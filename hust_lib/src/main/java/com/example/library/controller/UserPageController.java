@@ -1,8 +1,12 @@
 package com.example.library.controller;
 
 import com.example.library.model.Book;
+import com.example.library.model.Customer;
+import com.example.library.model.Person;
 import com.example.library.service.cartService;
+import com.example.library.service.customerService;
 import com.example.library.service.searchBookService;
+import com.example.library.util.Session;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,6 +21,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+
+import static com.example.library.model.Person.getPersonId;
 
 public class UserPageController {
 
@@ -42,6 +48,9 @@ public class UserPageController {
     private TableColumn<Book, Double> user_bookPrice;
 
     @FXML
+    private TableColumn<Book, String> user_author;
+
+    @FXML
     private TableView<Book> user_tableView;
 
     @FXML
@@ -58,9 +67,12 @@ public class UserPageController {
 
     @FXML
     private void initialize() {
+        user_username.setText(Person.getFirstName());
+
         user_bookTitle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         user_bookPublisher.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPublisher()));
         user_bookQuantity.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
+        user_author.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         user_bookPrice.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getWorth() != null ? cellData.getValue().getWorth().doubleValue() : 0.0).asObject());
 
         loadAllBooks();
@@ -87,26 +99,31 @@ public class UserPageController {
     }
 
     private void handleIssueBook() {
+        // Lấy cuốn sách được chọn từ giao diện
         Book selectedBook = user_tableView.getSelectionModel().getSelectedItem();
 
         if (selectedBook != null) {
+            // Kiểm tra nếu sách đã hết hàng
             if (selectedBook.getQuantity() <= 0) {
                 System.out.println("Book is out of stock.");
                 return;
             }
 
-            int customerId = getCurrentCustomerId();
-            if (customerId == -1) {
-                System.out.println("Invalid customer ID.");
+            // Lấy thông tin customer từ session
+            Customer currentCustomer = getCurrentCustomer();
+            if (currentCustomer == null) {
+                System.out.println("Customer not found");
                 return;
             }
 
+            // Thực hiện mượn sách và thêm vào giỏ hàng
             try {
                 bookService.issueBookById(selectedBook.getBookId());
-                cartService.getInstance().addBookToCart(selectedBook, customerId);
+                cartService.getInstance().addBookToCart(selectedBook, currentCustomer); // Sử dụng đối tượng Customer
                 selectedBook.setQuantity(selectedBook.getQuantity() - 1);
                 loadAllBooks();
-                System.out.println("Book issued successfully.");
+
+                System.out.println("Book issued and added to the cart successfully.");
             } catch (Exception e) {
                 System.err.println("Error issuing book: " + e.getMessage());
             }
@@ -115,9 +132,20 @@ public class UserPageController {
         }
     }
 
-    private int getCurrentCustomerId() {
-        return -1; // Replace with actual implementation
+    private Customer getCurrentCustomer() {
+        int customerId = getCurrentCustomerId();
+        if (customerId == -1) {
+            return null;
+        }
+        return customerService.getCustomerById(customerId);
     }
+
+    private int getCurrentCustomerId() {
+        int currentCustomerId = Session.getInstance().getCustomerId();
+        System.out.println("Current Customer ID: " + currentCustomerId);
+        return currentCustomerId;
+    }
+
 
     private void loadAllBooks() {
         List<Book> books = bookService.getAllBooks();
