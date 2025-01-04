@@ -106,7 +106,7 @@ public class AdminPageController {
     }
 
     public void onOpenIssuedBooks() throws IOException {
-        openNewWindow("/com/example/library/view/issued-books.fxml", "Issued Books Page");
+        openNewWindow("/com/example/library/view/rent.fxml", "Issued Books Page");
     }
 
     private void openNewWindow(String fxmlPath, String title) throws IOException {
