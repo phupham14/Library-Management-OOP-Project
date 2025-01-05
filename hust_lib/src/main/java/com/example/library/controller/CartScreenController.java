@@ -124,4 +124,24 @@ public class CartScreenController {
         //updateTotalCost();
     }
 
+    @FXML
+    private void placeOrder() {
+        try {
+            // Lấy customerId từ Session
+            int customerId = com.example.library.util.Session.getInstance().getCustomerId();
+
+            // Gọi hàm confirm_rent trong cartService
+            cartService.getInstance().confirm_rent(customerId);
+
+            // Xóa sách khỏi giỏ hàng sau khi đặt hàng thành công
+            cartItems.clear();
+            cart_tableView.refresh();
+
+            // Hiển thị thông báo đặt hàng thành công (hoặc xử lý lỗi nếu cần)
+            System.out.println("Order placed successfully for customer ID: " + customerId);
+        } catch (SQLException e) {
+            System.err.println("Error placing order: " + e.getMessage());
+            // Xử lý lỗi (ví dụ: hiển thị thông báo lỗi cho người dùng)
+        }
+    }
 }

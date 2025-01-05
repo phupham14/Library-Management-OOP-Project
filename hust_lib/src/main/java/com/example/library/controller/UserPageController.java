@@ -33,6 +33,9 @@ public class UserPageController {
     private TextField user_authorFind;
 
     @FXML
+    private Button user_cancelRent;
+
+    @FXML
     private TextField user_bookNameFind;
 
     @FXML
@@ -102,6 +105,23 @@ public class UserPageController {
     }
 
     public void onOpenCart() throws IOException {
+        // Kiểm tra trạng thái BlockRent của khách hàng
+        Customer currentCustomer = getCurrentCustomer();
+        if (currentCustomer == null) {
+            System.out.println("Customer not found");
+            return;
+        }
+
+        if (currentCustomer.isBlockRent()) {
+            // Hiển thị cảnh báo nếu BlockRent là true
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("You have already rented books. Please return them before accessing the cart.");
+            alert.showAndWait();
+            return;
+        }
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/library/view/Cart.fxml"));
         Parent root = loader.load();
 
@@ -127,7 +147,6 @@ public class UserPageController {
     private void handleIssueBook() {
         // Lấy cuốn sách được chọn từ giao diện
         Book selectedBook = user_tableView.getSelectionModel().getSelectedItem();
-
         if (selectedBook != null) {
             // Kiểm tra nếu sách đã hết hàng
             if (selectedBook.getQuantity() <= 0) {
@@ -139,6 +158,17 @@ public class UserPageController {
             Customer currentCustomer = getCurrentCustomer();
             if (currentCustomer == null) {
                 System.out.println("Customer not found");
+                return;
+            }
+
+            // Kiểm tra trạng thái BlockRent của khách hàng
+            if (currentCustomer.isBlockRent()) {
+                // Hiển thị cảnh báo nếu BlockRent là true
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText(null);
+                alert.setContentText("You have already rented books. Please return them before renting new ones.");
+                alert.showAndWait();
                 return;
             }
 

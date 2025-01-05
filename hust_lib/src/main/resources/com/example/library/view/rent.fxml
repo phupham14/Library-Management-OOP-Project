@@ -26,4 +26,9 @@
     </Label>
    <TextField fx:id="rent_searchBar" layoutX="25.0" layoutY="44.0" />
    <Button fx:id="rent_searchBtn" layoutX="196.0" layoutY="44.0" mnemonicParsing="false" text="Search" />
+   <Button fx:id="rent_checkRent" layoutX="464.0" layoutY="44.0" mnemonicParsing="false" onAction="#handleCheckRent" text="Check Rent">
+      <font>
+         <Font name="Georgia Bold" size="14.0" />
+      </font>
+   </Button>
 </AnchorPane>

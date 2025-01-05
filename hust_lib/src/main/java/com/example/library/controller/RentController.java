@@ -28,6 +28,9 @@ public class RentController {
     private TableView<Rent> rentTableView;
 
     @FXML
+    private Button rent_checkRent;
+
+    @FXML
     private TableColumn<Rent, Integer> rent_rentId;
 
     @FXML
@@ -102,6 +105,10 @@ public class RentController {
             e.printStackTrace();
             // Handle the exception (e.g., show an error dialog)
         }
+    }
+
+    public void handleCheckRent(javafx.event.ActionEvent actionEvent) {
+        RentService.checkRent();
     }
 
     private void loadRentData() {

@@ -16,6 +16,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import static com.example.library.util.Session.getInstance;
+
 public class LoginController {
 
     @FXML
@@ -346,6 +348,9 @@ public class LoginController {
             String customerId = loginService.getCustomerId(userId);
             System.out.println("Customer ID:" + customerId);
             Session.getInstance().setCustomerId(Integer.parseInt(customerId));
+
+
+
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/library/view/loginAs.fxml"));
                 Parent root = loader.load();

@@ -2,10 +2,8 @@ package com.example.library.service;
 
 import com.example.library.model.RentDetail;
 import com.example.library.util.ConnectionUtil;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +21,12 @@ public class RentDetailsService {
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setInt(1, rentId);
+
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 RentDetail detail = new RentDetail();
+
                 detail.setRentlineId(rs.getInt("rentlineid")); // Accessing the correct column
                 detail.setBookTitle(rs.getString("title")); // Accessing the book title
                 detail.setReturnDate(rs.getDate("returndate") != null ? rs.getDate("returndate").toLocalDate() : null); // Handling return date

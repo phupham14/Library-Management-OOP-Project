@@ -5,13 +5,18 @@ import com.example.library.service.RentDetailsService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class RentDetailsController {
+
+    @FXML
+    private Button rentDetails_checkRent;
 
     @FXML
     private TableColumn<RentDetail, String> rentDetails_bookTitle;
@@ -46,5 +51,13 @@ public class RentDetailsController {
         rentDetails_rentStatus.setCellValueFactory(new PropertyValueFactory<>("rentStatus"));
         rentDetails_rentlineId.setCellValueFactory(new PropertyValueFactory<>("rentlineId"));
         rentDetails_returnDate.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
+    }
+
+    public Button getRentDetails_checkRent() {
+        return rentDetails_checkRent;
+    }
+
+    public void setRentDetails_checkRent(Button rentDetails_checkRent) {
+        this.rentDetails_checkRent = rentDetails_checkRent;
     }
 }

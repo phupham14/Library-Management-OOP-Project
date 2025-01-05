@@ -3,10 +3,7 @@ package com.example.library.service;
 import com.example.library.model.Rent;
 import com.example.library.util.ConnectionUtil;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +61,19 @@ public class RentService {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Error updating rent: " + e.getMessage());
+        }
+    }
+
+    public static void checkRent() {
+        String sql = "{call check_rent()}";
+
+        try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
+             CallableStatement cstmt = connection.prepareCall(sql)) {
+
+            cstmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error calling check_rent procedure: " + e.getMessage());
         }
     }
 }

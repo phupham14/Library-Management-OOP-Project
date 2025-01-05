@@ -1,12 +1,16 @@
 package com.example.library.model;
 
-public class BlackList {
+public class Blacklist {
     private int blackListId;
     private String reason;
     private double fineAmount;
     private int rentId;
 
-    public BlackList(int blackListId, String reason, double fineAmount, int rentId) {
+    public Blacklist() {
+        // Default constructor
+    }
+
+    public Blacklist(int blackListId, String reason, double fineAmount, int rentId) {
         this.blackListId = blackListId;
         this.reason = reason;
         this.fineAmount = fineAmount;
