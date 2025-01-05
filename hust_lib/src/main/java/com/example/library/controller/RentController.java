@@ -95,7 +95,7 @@ public class RentController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/library/view/rentDetails.fxml")); // Update with the correct path
             Parent root = loader.load();
             RentDetailsController rentDetailsController = loader.getController();
-            rentDetailsController.setRentId(rentId); // Pass the rent ID to RentDetailsController
+            rentDetailsController.setRentId(rentId);
 
             Stage stage = new Stage();
             stage.setTitle("Rent Details");
@@ -103,7 +103,6 @@ public class RentController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle the exception (e.g., show an error dialog)
         }
     }
 

@@ -40,5 +40,5 @@
          <Font name="System Bold" size="18.0" />
       </font>
    </Label>
-   <Button fx:id="user_cancelRent" layoutX="405.0" layoutY="146.0" mnemonicParsing="false" text="Cancel Rent" />
+   <Button fx:id="user_historyBtn" layoutX="418.0" layoutY="146.0" mnemonicParsing="false" onAction="#onSwitchToHistory" text="History" />
 </AnchorPane>

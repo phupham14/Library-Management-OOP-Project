@@ -48,15 +48,25 @@ public class BlacklistService {
     }
 
     public void payForFine(int rentId, double paidAmount, int customerId) throws SQLException {
-        String sql = "{CALL PayForFine(?, ?, ?)}";
+        String sql = "{CALL PayForFine(?, CAST(? AS NUMERIC), ?)}";
+
         try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
              CallableStatement cstmt = connection.prepareCall(sql)) {
+
+            System.out.println("Rent ID: " + rentId);
+            System.out.println("Paid Amount: " + paidAmount);
+            System.out.println("Customer ID: " + customerId);
+            System.out.println("SQL statement: " + cstmt); // Log the SQL
 
             cstmt.setInt(1, rentId);
             cstmt.setDouble(2, paidAmount);
             cstmt.setInt(3, customerId);
 
             cstmt.execute();
+            System.out.println();
+        } catch (SQLException e) {
+            System.err.println("Error calling PayForFine: " + e.getMessage());
+            // Handle or re-throw the exception as needed
         }
     }
 

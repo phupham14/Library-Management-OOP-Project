@@ -95,14 +95,15 @@ public class BlacklistController implements Initializable {
                     // Get the rentId from the selectedBlacklist
                     int rentId = selectedBlacklist.getRentId();
 
-                    // Get the customerId using the service (you'll need to implement this in BlacklistService)
+                    // Get the customerId using the service
                     int customerId = service.getCustomerIdFromRentId(rentId);
 
                     // Call the PayForFine function
                     service.payForFine(rentId, paidAmount, customerId);
 
-                    // Update the UI or show a success message
-                    // ...
+                    // Refresh the TableView
+                    refreshTableView();
+
                 } catch (NumberFormatException e) {
                     showErrorAlert("Error", "Invalid amount entered.");
                 } catch (SQLException e) {
@@ -113,6 +114,21 @@ public class BlacklistController implements Initializable {
         } else {
             // Handle case where no row is selected
             System.out.println("No row selected!");
+        }
+    }
+
+    // Method to refresh the TableView
+    private void refreshTableView() {
+        try {
+            // Clear existing items
+            blacklistItems.clear();
+
+            // Fetch updated data from the database
+            blacklistItems.addAll(service.fetchAllBlacklists());
+
+        } catch (SQLException e) {
+            System.err.println("Error refreshing blacklist data: " + e.getMessage());
+            showErrorAlert("Error", "Failed to refresh data.");
         }
     }
 

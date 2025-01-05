@@ -29,6 +29,20 @@ public class Rent {
         this.lastname = lastname;  // Initialize last name
     }
 
+    public Rent(int rentid, int customerid, String borrowdate, String duedate, int iscollected) {
+    }
+
+    public Rent(int rentid, int customerid, String borrowdate, String duedate, boolean iscollected) {
+    }
+
+    public Rent(int rentId, int customerId, LocalDate borrowDate, LocalDate dueDate, boolean isCollected) {
+        this.rentId = rentId;
+        this.customerId = customerId;
+        this.borrowDate = borrowDate;
+        this.dueDate = dueDate;
+        this.isCollected = isCollected;
+    }
+
     // Getters and setters for all properties (including first name and last name)
 
     public int getRentId() {

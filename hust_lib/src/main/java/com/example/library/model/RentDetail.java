@@ -20,4 +20,9 @@ public class RentDetail {
 
     public LocalDate getReturnDate() { return returnDate; }
     public void setReturnDate(LocalDate returnDate) { this.returnDate = returnDate; }
+
+    public void setRentlineid(int rentlineid) {
+    }
+
+
 }

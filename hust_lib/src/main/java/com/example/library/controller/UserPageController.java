@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 import static com.example.library.model.Person.getPersonId;
 import static com.example.library.util.Session.*;
@@ -33,7 +34,7 @@ public class UserPageController {
     private TextField user_authorFind;
 
     @FXML
-    private Button user_cancelRent;
+    private Button user_historyBtn;
 
     @FXML
     private TextField user_bookNameFind;
@@ -193,6 +194,20 @@ public class UserPageController {
         } else {
             System.out.println("No book selected. Please select a book to issue.");
         }
+    }
+
+    public void onSwitchToHistory() throws IOException {
+        openNewWindow("/com/example/library/view/history.fxml", "History Page");
+    }
+
+    private void openNewWindow(String fxmlPath, String title) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlPath)));
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.setTitle(title);
+        stage.show();
     }
 
 
