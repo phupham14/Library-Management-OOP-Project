@@ -90,6 +90,30 @@ public class cartService {
         }
     }
 
+    public void clearCart(int customerId) throws SQLException {
+        String sql = "DELETE FROM cart WHERE customerid = ?";
+        try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            System.out.println("Attempting to clear cart for customer ID: " + customerId); // Debug: Print before executing
+
+            statement.setInt(1, customerId);
+            int rowsAffected = statement.executeUpdate();
+
+            System.out.println("Rows affected: " + rowsAffected); // Debug: Print rows affected
+
+            if (rowsAffected > 0) {
+                System.out.println("Cart cleared successfully for customer ID: " + customerId);
+            } else {
+                System.out.println("No cart items found for customer ID: " + customerId);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error clearing cart: " + e.getMessage());
+            e.printStackTrace(); // Debug: Print stack trace for more details
+            throw e;
+        }
+    }
+
     public int confirm_rent(int customerId) throws SQLException {
         // SQL statements for database operations
         String checkQuantitySql = "SELECT Quantity FROM Book WHERE BookID = ?";
@@ -219,22 +243,5 @@ public class cartService {
                 }
             }
         }
-    }
-
-    // Calculate the total cost for a specific customer
-    public double calculateTotalCost(int customerId) throws SQLException {
-        String sql = "SELECT SUM(worth) AS total_cost FROM cart WHERE customer_id = ?";
-        try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, customerId);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return resultSet.getDouble("total_cost");
-            }
-        } catch (SQLException e) {
-            System.err.println("Error calculating total cost: " + e.getMessage());
-            throw e;
-        }
-        return 0.0;
     }
 }

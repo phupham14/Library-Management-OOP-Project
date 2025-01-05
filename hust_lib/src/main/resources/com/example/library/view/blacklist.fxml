@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -19,4 +20,5 @@
           <TableColumn fx:id="blacklist_reason" prefWidth="350.0" text="Reason" />
       </columns>
     </TableView>
+   <Button fx:id="blacklist_payForFine" layoutX="493.0" layoutY="38.0" mnemonicParsing="false" onAction="#payForFine" text="Paying Fine" />
 </AnchorPane>

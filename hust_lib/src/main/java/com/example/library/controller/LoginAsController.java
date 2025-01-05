@@ -1,14 +1,19 @@
 package com.example.library.controller;
 
+import com.example.library.model.Customer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import com.example.library.service.cartService;
+import com.example.library.service.customerService;
+import static com.example.library.util.Session.getInstance;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -73,23 +78,40 @@ public class LoginAsController {
     }
 
     public void onSwitchToUser() throws IOException {
-        // Load the FXML file
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/user-page.fxml")));
+        int currentPersonId = getInstance().getPersonId(); // Get person ID from session
+        System.out.println("Current Person ID: " + currentPersonId); // Debug: Print currentPersonId
 
-        // Create a new Scene with the loaded content
-        Scene scene = new Scene(root);
+        Customer currentCustomer = customerService.getCustomerById(currentPersonId); // Retrieve customer using person ID
+        System.out.println("Customer object: " + currentCustomer); // Debug: Print customer object
 
-        // Get the current window
-        Stage window = (Stage) switchToUser.getScene().getWindow();
+        if (currentCustomer != null) {
+            if (!currentCustomer.isBlockRent()) {
+                try {
+                    System.out.println("Clearing cart for customer ID: " + currentCustomer.getCustomerId()); // Debug: Print before clearing
+                    cartService.getInstance().clearCart(currentCustomer.getCustomerId()); // Clear cart using customer ID from the Customer object
+                    System.out.println("Cart cleared successfully."); // Debug: Print after clearing
+                } catch (SQLException e) {
+                    System.err.println("Error clearing cart: " + e.getMessage());
+                }
+            } else {
+                System.out.println("Customer is blocked from renting."); // Debug: Print if customer is blocked
+            }
 
-        // Set the scene to the window
-        window.setScene(scene);
-
-        // Optionally, you can set the window to be resizable
-        window.setResizable(true);
-
-        // Show the window with preferred size
-        window.sizeToScene();
+            // Load the FXML file
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/library/view/user-page.fxml")));
+            // Create a new Scene with the loaded content
+            Scene scene = new Scene(root);
+            // Get the current window
+            Stage window = (Stage) switchToUser.getScene().getWindow();
+            // Set the scene to the window
+            window.setScene(scene);
+            // Optionally, you can set the window to be resizable
+            window.setResizable(true);
+            // Show the window with preferred size
+            window.sizeToScene();
+        } else {
+            System.out.println("Customer object is null."); // Debug: Print if customer is not found
+        }
     }
 
     public void onSwitchToEmployee() throws IOException {

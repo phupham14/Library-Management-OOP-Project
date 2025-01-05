@@ -22,5 +22,6 @@
             <TableColumn fx:id="rentDetails_rentStatus" prefWidth="100.0" text="Rent Status" />
         </columns>
       </TableView>
+      <Button fx:id="rentDetails_receiveBook" layoutX="466.0" layoutY="25.0" mnemonicParsing="false" text="Receive Book" />
    </children>
 </AnchorPane>

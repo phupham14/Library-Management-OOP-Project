@@ -3,10 +3,7 @@ package com.example.library.service;
 import com.example.library.model.Blacklist;
 import com.example.library.util.ConnectionUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +30,34 @@ public class BlacklistService {
         }
 
         return blacklists;
+    }
+
+    public int getCustomerIdFromRentId(int rentId) throws SQLException {
+        String sql = "SELECT customerid FROM rent WHERE rentid = ?";
+        try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setInt(1, rentId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("customerid");
+                }
+            }
+        }
+        return 0; // Or handle the case where customerId is not found
+    }
+
+    public void payForFine(int rentId, double paidAmount, int customerId) throws SQLException {
+        String sql = "{CALL PayForFine(?, ?, ?)}";
+        try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
+             CallableStatement cstmt = connection.prepareCall(sql)) {
+
+            cstmt.setInt(1, rentId);
+            cstmt.setDouble(2, paidAmount);
+            cstmt.setInt(3, customerId);
+
+            cstmt.execute();
+        }
     }
 
     public void updateReason(int blacklistId, String newReason) throws SQLException {

@@ -7,13 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class BlacklistController implements Initializable {
@@ -22,6 +21,10 @@ public class BlacklistController implements Initializable {
     private TableColumn<Blacklist, String> blacklist_fineAmount;
     @FXML
     private TableColumn<Blacklist, String> blacklist_reason;
+
+    @FXML
+    private Button blacklist_payForFine; // This should be javafx.scene.control.Button
+
     @FXML
     private TableColumn<Blacklist, String> blacklist_rentId;
     @FXML
@@ -70,6 +73,47 @@ public class BlacklistController implements Initializable {
                 showErrorAlert("Error", "Failed to update reason.");
             }
         });
+    }
+
+    @FXML
+    private void payForFine() {
+        Blacklist selectedBlacklist = blacklist_tableView.getSelectionModel().getSelectedItem();
+
+        if (selectedBlacklist != null) {
+            // Create a dialog to get the paid amount
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Pay Fine");
+            dialog.setHeaderText("Enter Paid Amount");
+            dialog.setContentText("Amount:");
+
+            Optional<String> result = dialog.showAndWait();
+
+            if (result.isPresent()) {
+                try {
+                    double paidAmount = Double.parseDouble(result.get());
+
+                    // Get the rentId from the selectedBlacklist
+                    int rentId = selectedBlacklist.getRentId();
+
+                    // Get the customerId using the service (you'll need to implement this in BlacklistService)
+                    int customerId = service.getCustomerIdFromRentId(rentId);
+
+                    // Call the PayForFine function
+                    service.payForFine(rentId, paidAmount, customerId);
+
+                    // Update the UI or show a success message
+                    // ...
+                } catch (NumberFormatException e) {
+                    showErrorAlert("Error", "Invalid amount entered.");
+                } catch (SQLException e) {
+                    System.err.println("Error paying for fine: " + e.getMessage());
+                    showErrorAlert("Error", "Failed to pay for fine.");
+                }
+            }
+        } else {
+            // Handle case where no row is selected
+            System.out.println("No row selected!");
+        }
     }
 
     private void showErrorAlert(String title, String message) {
