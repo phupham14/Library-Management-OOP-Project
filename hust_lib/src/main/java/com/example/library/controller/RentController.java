@@ -4,7 +4,9 @@ import com.example.library.model.Rent;
 import com.example.library.service.RentService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,6 +25,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RentController {
+
+    @FXML
+    private Button rent_blacklist;
 
     @FXML
     private TableView<Rent> rentTableView;
@@ -192,5 +197,26 @@ public class RentController {
                 comboBox.setValue(getItem());
             }
         });
+    }
+
+    @FXML
+    private void handleRentBlacklist(ActionEvent event) {
+        try {
+            // Tải file FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/library/view/blacklist.fxml"));
+            Parent root = loader.load();
+
+            // Lấy Stage hiện tại
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Cập nhật Scene
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Blacklist");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Xử lý lỗi nếu file FXML không được tìm thấy
+        }
     }
 }

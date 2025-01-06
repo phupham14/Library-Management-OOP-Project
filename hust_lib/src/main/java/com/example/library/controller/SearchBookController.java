@@ -83,7 +83,7 @@ public class SearchBookController {
         searchBook_tableView.setOnMouseClicked(this::handleMouseClick);
         searchBook_image.setOnMouseClicked(this::handleImageClick);
         searchBook_cancelBtn.setOnAction(event -> clearFields());
-        searchBook_delBtn.setOnAction(event -> handleDelete());
+        //searchBook_delBtn.setOnAction(event -> handleDelete());
         searchBook_saveAddBtn.setOnAction(event -> handleSaveUpdate());
     }
 

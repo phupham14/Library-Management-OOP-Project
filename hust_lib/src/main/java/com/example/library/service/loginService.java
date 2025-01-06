@@ -98,4 +98,30 @@ public class loginService {
             return false;
         }
     }
+
+    public String getUserRole(Integer userId) {
+        String role = "unknown"; // Giá trị mặc định nếu không tìm thấy vai trò
+        String query = "SELECT role FROM person WHERE personid = ?";
+
+        try (
+                // Kết nối đến database
+                Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
+                PreparedStatement preparedStatement = connection.prepareStatement(query)
+        ) {
+            // Gán tham số vào query
+            preparedStatement.setInt(1, userId);
+
+            // Thực thi query và lấy kết quả
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    role = resultSet.getString("role");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log lỗi nếu có vấn đề với database
+        }
+
+        return role;
+    }
+
 }

@@ -341,15 +341,22 @@ public class LoginController {
             // Show success message
             showSuccess("Login successful!");
 
-            // Retrieve and print the user ID
             String userId = loginService.getUserId(enteredEmail);
-            System.out.println("Person ID: " + userId);  // Print user ID
             Session.getInstance().setPersonId(Integer.parseInt(userId));
-            String customerId = loginService.getCustomerId(userId);
-            System.out.println("Customer ID:" + customerId);
-            Session.getInstance().setCustomerId(Integer.parseInt(customerId));
 
+            // Lấy vai trò của người dùng
+            String role = loginService.getUserRole(Integer.valueOf(userId));
 
+            // Xử lý in thông tin hoặc bỏ qua theo vai trò
+            if ("customer".equalsIgnoreCase(role)) {
+                System.out.println("Person ID: " + userId); // Chỉ in cho customer
+                String customerId = loginService.getCustomerId(userId);
+                System.out.println("Customer ID: " + customerId);
+                Session.getInstance().setCustomerId(Integer.parseInt(customerId));
+            } else {
+                System.out.println("Admin or Employee logged in."); // Không cần in userId hoặc customerId
+                Session.getInstance().setCustomerId(0); // Hoặc giá trị mặc định
+            }
 
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/library/view/loginAs.fxml"));

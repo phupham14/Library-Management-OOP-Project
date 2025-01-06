@@ -48,7 +48,7 @@ public class searchMemberService {
 
     public List<Person> getAllMembers() {
         List<Person> members = new ArrayList<>();
-        String sql = "SELECT * FROM person"; // Câu lệnh SQL để lấy tất cả các thành viên
+        String sql = "SELECT * FROM person where role = 'Employee' "; // Câu lệnh SQL để lấy tất cả các thành viên
 
         try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
              Statement statement = connection.createStatement();
@@ -129,25 +129,41 @@ public class searchMemberService {
     }
 
     public void deleteMember(String phoneNumber) {
-        String query = "DELETE FROM person WHERE phonenumber = ?";
-        try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin");
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        String deleteEmployeeQuery = "DELETE FROM employee WHERE personid = (SELECT personid FROM person WHERE phonenumber = ?)";
+        String deletePersonQuery = "DELETE FROM person WHERE phonenumber = ?";
 
-            preparedStatement.setString(1, phoneNumber);
-            int rowsAffected = preparedStatement.executeUpdate();
+        try (Connection connection = ConnectionUtil.getInstance().connect_to_db("hust_lib", "hustlib_admin", "hustlib_admin")) {
+            connection.setAutoCommit(false); // Bắt đầu giao dịch
 
-            if (rowsAffected == 0) {
-                System.out.println("No member found with phone number: " + phoneNumber);
-                throw new RuntimeException("No member found with the given phone number.");
-            } else {
+            try (PreparedStatement deleteEmployeeStmt = connection.prepareStatement(deleteEmployeeQuery);
+                 PreparedStatement deletePersonStmt = connection.prepareStatement(deletePersonQuery)) {
+
+                // Xóa các bản ghi liên quan trong bảng employee
+                deleteEmployeeStmt.setString(1, phoneNumber);
+                deleteEmployeeStmt.executeUpdate();
+
+                // Xóa bản ghi trong bảng person
+                deletePersonStmt.setString(1, phoneNumber);
+                int rowsAffected = deletePersonStmt.executeUpdate();
+
+                if (rowsAffected == 0) {
+                    connection.rollback(); // Hoàn tác nếu không có bản ghi nào bị xóa
+                    System.out.println("No member found with phone number: " + phoneNumber);
+                    throw new RuntimeException("No member found with the given phone number.");
+                }
+
+                connection.commit(); // Xác nhận giao dịch
                 System.out.println("Member with phone number " + phoneNumber + " deleted successfully.");
+            } catch (Exception e) {
+                connection.rollback(); // Hoàn tác trong trường hợp lỗi
+                throw e;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Error deleting member: " + e.getMessage());
         }
     }
+
 
     public void updateMember(Person member) {
         String query = "UPDATE person SET firstname = ?, lastname = ?, address = ?, phonenumber = ?, password = ? WHERE email = ?"; // or phone number
