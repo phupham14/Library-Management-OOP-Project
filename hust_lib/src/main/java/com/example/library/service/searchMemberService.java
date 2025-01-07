@@ -55,7 +55,7 @@ public class searchMemberService {
              ResultSet resultSet = statement.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                Person person = new Person();
+                Person person = new Person(); // Tạo đối tượng mới trong mỗi vòng lặp
                 person.setFirstName(resultSet.getString("firstname"));
                 person.setLastName(resultSet.getString("lastname"));
                 person.setAddress(resultSet.getString("address"));
@@ -63,8 +63,10 @@ public class searchMemberService {
                 person.setEmail(resultSet.getString("email"));
                 person.setRole(resultSet.getString("role"));
                 person.setPassword(resultSet.getString("password"));
-                members.add(person);
+               
+                members.add(person); // Thêm vào danh sách
             }
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

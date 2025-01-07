@@ -207,6 +207,7 @@ public class SearchMemberController {
 
         // Clear the input fields and reload the members list
         clearFields();
+
         loadAllMembers();
     }
 

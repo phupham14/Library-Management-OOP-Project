@@ -71,7 +71,7 @@ public class UserPageController {
 
     @FXML
     private void initialize() {
-        user_username.setText(Person.getFirstName());
+//        user_username.setText(Person.getFirstName());
 
         user_bookTitle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         user_bookPublisher.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPublisher()));

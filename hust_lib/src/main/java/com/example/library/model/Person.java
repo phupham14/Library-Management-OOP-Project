@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  */
 public class Person {
     private static int personId;
-    private static String firstName;
+    private String firstName;
     private String lastName;
     private String address;
     private String phoneNumber;
@@ -74,7 +74,7 @@ public class Person {
         this.personId = personId;
     }
 
-    public static String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 

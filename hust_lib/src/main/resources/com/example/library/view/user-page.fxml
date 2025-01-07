@@ -20,11 +20,9 @@
         </font>
     </Label>
     <Label layoutX="40.0" layoutY="116.0" text="Book Name" />
-    <Label layoutX="40.0" layoutY="156.0" text="Author" />
     <Button fx:id="user_issueBookBtn" layoutX="261.0" layoutY="360.0" mnemonicParsing="false" text="Issue Book" />
     <Button fx:id="user_findBookBtn" layoutX="500.0" layoutY="146.0" mnemonicParsing="false" text="Find Book" />
     <TextField fx:id="user_bookNameFind" layoutX="117.0" layoutY="112.0" />
-    <TextField fx:id="user_authorFind" layoutX="117.0" layoutY="152.0" />
     <TableView fx:id="user_tableView" layoutX="2.0" layoutY="186.0" prefHeight="164.0" prefWidth="600.0">
         <columns>
             <TableColumn fx:id="user_bookTitle" prefWidth="174.39996647834778" text="Title" />
